@@ -95,6 +95,7 @@ class editor {
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyoffice/callback.php?doc=' . $pathnamehash;
+        $editorconfig['lang'] = $USER->lang;
 
         // user
         $user = [];
