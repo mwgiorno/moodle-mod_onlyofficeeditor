@@ -55,4 +55,11 @@ $string['print_desc'] = 'Allow documents to be printed via the OnlyOffice editor
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
 
+$string['forcesave'] = 'Enable Force Save';
+$string['editor_view'] = 'Editor customization settings';
+$string['editor_view_chat'] = 'Display Chat menu button';
+$string['editor_view_help'] = 'Display Help menu button';
+$string['editor_view_header'] = 'Display the header more compact';
+$string['editor_view_feedback'] = 'Display Feedback & Support menu button';
+$string['editor_view_toolbar'] = 'Display monochrome toolbar header';
 

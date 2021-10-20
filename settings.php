@@ -31,4 +31,12 @@ if ($ADMIN->fulltree) {
     $defaulthost = 'https://documentserver.url';
     $settings->add(new admin_setting_configtext('onlyoffice/documentserverurl', get_string('documentserverurl', 'onlyoffice'), get_string('documentserverurl_desc', 'onlyoffice'), $defaulthost));
     $settings->add(new admin_setting_configtext('onlyoffice/documentserversecret', get_string('documentserversecret', 'onlyoffice'), get_string('documentserversecret_desc', 'onlyoffice'), ''));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/forcesave', get_string('forcesave', 'onlyoffice'), '', 0));
+    $settings->add(new admin_setting_heading('onlyoffice/editor_view', get_string('editor_view', 'onlyoffice'), ''));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_view_chat', get_string('editor_view_chat', 'onlyoffice'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_view_help', get_string('editor_view_help', 'onlyoffice'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_view_header', get_string('editor_view_header', 'onlyoffice'), '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_view_feedback', get_string('editor_view_feedback', 'onlyoffice'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_view_toolbar', get_string('editor_view_toolbar', 'onlyoffice'), '', 0));
+
 }
