@@ -76,7 +76,7 @@ class util {
         return $info;
     }
 
-    public static function save_document_to_moodle($data, $hash) {
+    public static function save_document_to_moodle($data, $hash, $isForcesave) {
         $downloadurl = $data['url'];
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
@@ -94,7 +94,9 @@ class util {
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
-                \mod_onlyoffice\document::set_key($hash->cm);
+                if (!$isForcesave) {
+                    \mod_onlyoffice\document::set_key($hash->cm);
+                }
                 return true;
             } catch (\moodle_exception $e) {
                 return false;
