@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Execute onlyoffice upgrade from the given old version
+ * Execute ONLYOFFICE upgrade from the given old version
  *
  * @param int $oldversion
  * @return bool
