@@ -22,7 +22,8 @@
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
  * @package    mod_onlyoffice
- * @copyright  2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
