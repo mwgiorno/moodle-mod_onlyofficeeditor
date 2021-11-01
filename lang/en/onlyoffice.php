@@ -19,15 +19,15 @@
  *
  * @package     mod_onlyoffice
  * @subpackage
- * @copyright   2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
- * @author      Olumuyiwa Taiwo {@link https://moodle.org/user/view.php?id=416594}
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
 $string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
-$string['pluginname'] = 'Onlyoffice document';
-$string['pluginadministration'] = 'Onlyoffice document activity administration';
+$string['pluginname'] = 'ONLYOFFICE document';
+$string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
 $string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
@@ -46,13 +46,11 @@ $string['printintro'] = 'Print intro text';
 $string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
 $string['download'] = 'Document can be downloaded';
-$string['download_help'] = 'If this is off, documents will not be downloadable in the OnlyOffice editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to download documents via the app';
-$string['download_desc'] = 'Allow documents to be downloaded via the OnlyOffice editor app';
+$string['download_help'] = 'If this is off, documents will not be downloadable in the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to download documents via the app';
+$string['download_desc'] = 'Allow documents to be downloaded via the ONLYOFFICE editor app';
 $string['print'] = 'Document can be printed';
-$string['print_help'] = 'If this is off, documents will not be printable via the OnlyOffice editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
-$string['print_desc'] = 'Allow documents to be printed via the OnlyOffice editor app';
+$string['print_help'] = 'If this is off, documents will not be printable via the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
+$string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor app';
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
-
-

@@ -19,8 +19,8 @@
  *
  * @package     mod_onlyoffice
  * @subpackage
- * @copyright   2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
- * @author      Olumuyiwa Taiwo {@link https://moodle.org/user/view.php?id=416594}
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 /**
@@ -76,8 +76,9 @@ if (isset($data['status'])) {
 
         case mod_onlyoffice\util::STATUS_MUSTSAVE:
         case mod_onlyoffice\util::STATUS_FORCESAVE:
+            $isForcesave = $status === mod_onlyoffice\util::STATUS_FORCESAVE;
             // Save to Moodle.
-            if (mod_onlyoffice\util::save_document_to_moodle($data, $hash)) {
+            if (mod_onlyoffice\util::save_document_to_moodle($data, $hash, $isForcesave)) {
                 $response['error'] = 0;
             } else {
                 $response['error'] = 1;

@@ -16,17 +16,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module onlyoffice
+ * Library of interface functions and constants for module ONLYOFFICE
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the onlyoffice specific functions, needed to implement all the module
+ * All the ONLYOFFICE specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
  * @package    mod_onlyoffice
- * @copyright  2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -54,7 +55,7 @@ function onlyoffice_supports($feature) {
 }
 
 /**
- * Saves a new instance of the onlyoffice into the database
+ * Saves a new instance of the ONLYOFFICE into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -63,7 +64,7 @@ function onlyoffice_supports($feature) {
  *
  * @param stdClass $data Submitted data from the form in mod_form.php
  * @param mod_onlyoffice_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted onlyoffice record
+ * @return int The id of the newly inserted ONLYOFFICE record
  */
 function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform = null) {
     global $CFG, $DB;
@@ -87,7 +88,7 @@ function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform 
 }
 
 /**
- * Updates an instance of the onlyoffice in the database
+ * Updates an instance of the ONLYOFFICE in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -115,7 +116,7 @@ function onlyoffice_update_instance(stdClass $data, mod_onlyoffice_mod_form $mfo
 }
 
 /**
- * Removes an instance of the onlyoffice from the database
+ * Removes an instance of the ONLYOFFICE from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -211,7 +212,7 @@ function onlyoffice_cm_info_dynamic(cm_info $cm) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $onlyoffice The onlyoffice instance record
+ * @param stdClass $onlyoffice The ONLYOFFICE instance record
  * @return stdClass|null
  */
 function onlyoffice_user_outline($course, $user, $mod, $onlyoffice) {
@@ -239,7 +240,7 @@ function onlyoffice_user_complete($course, $user, $mod, $onlyoffice) {
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in onlyoffice activities and print it out.
+ * that has occurred in ONLYOFFICE activities and print it out.
  *
  * @todo implement
  * 
@@ -316,7 +317,7 @@ function onlyoffice_get_file_areas($course, $cm, $context) {
 }
 
 /**
- * File browsing support for onlyoffice file areas
+ * File browsing support for ONLYOFFICE file areas
  *
  * @package mod_onlyoffice
  * @category files
@@ -337,13 +338,13 @@ function onlyoffice_get_file_info($browser, $areas, $course, $cm, $context, $fil
 }
 
 /**
- * Serves the files from the onlyoffice file areas
+ * Serves the files from the ONLYOFFICE file areas
  *
  * @package mod_onlyoffice
  * 
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the onlyoffice's context
+ * @param stdClass $context the ONLYOFFICE's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
