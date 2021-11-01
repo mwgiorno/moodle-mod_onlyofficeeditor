@@ -20,11 +20,11 @@
  */
 
 
-define(['jquery'], function ($) {
-    var displayError = function (error) {
-        require(['core/str'], function (str) {
+define(['jquery'], function($) {
+    var displayError = function(error) {
+        require(['core/str'], function(str) {
             var errorIsAvailable = str.get_string(error, 'onlyoffice');
-            $.when(errorIsAvailable).done(function (localizedStr) {
+            $.when(errorIsAvailable).done(function(localizedStr) {
                 $("#onlyoffice-editor").text = localizedStr;
                 $("#onlyoffice-editor").text(localizedStr).addClass("error");
             });
@@ -32,17 +32,17 @@ define(['jquery'], function ($) {
     };
 
     return {
-        init: function (courseid, cmid) {
+        init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
                 displayError('docserverunreachable');
                 return;
             }
-            var ajax_url = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
-            $.getJSON(ajax_url, {
+            var ajaxUrl = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
+            $.getJSON(ajaxUrl, {
                 courseid: courseid,
                 cmid: cmid
-            }).done(function (config) {
-                var docEditor = new DocsAPI.DocEditor("onlyoffice-editor", config);
+            }).done(function(config) {
+                new DocsAPI.DocEditor("onlyoffice-editor", config);
             });
         }
     };
