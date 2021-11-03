@@ -74,7 +74,6 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanageroptions);
         $mform->addRule('file', get_string('required'), 'required', null, 'client');
 
-//-----------------------------------------------------------------------
         $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyoffice'));
         $mform->addElement('checkbox', 'download', get_string('download', 'onlyoffice'));
         $mform->setDefault('download', 1);

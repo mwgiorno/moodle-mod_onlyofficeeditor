@@ -77,7 +77,7 @@ function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform 
 
     $data->id = $DB->insert_record('onlyoffice', $data);
 
-    // we need to use context now, so we need to make sure all needed info is already in db
+    //We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;

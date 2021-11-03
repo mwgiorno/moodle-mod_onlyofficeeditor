@@ -25,8 +25,8 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 
-$id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
-$n = optional_param('n', 0, PARAM_INT);  // Resource instance ID
+$id = optional_param('id', 0, PARAM_INT); // Course_module ID.
+$n = optional_param('n', 0, PARAM_INT);  // Resource instance ID.
 $redirect = optional_param('redirect', 0, PARAM_BOOL);
 
 if ($id) {
@@ -59,7 +59,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($cm->name);
-echo html_writer::start_div('', array('class' => 'onlyoffice-container')); // start onlyoffice-container
+echo html_writer::start_div('', array('class' => 'onlyoffice-container')); // Start onlyoffice-container.
 $documentserverurl = get_config('onlyoffice', 'documentserverurl');
 if (!isset($documentserverurl) ||
         empty($documentserverurl) ||
@@ -71,7 +71,7 @@ if (!isset($documentserverurl) ||
         'src' => $documentserverurl . '/web-apps/apps/api/documents/api.js']);
     $PAGE->requires->js_call_amd('mod_onlyoffice/editor', 'init', [$course->id, $cm->id]);
 }
-echo html_writer::end_div(); // end onlyoffice-container
+echo html_writer::end_div(); // End onlyoffice-container.
 
 echo $OUTPUT->footer();
 

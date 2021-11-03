@@ -45,7 +45,7 @@ class summary implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
         
-        // do some stuff
+        //Do some stuff.
         
         return $data;
     }
