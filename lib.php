@@ -156,8 +156,9 @@ function onlyoffice_get_coursemodule_info($coursemodule) {
 
     $context = \context_module::instance($coursemodule->id);
 
-    if (!$onlyoffice = $DB->get_record('onlyoffice', array('id' => $coursemodule->instance), 'id, name, display, displayoptions, intro, introformat')) {
-        return NULL;
+    if (!$onlyoffice = $DB->get_record('onlyoffice', array('id' => $coursemodule->instance),
+        'id, name, display, displayoptions, intro, introformat')) {
+        return null;
     }
 
     $info = new cached_cm_info();
@@ -187,7 +188,8 @@ function onlyoffice_get_coursemodule_info($coursemodule) {
  */
 function onlyoffice_cm_info_view(cm_info $cm) {
     global $OUTPUT;
-    $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyoffice'), 'onlyoffice', array('class' => 'onlyofficeactivityicon'));
+    $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyoffice'), 'onlyoffice',
+        array('class' => 'onlyofficeactivityicon'));
     $cm->set_after_link(' ' . html_writer::tag('span', $icon));
 }
 
@@ -355,7 +357,7 @@ function onlyoffice_pluginfile($course, $cm, $context, $filearea, array $args, $
 
     $crypt = new \mod_onlyoffice\crypt();
     list($hash, $error) = $crypt->read_hash($doc);
-    if ($error || ($hash == NULL)) {
+    if ($error || ($hash == null)) {
         return false;
     }
 
@@ -364,7 +366,8 @@ function onlyoffice_pluginfile($course, $cm, $context, $filearea, array $args, $
     $files = $fs->get_area_files($context->id, 'mod_onlyoffice', $filearea, false, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
-        if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true) || has_any_capability(['moodle/course:manageactivities', 'mod/onlyoffice:editdocument'], $context, $hash->userid))) {
+        if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
+                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyoffice:editdocument'], $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
     }

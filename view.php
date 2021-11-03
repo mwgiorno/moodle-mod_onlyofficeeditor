@@ -67,7 +67,8 @@ if (!isset($documentserverurl) ||
     echo $OUTPUT->notification(get_string('docserverunreachable', 'onlyoffice'), 'error');
 } else {
     echo html_writer::div('', '', array('id' => 'onlyoffice-editor'));
-    echo html_writer::tag('script', '', ['type' => 'text/javascript', 'src' => $documentserverurl . '/web-apps/apps/api/documents/api.js']);
+    echo html_writer::tag('script', '', ['type' => 'text/javascript',
+        'src' => $documentserverurl . '/web-apps/apps/api/documents/api.js']);
     $PAGE->requires->js_call_amd('mod_onlyoffice/editor', 'init', [$course->id, $cm->id]);
 }
 echo html_writer::end_div(); // end onlyoffice-container

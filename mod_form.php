@@ -50,8 +50,7 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $mform->addElement('text', 'name', get_string('onlyofficename', 'onlyoffice'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
-        }
-        else {
+        } else {
             $mform->setType('name', PARAM_CLEANHTML);
         }
         $mform->addRule('name', null, 'required', null, 'client');
@@ -64,15 +63,15 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $attributes = $element->getAttributes();
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
-        $filemanager_options = array();
+        $filemanageroptions = array();
         /**
          * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
          */
-        $filemanager_options['accepted_types'] = '*'; // $config->allowedformats; // 
-        $filemanager_options['maxbytes'] = -1;
-        $filemanager_options['maxfiles'] = 1;
+        $filemanageroptions['accepted_types'] = '*'; // $config->allowedformats; //
+        $filemanageroptions['maxbytes'] = -1;
+        $filemanageroptions['maxfiles'] = 1;
 
-        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanager_options);
+        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanageroptions);
         $mform->addRule('file', get_string('required'), 'required', null, 'client');
 
 //-----------------------------------------------------------------------
@@ -116,25 +115,23 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
      *
      * Only available on moodleform_mod.
      *
-     * @param array $default_values passed by reference
+     * @param array $defaultvalues passed by reference
      */
-    function data_preprocessing(&$default_values) {
+    function data_preprocessing(&$defaultvalues) {
         $draftitemid = file_get_submitted_draft_itemid('file');
         file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyoffice', 'content', 0, array('subdirs' => false));
-        $default_values['file'] = $draftitemid;
-        if (!empty($default_values['permissions'])) {
-            $permissions = unserialize($default_values['permissions']);
+        $defaultvalues['file'] = $draftitemid;
+        if (!empty($defaultvalues['permissions'])) {
+            $permissions = unserialize($defaultvalues['permissions']);
             if (isset($permissions['download'])) {
-                $default_values['download'] = $permissions['download'];
-            }
-            else {
-                $default_values['download'] = 0;
+                $defaultvalues['download'] = $permissions['download'];
+            } else {
+                $defaultvalues['download'] = 0;
             }
             if (isset($permissions['print'])) {
-                $default_values['print'] = $permissions['print'];
-            }
-            else {
-                $default_values['print'] = 0;
+                $defaultvalues['print'] = $permissions['print'];
+            } else {
+                $defaultvalues['print'] = 0;
             }
         }
     }

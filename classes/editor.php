@@ -54,7 +54,8 @@ class editor {
     }
 
     /**
-     * @todo Warn if document is in format needing conversion. Send to ONLYOFFICE conversion service for conversion and overwrite current version before opening in editor
+     * @todo Warn if document is in format needing conversion.
+     * @todo Send to ONLYOFFICE conversion service for conversion and overwrite current version before opening in editor
      */
     public function config() {
         /*
