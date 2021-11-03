@@ -33,11 +33,11 @@ use Firebase\JWT\JWT;
 
 class editor {
 
-    var $courseid;
-    var $context;
-    var $cm;
-    var $modconfig;
-    var $file;
+    private $courseid;
+    private $context;
+    private $cm;
+    private $modconfig;
+    private $file;
 
     public function __construct($courseid, $context, $cm, $modconfig) {
         $this->courseid = $courseid;
