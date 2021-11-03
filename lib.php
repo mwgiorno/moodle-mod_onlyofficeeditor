@@ -198,7 +198,6 @@ function onlyoffice_cm_info_view(cm_info $cm) {
  * @param cm_info $cm
  */
 function onlyoffice_cm_info_dynamic(cm_info $cm) {
-    
 }
 
 /**
@@ -236,7 +235,6 @@ function onlyoffice_user_outline($course, $user, $mod, $onlyoffice) {
  * @param stdClass $onlyoffice the module instance record
  */
 function onlyoffice_user_complete($course, $user, $mod, $onlyoffice) {
-    
 }
 
 /**
@@ -244,7 +242,7 @@ function onlyoffice_user_complete($course, $user, $mod, $onlyoffice) {
  * that has occurred in ONLYOFFICE activities and print it out.
  *
  * @todo implement
- * 
+ *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
@@ -272,7 +270,6 @@ function onlyoffice_print_recent_activity($course, $viewfullnames, $timestart) {
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
 function onlyoffice_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0, $groupid = 0) {
-    
 }
 
 /**
@@ -285,7 +282,6 @@ function onlyoffice_get_recent_mod_activity(&$activities, &$index, $timestart, $
  * @param bool $viewfullnames display users' full names
  */
 function onlyoffice_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
-    
 }
 
 /**
@@ -342,7 +338,7 @@ function onlyoffice_get_file_info($browser, $areas, $course, $cm, $context, $fil
  * Serves the files from the ONLYOFFICE file areas
  *
  * @package mod_onlyoffice
- * 
+ *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
  * @param stdClass $context the ONLYOFFICE's context

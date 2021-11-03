@@ -39,7 +39,6 @@ class renderer extends plugin_renderer_base {
     public function render_summary($page) {
         $data = $page->export_for_template($this);
         return parent::render_from_template('mod_onlyoffice/summary', $data);
-        
     }
 
 }

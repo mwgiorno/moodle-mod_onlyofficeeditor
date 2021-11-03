@@ -34,7 +34,7 @@ use stdClass;
  */
 /**
  * class containing data form instance display
- * 
+ *
  */
 class summary implements renderable, templatable {
     /**
@@ -44,9 +44,7 @@ class summary implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
-        
         //Do some stuff.
-        
         return $data;
     }
 }

@@ -59,9 +59,9 @@ class editor {
      */
     public function config() {
         /*
-         * Note: It is important to preserv the case (camelCase) of the $config 
+         * Note: It is important to preserv the case (camelCase) of the $config
          * array keys, as they are used in the config passed to JS
-         * 
+         *
          * Note: Error "too many parameters passed to js_init_call()" occurs in DEBUG_DEVELOPER. See MDL-57614, MDL-62468
          */
 

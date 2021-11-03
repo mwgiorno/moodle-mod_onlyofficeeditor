@@ -41,7 +41,7 @@ class crypt {
     public function __construct() {
         $this->appkey = util::get_appkey();
     }
-    
+
     public function get_hash($object) {
         $primarykey = json_encode($object);
         $hash = $this->signature_create($primarykey);
