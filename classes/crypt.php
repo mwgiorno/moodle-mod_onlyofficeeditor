@@ -43,8 +43,8 @@ class crypt {
     }
     
     public function get_hash($object) {
-        $primaryKey = json_encode($object);
-        $hash = $this->signature_create($primaryKey);
+        $primarykey = json_encode($object);
+        $hash = $this->signature_create($primarykey);
         return $hash;
     }
 

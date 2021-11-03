@@ -75,9 +75,9 @@ if (isset($data['status'])) {
 
         case mod_onlyoffice\util::STATUS_MUSTSAVE:
         case mod_onlyoffice\util::STATUS_FORCESAVE:
-            $isForcesave = $status === mod_onlyoffice\util::STATUS_FORCESAVE;
+            $isforcesave = $status === mod_onlyoffice\util::STATUS_FORCESAVE;
             // Save to Moodle.
-            if (mod_onlyoffice\util::save_document_to_moodle($data, $hash, $isForcesave)) {
+            if (mod_onlyoffice\util::save_document_to_moodle($data, $hash, $isforcesave)) {
                 $response['error'] = 0;
             } else {
                 $response['error'] = 1;
