@@ -38,7 +38,7 @@ use mod_onlyoffice\util;
 /**
  * Returns the information on whether the module supports a feature
  *
- * See {@link plugin_supports()} for more info.
+ * See {@see plugin_supports()} for more info.
  *
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
@@ -144,7 +144,7 @@ function onlyoffice_delete_instance($id) {
  * "extra" information that may be needed when printing
  * this activity in a course listing.
  *
- * See {@link get_array_of_activities()} in course/lib.php
+ * See {@see get_array_of_activities()} in course/lib.php.
  *
  * @param stdClass $coursemodule
  * @return cached_cm_info info
@@ -194,6 +194,10 @@ function onlyoffice_cm_info_view(cm_info $cm) {
 }
 
 /**
+ * Sets dynamic information about a course module.
+ *
+ * This function is called from cm_info when displaying the module.
+ *
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  * @param cm_info $cm
  */
@@ -257,7 +261,7 @@ function onlyoffice_print_recent_activity($course, $viewfullnames, $timestart) {
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link onlyoffice_print_recent_mod_activity()}.
+ * {@see onlyoffice_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -273,12 +277,12 @@ function onlyoffice_get_recent_mod_activity(&$activities, &$index, $timestart, $
 }
 
 /**
- * Prints single activity item prepared by {@link onlyoffice_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@see onlyoffice_get_recent_mod_activity()}.
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
  * @param bool $detail print detailed report
- * @param array $modnames as returned by {@link get_module_types_names()}
+ * @param array $modnames as returned by {@see get_module_types_names()}.
  * @param bool $viewfullnames display users' full names
  */
 function onlyoffice_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
@@ -302,7 +306,7 @@ function onlyoffice_get_extra_capabilities() {
  * Returns the lists of all browsable file areas within the given module context
  *
  * The file area 'intro' for the activity introduction field is added automatically
- * by {@link file_browser::get_file_info_context_module()}
+ * by {@see file_browser::get_file_info_context_module()}.
  *
  * @param stdClass $course
  * @param stdClass $cm

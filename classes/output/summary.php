@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Contains class mod_onlyoffice\output\summary.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -32,9 +33,15 @@ use stdClass;
 /**
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  */
+
 /**
- * class containing data form instance display
+ * Class containing data form instance display.
  *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class summary implements renderable, templatable {
     /**

@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Utils for editor.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -27,16 +28,43 @@ namespace mod_onlyoffice;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Utils class.
+ *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class util {
 
+    /** No doc with the specified key can be found. */
     const STATUS_NOTFOUND = 0;
+
+    /** User has entered/exited editor. */
     const STATUS_EDITING = 1;
+
+    /** Document updated, changing content. */
     const STATUS_MUSTSAVE = 2;
+
+    /** Saving the document has failed. */
     const STATUS_ERRORSAVING = 3;
+
+    /** No document updates. */
     const STATUS_CLOSEDNOCHANGES = 4;
+
+    /** Document updated, force saving content. */
     const STATUS_FORCESAVE = 6;
+
+    /** Force saving the document has failed. */
     const STATUS_ERRORFORCESAVE = 7;
 
+    /**
+     * Get add secret key.
+     *
+     * @return string secret key from the application configuration.
+     */
     public static function get_appkey() {
         $key = get_config('onlyoffice', 'appkey');
         if (empty($key)) {
@@ -46,6 +74,11 @@ class util {
         return $key;
     }
 
+    /**
+     * Add permissions for document.
+     *
+     * @param \stdClass $data form data for new onlyoffice module.
+     */
     public static function save_document_permissions($data) {
         $permissions = [];
         if (!empty($data->download)) {
@@ -57,6 +90,11 @@ class util {
         $data->permissions = serialize($permissions);
     }
 
+    /**
+     * Save file.
+     *
+     * @param \stdClass $data form data for new onlyoffice module.
+     */
     public static function save_file($data) {
         $cmid = $data->coursemodule;
         $draftitemid = $data->file;
@@ -68,6 +106,12 @@ class util {
         }
     }
 
+    /**
+     * Get connections info.
+     *
+     * @param string $url url.
+     * @return mixed connection info.
+     */
     public static function get_connection_info($url) {
         $ch = new \curl();
         $ch->get($url);
@@ -75,6 +119,14 @@ class util {
         return $info;
     }
 
+    /**
+     * Save new or changed file.
+     *
+     * @param array $data callback json.
+     * @param string $hash encoded object.
+     * @param bool $isforcesave forcesave is enabled or not.
+     * @return bool saved or error.
+     */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
         $downloadurl = $data['url'];
         $fs = get_file_storage();

@@ -31,6 +31,17 @@ use mod_onlyoffice\util;
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
+/**
+ * New ONLYOFFICE module form.
+ *
+ * It uses the standard core Moodle formslib. For more info about them, please
+ * visit: http://docs.moodle.org/en/Development:lib/formslib.php
+ *
+ * @package    mod_onlyoffice
+ * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_onlyoffice_mod_form extends moodleform_mod {
 
     /**
@@ -64,10 +75,9 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
         $filemanageroptions = array();
-        /**
-         * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
-         */
-        $filemanageroptions['accepted_types'] = '*'; // $config->allowedformats;//
+
+        // @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc. ($config->allowedformats).
+        $filemanageroptions['accepted_types'] = '*';
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
 
@@ -83,10 +93,8 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $mform->setDefault('print', 1);
         $mform->addHelpButton('print', 'print', 'onlyoffice');
 
-        /**
-         * @todo add grading capability. need use case for grading
-         */
         // Add standard grading elements.
+        // @todo add grading capability. need use case for grading.
         // $this->standard_grading_coursemodule_elements();
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();
@@ -95,7 +103,15 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
-    function validation($data, $files) {
+    /**
+     * Form verification.
+     *
+     * @param array $data form data.
+     * @param array $files uploaded file.
+     * @return mixed of "element_name"=>"error_description" if there are errors,
+     *         or an empty array if everything is OK (true allowed for backwards compatibility too).
+     */
+    public function validation($data, $files) {
         global $USER;
 
         $errors = parent::validation($data, $files);
@@ -116,7 +132,7 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
      *
      * @param array $defaultvalues passed by reference
      */
-    function data_preprocessing(&$defaultvalues) {
+    public function data_preprocessing(&$defaultvalues) {
         $draftitemid = file_get_submitted_draft_itemid('file');
         file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyoffice', 'content', 0, array('subdirs' => false));
         $defaultvalues['file'] = $draftitemid;
