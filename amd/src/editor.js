@@ -42,6 +42,7 @@ define(['jquery'], function($) {
                 courseid: courseid,
                 cmid: cmid
             }).done(function(config) {
+                // eslint-disable-next-line no-undef
                 new DocsAPI.DocEditor("onlyoffice-editor", config);
             });
         }
