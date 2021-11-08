@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Key and permissions for document.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -25,8 +26,22 @@
 
 namespace mod_onlyoffice;
 
+/**
+ * Document class.
+ *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class document {
 
+    /**
+     * Get document key.
+     * @param cm_info $cm information about that course-module.
+     * @return mixed document key.
+     */
     public static function get_key($cm) {
         global $DB;
         if (!$key = $DB->get_field('onlyoffice', 'documentkey', ['id' => $cm->instance])) {
@@ -36,12 +51,22 @@ class document {
         return $key;
     }
 
+    /**
+     * Set document key.
+     * @param cm_info $cm information about that course-module.
+     */
     public static function set_key($cm) {
         global $DB;
         $key = random_string(20);
         $DB->set_field('onlyoffice', 'documentkey', $key, ['id' => $cm->instance]);
     }
 
+    /**
+     * Get document permissions.
+     * @param context_module $context context instance.
+     * @param cm_info $cm information about that course-module.
+     * @return array permissions of editor config.
+     */
     public static function get_permissions($context, $cm) {
         global $DB;
         $canmanage = has_capability('moodle/course:manageactivities', $context);

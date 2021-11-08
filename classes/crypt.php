@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * JWT handler.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -29,6 +30,15 @@ defined('MOODLE_INTERNAL') || die();
 
 use mod_onlyoffice\util;
 
+/**
+ * JWT handler class.
+ *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class crypt {
 
     /**
@@ -38,16 +48,29 @@ class crypt {
      */
     private $appkey;
 
+    /**
+     * crypt constructor.
+     */
     public function __construct() {
         $this->appkey = util::get_appkey();
     }
 
+    /**
+     * Get hash for object.
+     * @param mixed $object object.
+     * @return string encoded object.
+     */
     public function get_hash($object) {
         $primarykey = json_encode($object);
         $hash = $this->signature_create($primarykey);
         return $hash;
     }
 
+    /**
+     * Decode hash.
+     * @param string $hash encoded object.
+     * @return array decoded object.
+     */
     public function read_hash($hash) {
         $result = null;
         $error = null;
@@ -75,6 +98,11 @@ class crypt {
         return [$result, $error];
     }
 
+    /**
+     * Create hash.
+     * @param string $key json encoded string.
+     * @return string hash of payload.
+     */
     private function signature_create($key) {
         $payload = base64_encode(hash("sha256", ($key . $this->appkey), true)) . "?" . $key;
         $base64str = base64_encode($payload);

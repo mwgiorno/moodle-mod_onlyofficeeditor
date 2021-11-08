@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Strings for component 'onlyoffice', language 'en'.
  *
  * @package     mod_onlyoffice
  * @subpackage

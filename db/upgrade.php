@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Upgrade code for the onlyoffice.
  *
  * @package    mod_onlyoffice
  * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>

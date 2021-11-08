@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Return json-encoded editor config.
  *
  * @package     mod_onlyoffice
  * @subpackage

@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Construct editor config.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -31,14 +32,49 @@ use mod_onlyoffice\crypt;
 use mod_onlyoffice\document;
 use Firebase\JWT\JWT;
 
+/**
+ * Editor config class.
+ *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class editor {
 
+    /**
+     * @var int the course id.
+     */
     private $courseid;
+
+    /**
+     * @var context_module context instance.
+     */
     private $context;
+
+    /**
+     * @var cm_info information about that course-module.
+     */
     private $cm;
+
+    /**
+     * @var mixed config of mod.
+     */
     private $modconfig;
+
+    /**
+     * @var mixed document file.
+     */
     private $file;
 
+    /**
+     * Editor constructor.
+     * @param int $courseid the course id.
+     * @param context_module $context context instance.
+     * @param cm_info $cm information about that course-module.
+     * @param mixed $modconfig config of mod.
+     */
     public function __construct($courseid, $context, $cm, $modconfig) {
         $this->courseid = $courseid;
         $this->context = $context;
@@ -56,6 +92,11 @@ class editor {
     /**
      * @todo Warn if document is in format needing conversion.
      * @todo Send to ONLYOFFICE conversion service for conversion and overwrite current version before opening in editor
+     */
+
+    /**
+     * Return editor config for document.
+     * @return array|null editor config.
      */
     public function config() {
         /*

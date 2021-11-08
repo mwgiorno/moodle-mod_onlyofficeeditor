@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Plugin renderer.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -31,10 +32,22 @@ use plugin_renderer_base;
 /**
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  */
+
+/**
+ * Plugin renderer class.
+ *
+ * @package     mod_onlyoffice
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class renderer extends plugin_renderer_base {
 
     /**
-     * Returns html to display the content of mod_folder
+     * Returns html to display the content of mod_folder.
+     * @param summary_page $page the summary page to be rendered.
+     * @return mixed html for the page.
      */
     public function render_summary($page) {
         $data = $page->export_for_template($this);
