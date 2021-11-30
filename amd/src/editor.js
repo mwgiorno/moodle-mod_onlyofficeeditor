@@ -20,29 +20,85 @@
  */
 
 
-define(['jquery'], function ($) {
-    var displayError = function (error) {
-        require(['core/str'], function (str) {
+define(['jquery'], function($) {
+    var displayError = function(error) {
+        require(['core/str'], function(str) {
             var errorIsAvailable = str.get_string(error, 'onlyoffice');
-            $.when(errorIsAvailable).done(function (localizedStr) {
+            $.when(errorIsAvailable).done(function(localizedStr) {
                 $("#onlyoffice-editor").text = localizedStr;
                 $("#onlyoffice-editor").text(localizedStr).addClass("error");
             });
         });
     };
 
+    var createFullScreenButtons = function() {
+        require(['core/str'], function(str) {
+            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyoffice');
+            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyoffice');
+            var navButton = $('nav .nav-link.btn')[0];
+            var editorContainer = $('.onlyoffice-container')[0];
+
+            $.when(enterFullScreenText).done(function(localized) {
+                enterFullScreenText = localized;
+                var enterButton = document.createElement('button');
+                var enterIcon = document.createElement('i');
+                enterIcon.className = 'icon fa fa-expand fa-fw';
+                enterButton.appendChild(enterIcon);
+                enterButton.className = 'onlyoffice-editor-fs-button';
+                enterButton.id = 'onlyoffice-enter-fs-button';
+                enterButton.innerHTML += enterFullScreenText;
+                enterButton.style.cssText = 'padding: 5px; margin-top: -5px; margin-right: 10px;';
+
+                enterButton.onclick = function() {
+                    $('header').hide();
+                    $('footer').hide();
+                    if (navButton.getAttribute('aria-expanded') === 'true') {
+                        $('nav .nav-link.btn')[0].click();
+                    }
+                    editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
+                        'padding: 0 16px 0 16px; z-index: 100;';
+                    $('#onlyoffice-enter-fs-button').hide();
+                    $('#onlyoffice-exit-fs-button').show();
+                };
+                $("#region-main-settings-menu .menubar")[0].prepend(enterButton);
+            });
+            $.when(exitFullScreenText).done(function(localized) {
+                exitFullScreenText = localized;
+                var exitButton = document.createElement('button');
+                var exitIcon = document.createElement('i');
+                exitIcon.className = 'icon fa fa-compress fa-fw';
+                exitButton.appendChild(exitIcon);
+                exitButton.innerHTML += exitFullScreenText;
+                exitButton.className = 'onlyoffice-editor-fs-button';
+                exitButton.id = 'onlyoffice-exit-fs-button';
+
+                exitButton.onclick = function() {
+                    editorContainer.style.cssText = '';
+                    $('header').show();
+                    $('footer').show();
+                    $('#onlyoffice-enter-fs-button').show();
+                    $('#onlyoffice-exit-fs-button').hide();
+                };
+                $('.usernav .nav-item')[0].prepend(exitButton);
+                $('#onlyoffice-exit-fs-button').hide();
+            });
+        });
+    };
+
     return {
-        init: function (courseid, cmid) {
+        init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
                 displayError('docserverunreachable');
                 return;
             }
-            var ajax_url = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
-            $.getJSON(ajax_url, {
+            createFullScreenButtons();
+            var ajaxUrl = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
+            $.getJSON(ajaxUrl, {
                 courseid: courseid,
                 cmid: cmid
-            }).done(function (config) {
-                var docEditor = new DocsAPI.DocEditor("onlyoffice-editor", config);
+            }).done(function(config) {
+                // eslint-disable-next-line no-undef
+                new DocsAPI.DocEditor("onlyoffice-editor", config);
             });
         }
     };

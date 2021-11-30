@@ -8,10 +8,16 @@
 }
 
 .onlyoffice-container > iframe {
-    height: 80vh;
+    height: 95vh;
     max-height: 60rem;
 }
 
 #onlyoffice-editor.error {
     color: red;
+}
+
+.onlyoffice-editor-fs-button {
+    border: 1px solid rgb(15, 111, 197);
+    background: white;
+    color: rgb(15, 111, 197);
 }
