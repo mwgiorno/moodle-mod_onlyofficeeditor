@@ -65,16 +65,34 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $attributes = $element->getAttributes();
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
-        $filemanager_options = array();
+        $filemanageroptions = array();
         /**
          * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
          */
-        $filemanager_options['accepted_types'] = '*'; // $config->allowedformats; // 
-        $filemanager_options['maxbytes'] = -1;
-        $filemanager_options['maxfiles'] = 1;
+        $filemanageroptions['accepted_types'] = '*'; // $config->allowedformats; //
+        $filemanageroptions['maxbytes'] = -1;
+        $filemanageroptions['maxfiles'] = 1;
 
-        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanager_options);
-        $mform->addRule('file', get_string('required'), 'required', null, 'client');
+        
+        if (!$this->_instance) {
+            $attr = ['class' => 'onlyoffice-create-button'];
+            $create_buttons = array();
+            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('docxformname', 'onlyoffice'), 'Document', $attr);
+            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('xlsxformname', 'onlyoffice'), 'Spreadsheet', $attr);
+            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('pptxformname', 'onlyoffice'), 'Presentation', $attr);
+            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('uploadformname', 'onlyoffice'), 'Upload file', $attr);
+
+            $mform->addGroup($create_buttons, 'create_buttons',
+                get_string('selectfile', 'onlyoffice'), array(' '), false);
+
+            $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
+            $mform->disabledIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
+            $mform->hideIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
+        }
 
 //-----------------------------------------------------------------------
         $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyoffice'));
@@ -99,14 +117,19 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
     }
 
     function validation($data, $files) {
-        global $USER;
+        global $USER, $CFG;
 
         $errors = parent::validation($data, $files);
 
         $usercontext = \context_user::instance($USER->id);
         $fs = get_file_storage();
         if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
-            $errors['file'] = get_string('required');
+            $fileformat = $data['onlyofficetemplateformat'];
+            if ($fileformat != null && $fileformat != 'Upload file') {
+                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot, $data['file']);
+            } else {
+                $errors['file'] = get_string('required');
+            }
         }
         return $errors;
     }

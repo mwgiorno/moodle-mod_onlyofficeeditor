@@ -72,9 +72,19 @@ function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform 
     $cmid = $data->coursemodule;
     $data->timecreated = time();
     $data->timemodified = $data->timecreated;
+    $fileformat = $data->onlyofficetemplateformat;
 
     util::save_document_permissions($data);
     util::save_file($data);
+
+    if ($fileformat != null && $fileformat != 'Upload file') {
+        $records = $DB->get_records('files', ['itemid' => $data->file, 'component' => 'mod_onlyoffice', 'filearea' => 'content']);
+        foreach ($records as $record) {
+            $record->contextid = context_module::instance($cmid)->id;
+            $record->itemid = 0;
+            $DB->update_record('files', $record);
+        }
+    }
 
     $data->id = $DB->insert_record('onlyoffice', $data);
 

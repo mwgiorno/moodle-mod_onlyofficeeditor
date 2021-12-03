@@ -15,3 +15,40 @@
 #onlyoffice-editor.error {
     color: red;
 }
+
+.onlyoffice-create-button {
+    position: relative;
+    justify-content: center;
+    min-width: 85px;
+    margin-top: 10px;
+    padding: 45px 5px 6px;
+    background-repeat: no-repeat;
+}
+
+.onlyoffice-create-button input[type=radio] {
+    margin: auto;
+    appearance: none;
+    position: absolute;
+    top: 0;
+    opacity: 0.5;
+}
+
+.onlyoffice-create-button input[type=radio]:checked {
+    opacity: 1;
+}
+
+.onlyoffice-create-button input[value^="Document"] {
+    content: url([[pix:onlyoffice|file_docx]]);
+}
+
+.onlyoffice-create-button input[value^="Presentation"] {
+    content: url([[pix:onlyoffice|file_pptx]]);
+}
+
+.onlyoffice-create-button input[value^="Spreadsheet"] {
+    content: url([[pix:onlyoffice|file_xlsx]]);
+}
+
+.onlyoffice-create-button input[value^="Upload file"] {
+    content: url([[pix:onlyoffice|file_upload]]);
+}

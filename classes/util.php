@@ -106,4 +106,45 @@ class util {
         }
     }
 
+    /**
+     * @param string $fileformat new file format.
+     * @param object $user user.
+     * @param int $contextid context id.
+     * @param string $dirroot moodle dir root.
+     * @param int $fileid new file id.
+     * @throws \file_exception
+     * @throws \stored_file_creation_exception
+     */
+    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $dirroot, $fileid) {
+        switch ($fileformat) {
+            case 'Document': {
+                $fileformat = 'docx';
+                break;
+            }
+            case 'Spreadsheet': {
+                $fileformat = 'xlsx';
+                break;
+            }
+            case 'Presentation': {
+                $fileformat = 'pptx';
+                break;
+            }
+        }
+        $pathlocale = util::PATH_LOCALE[$user->lang];
+        $pathname = $dirroot . '/mod/onlyoffice/newdocs/' . $pathlocale . '/new.' . $fileformat;
+
+        $fileinfo = array(
+            'author' => fullname($user),
+            'contextid' => $contextid,
+            'component' => 'mod_onlyoffice',
+            'filearea' => 'content',
+            'userid' => $user->id,
+            'itemid' => $fileid,
+            'filepath' => '/',
+            'filename' => 'new.' . $fileformat);
+
+        $fs = get_file_storage();
+        $file = $fs->create_file_from_pathname($fileinfo, $pathname);
+    }
+
 }
