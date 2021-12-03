@@ -88,6 +88,8 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
 
             $mform->addGroup($create_buttons, 'create_buttons',
                 get_string('selectfile', 'onlyoffice'), array(' '), false);
+            $mform->addRule('create_buttons', get_string('required'), 'required',
+                null, 'client');
 
             $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
             $mform->disabledIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');

@@ -29,12 +29,12 @@ $string['xlsxformname'] = 'Spreadsheet';
 $string['uploadformname'] = 'Upload file';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
 $string['pluginname'] = 'ONLYOFFICE document';
 $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
-$string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
+$string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyoffice:addinstance'] = 'Add a new ONLYOFFICE document activity';
 $string['onlyoffice:view'] = 'View ONLYOFFICE document activity';
 
