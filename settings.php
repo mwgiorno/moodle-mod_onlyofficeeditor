@@ -30,6 +30,23 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
-    $settings->add(new admin_setting_configtext('onlyoffice/documentserverurl', get_string('documentserverurl', 'onlyoffice'), get_string('documentserverurl_desc', 'onlyoffice'), $defaulthost));
-    $settings->add(new admin_setting_configtext('onlyoffice/documentserversecret', get_string('documentserversecret', 'onlyoffice'), get_string('documentserversecret_desc', 'onlyoffice'), ''));
+    $settings->add(new admin_setting_configtext('onlyoffice/documentserverurl',
+        get_string('documentserverurl', 'onlyoffice'), get_string('documentserverurl_desc', 'onlyoffice'), $defaulthost));
+    $settings->add(new admin_setting_configtext('onlyoffice/documentserversecret',
+        get_string('documentserversecret', 'onlyoffice'), get_string('documentserversecret_desc', 'onlyoffice'), ''));
+
+    $settings->add(new admin_setting_heading('onlyoffice/editor_allow_filetype',
+        get_string('editor_allow_filetype', 'onlyoffice'), get_string('editor_allow_filetype_desc', 'onlyoffice')));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_csv',
+        'csv', '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_odp',
+        'odp', '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_ods',
+        'ods', '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_odt',
+        'odt', '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_rtf',
+        'rtf', '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyoffice/editor_allow_txt',
+        'txt', '', 1));
 }
