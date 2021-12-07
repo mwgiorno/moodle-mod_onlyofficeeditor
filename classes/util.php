@@ -61,9 +61,9 @@ class util {
     const STATUS_ERRORFORCESAVE = 7;
 
     /**
-     * Get add secret key.
+     * Get plugin key.
      *
-     * @return string secret key from the application configuration.
+     * @return string plugin key from the plugin configuration.
      */
     public static function get_appkey() {
         $key = get_config('onlyoffice', 'appkey');
@@ -123,9 +123,11 @@ class util {
      * Save new or changed file.
      *
      * @param array $data callback json.
-     * @param string $hash encoded object.
+     * @param object $hash encoded object.
      * @param bool $isforcesave forcesave is enabled or not.
      * @return bool saved or error.
+     *
+     * @throws \Exception
      */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
         $downloadurl = $data['url'];

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * JWT handler.
+ * Hash handler.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 use mod_onlyoffice\util;
 
 /**
- * JWT handler class.
+ * Hash handler class.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -42,7 +42,7 @@ use mod_onlyoffice\util;
 class crypt {
 
     /**
-     * The secret key from the application configuration
+     * The plugin key from the plugin configuration.
      *
      * @var string
      */
