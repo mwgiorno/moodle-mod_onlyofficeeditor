@@ -38,6 +38,18 @@ class util {
     const STATUS_FORCESAVE = 6;
     const STATUS_ERRORFORCESAVE = 7;
 
+    /** Mimetypes should convert back. */
+    const SHOULD_CONVERT_BACK = [
+        'application/vnd.oasis.opendocument.text',
+        'application/vnd.oasis.opendocument.spreadsheet',
+        'application/vnd.oasis.opendocument.presentation',
+        'text/plain',
+        'text/csv',
+        'application/rtf',
+        'application/x-rtf',
+        'text/richtext'
+    ];
+
     public static function get_appkey() {
         $key = get_config('onlyoffice', 'appkey');
         if (empty($key)) {
@@ -76,10 +88,34 @@ class util {
         return $info;
     }
 
-    public static function save_document_to_moodle($data, $hash, $isForcesave) {
+    /**
+     * Save new or changed file.
+     *
+     * @param array $data callback json.
+     * @param object $hash encoded object.
+     * @param bool $isforcesave forcesave is enabled or not.
+     * @return bool saved or error.
+     *
+     * @throws \Exception
+     */
+    public static function save_document_to_moodle($data, $hash, $isforcesave) {
         $downloadurl = $data['url'];
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
+            $curext = strtolower('.' . pathinfo($file->get_filename(), PATHINFO_EXTENSION));
+            $downloadext = strtolower('.' . pathinfo($downloadurl, PATHINFO_EXTENSION));
+            $mimetype = $file->get_mimetype();
+            if (in_array($mimetype, self::SHOULD_CONVERT_BACK)) {
+                $key = document::get_key($hash->cm);
+                try {
+                    $converteduri = converter::get_converted_uri($downloadurl, $downloadext, $curext, $key, FALSE);
+                    if (!empty($converteduri)) {
+                        $downloadurl = $converteduri;
+                    }
+                } catch (\Exception $e) {
+                    throw new \Exception('Error while converting document back to original format: ' . $e->getMessage());
+                }
+            }
             $fr = array(
                 'contextid' => $file->get_contextid(),
                 'component' => $file->get_component(),
@@ -94,7 +130,7 @@ class util {
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
-                if (!$isForcesave) {
+                if (!$isforcesave) {
                     \mod_onlyoffice\document::set_key($hash->cm);
                 }
                 return true;

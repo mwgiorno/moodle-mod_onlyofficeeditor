@@ -31,8 +31,7 @@ class document {
     public static function get_key($cm) {
         global $DB;
         if (!$key = $DB->get_field('onlyoffice', 'documentkey', ['id' => $cm->instance])) {
-            $key = random_string(20);
-            $DB->set_field('onlyoffice', 'documentkey', $key, ['id' => $cm->instance]);
+            return self::set_key($cm);
         }
         return $key;
     }
@@ -41,12 +40,16 @@ class document {
         global $DB;
         $key = random_string(20);
         $DB->set_field('onlyoffice', 'documentkey', $key, ['id' => $cm->instance]);
+        return $key;
     }
 
-    public static function get_permissions($context, $cm) {
+    public static function get_permissions($context, $cm, $filename) {
         global $DB;
+        $editableexts = array_merge(onlyoffice_file_utility::get_custom_editable_extensions(),
+            onlyoffice_file_utility::get_editable_extensions());
+        $extension = strtolower('.' . pathinfo($filename, PATHINFO_EXTENSION));
         $canmanage = has_capability('moodle/course:manageactivities', $context);
-        $canedit = has_capability('mod/onlyoffice:editdocument', $context);
+        $canedit = has_capability('mod/onlyoffice:editdocument', $context) && in_array($extension, $editableexts);
         $editorperms = $DB->get_field('onlyoffice', 'permissions', ['id' => $cm->instance]);
         $permissions = \array_map('boolval', unserialize($editorperms));
         $permissions['print'] = empty($permissions['print']) ? $canmanage : true;
