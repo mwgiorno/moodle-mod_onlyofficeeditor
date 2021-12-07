@@ -38,6 +38,32 @@ class util {
     const STATUS_FORCESAVE = 6;
     const STATUS_ERRORFORCESAVE = 7;
 
+    /** Path locales to create file from ONLYOFFICE template. */
+    const PATH_LOCALE = [
+        "az" => "az-Latn-AZ",
+        "bg" => "bg-BG",
+        "cs" => "cs-CZ",
+        "de" => "de-DE",
+        "el" => "el-GR",
+        "en-GB" => "en-GB",
+        "en" => "en-US",
+        "es" => "es-ES",
+        "fr" => "fr-FR",
+        "it" => "it-IT",
+        "ja" => "ja-JP",
+        "ko" => "ko-KR",
+        "lv" => "lv-LV",
+        "nl" => "nl-NL",
+        "pl" => "pl-PL",
+        "pt-BR" => "pt-BR",
+        "pt" => "pt-PT",
+        "ru" => "ru-RU",
+        "sk" => "sk-SK",
+        "sv" => "sv-SE",
+        "uk" => "uk-UA",
+        "vi" => "vi-VN",
+        "zh" => "zh-CN"];
+
     /** Mimetypes should convert back. */
     const SHOULD_CONVERT_BACK = [
         'application/vnd.oasis.opendocument.text',

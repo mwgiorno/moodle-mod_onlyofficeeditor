@@ -62,8 +62,10 @@ class converter{
      * @throws \Exception
      */
     public static function get_converted_uri($documenturi, $fromext, $toext, $documentkey, $isasync) {
+        global $USER;
+        $region = util::PATH_LOCALE[$USER->lang];
         $documentkey = $documentkey . $fromext;
-        $response_from_convert_service = self::send_request_to_convert_service($documenturi, $fromext, $toext, $documentkey, $isasync);
+        $response_from_convert_service = self::send_request_to_convert_service($documenturi, $fromext, $toext, $documentkey, $isasync, $region);
         $json = json_decode($response_from_convert_service, true);
 
         $errorelement = $json["error"];
@@ -89,11 +91,11 @@ class converter{
      * @param string $toextension Extension to which to convert.
      * @param string $documentkey Key for caching on service.
      * @param bool $isasync Perform conversions asynchronously.
-     *
+     * @param string $region User region.
      * @return false|Document|string
      * @throws \dml_exception
      */
-    public static function send_request_to_convert_service($documenturi, $fromextension, $toextension, $documentkey, $isasync) {
+    public static function send_request_to_convert_service($documenturi, $fromextension, $toextension, $documentkey, $isasync, $region) {
         $docservurl = get_config('onlyoffice', 'documentserverurl');
         $urltoconverter = substr($docservurl, -1) == '/' ? $docservurl . self::DOC_SERV_CONVERT_URL
             : $docservurl . '/' . self::DOC_SERV_CONVERT_URL;
@@ -104,6 +106,7 @@ class converter{
             "outputtype" => trim($toextension,'.'),
             "filetype" => trim($fromextension, '.'),
             "key" => $documentkey,
+            "region" => $region
         ];
 
         $headertoken = "";
