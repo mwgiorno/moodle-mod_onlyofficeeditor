@@ -17,13 +17,13 @@
 /**
  * Plugin renderer.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace mod_onlyoffice\output;
+namespace mod_onlyofficeeditor\output;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -36,7 +36,7 @@ use plugin_renderer_base;
 /**
  * Plugin renderer class.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
@@ -51,7 +51,7 @@ class renderer extends plugin_renderer_base {
      */
     public function render_summary($page) {
         $data = $page->export_for_template($this);
-        return parent::render_from_template('mod_onlyoffice/summary', $data);
+        return parent::render_from_template('mod_onlyofficeeditor/summary', $data);
     }
 
 }

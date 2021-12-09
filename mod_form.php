@@ -20,14 +20,14 @@
  * It uses the standard core Moodle formslib. For more info about them, please
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
- * @package    mod_onlyoffice
+ * @package    mod_onlyofficeeditor
  * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-use mod_onlyoffice\util;
+use mod_onlyofficeeditor\util;
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
@@ -37,12 +37,12 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * It uses the standard core Moodle formslib. For more info about them, please
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
- * @package    mod_onlyoffice
+ * @package    mod_onlyofficeeditor
  * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_onlyoffice_mod_form extends moodleform_mod {
+class mod_onlyofficeeditor_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
@@ -52,13 +52,13 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
 
         $mform = $this->_form;
 
-        $config = get_config('onlyoffice');
+        $config = get_config('onlyofficeeditor');
 
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         // Adding the standard "name" field.
-        $mform->addElement('text', 'name', get_string('onlyofficename', 'onlyoffice'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('onlyofficename', 'onlyofficeeditor'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -81,17 +81,17 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
 
-        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanageroptions);
+        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyofficeeditor'), null, $filemanageroptions);
         $mform->addRule('file', get_string('required'), 'required', null, 'client');
 
-        $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyoffice'));
-        $mform->addElement('checkbox', 'download', get_string('download', 'onlyoffice'));
+        $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyofficeeditor'));
+        $mform->addElement('checkbox', 'download', get_string('download', 'onlyofficeeditor'));
         $mform->setDefault('download', 1);
-        $mform->addHelpButton('download', 'download', 'onlyoffice');
+        $mform->addHelpButton('download', 'download', 'onlyofficeeditor');
 
-        $mform->addElement('checkbox', 'print', get_string('print', 'onlyoffice'));
+        $mform->addElement('checkbox', 'print', get_string('print', 'onlyofficeeditor'));
         $mform->setDefault('print', 1);
-        $mform->addHelpButton('print', 'print', 'onlyoffice');
+        $mform->addHelpButton('print', 'print', 'onlyofficeeditor');
 
         // Add standard grading elements.
         // @todo add grading capability. need use case for grading.
@@ -134,7 +134,7 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
      */
     public function data_preprocessing(&$defaultvalues) {
         $draftitemid = file_get_submitted_draft_itemid('file');
-        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyoffice', 'content', 0, array('subdirs' => false));
+        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyofficeeditor', 'content', 0, array('subdirs' => false));
         $defaultvalues['file'] = $draftitemid;
         if (!empty($defaultvalues['permissions'])) {
             $permissions = unserialize($defaultvalues['permissions']);

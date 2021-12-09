@@ -17,21 +17,21 @@
 /**
  * Utils for editor.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
+namespace mod_onlyofficeeditor;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Utils class.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
@@ -66,10 +66,10 @@ class util {
      * @return string plugin key from the plugin configuration.
      */
     public static function get_appkey() {
-        $key = get_config('onlyoffice', 'appkey');
+        $key = get_config('onlyofficeeditor', 'appkey');
         if (empty($key)) {
             $key = number_format(round(microtime(true) * 1000), 0, ".", "");
-            set_config('appkey', $key, 'onlyoffice');
+            set_config('appkey', $key, 'onlyofficeeditor');
         }
         return $key;
     }
@@ -102,7 +102,7 @@ class util {
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
             $options = ['subdirs' => false];
-            file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyoffice', 'content', 0, $options);
+            file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyofficeeditor', 'content', 0, $options);
         }
     }
 
@@ -148,7 +148,7 @@ class util {
                 $file->set_timemodified(time());
                 $newfile->delete();
                 if (!$isforcesave) {
-                    \mod_onlyoffice\document::set_key($hash->cm);
+                    \mod_onlyofficeeditor\document::set_key($hash->cm);
                 }
                 return true;
             } catch (\moodle_exception $e) {

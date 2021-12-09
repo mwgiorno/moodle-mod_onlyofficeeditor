@@ -17,25 +17,25 @@
 /**
  * Construct editor config.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
+namespace mod_onlyofficeeditor;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_onlyoffice\crypt;
-use mod_onlyoffice\document;
+use mod_onlyofficeeditor\crypt;
+use mod_onlyofficeeditor\document;
 use Firebase\JWT\JWT;
 
 /**
  * Editor config class.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
@@ -82,7 +82,7 @@ class editor {
         $this->modconfig = $modconfig;
 
         $fs = get_file_storage();
-        $files = $fs->get_area_files($this->context->id, 'mod_onlyoffice', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+        $files = $fs->get_area_files($this->context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
 
         if (count($files) >= 1) {
             $this->file = reset($files);
@@ -121,7 +121,7 @@ class editor {
         //Document.
         $document = [];
         $filename = $file->get_filename();
-        $path = '/' . $this->context->id . '/mod_onlyoffice/content' . $file->get_filepath() . $filename;
+        $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content' . $file->get_filepath() . $filename;
         $contenthash = $crypt->get_hash(['userid' => $USER->id, 'contenthash' => $file->get_contenthash()]);
         $documenturl = $CFG->wwwroot . '/pluginfile.php' . $path . '?doc=' . $contenthash;
 
@@ -135,7 +135,7 @@ class editor {
         //Editorconfig.
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
-        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyoffice/callback.php?doc=' . $pathnamehash;
+        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
 
         //User.
         $user = [];
@@ -146,7 +146,7 @@ class editor {
         //Customization.
         $customization = [];
         $customization['goback']['blank'] = false;
-        $customization['goback']['text'] = get_string('returntodocument', 'onlyoffice');
+        $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
         $customization['goback']['url'] = $CFG->wwwroot . '/course/view.php?id=' . $this->courseid;
         $customization['forcesave'] = true;
         $customization['commentAuthorOnly'] = true;

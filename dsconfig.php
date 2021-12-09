@@ -17,7 +17,7 @@
 /**
  * Return json-encoded editor config.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2019 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
@@ -31,12 +31,12 @@ $courseid = required_param('courseid', PARAM_INT);
 $cmid = required_param('cmid', PARAM_INT);
 
 $context = CONTEXT_MODULE::instance($cmid);
-require_capability('mod/onlyoffice:view', $context);
+require_capability('mod/onlyofficeeditor:view', $context);
 
-$modconfig = get_config('onlyoffice');
+$modconfig = get_config('onlyofficeeditor');
 $modinfo = get_fast_modinfo($courseid);
 $cm = $modinfo->get_cm($cmid)->get_course_module_record();
-$editor = new \mod_onlyoffice\editor($courseid, $context, $cm, $modconfig);
+$editor = new \mod_onlyofficeeditor\editor($courseid, $context, $cm, $modconfig);
 $editorconfig = $editor->config();
 echo json_encode($editorconfig);
 die();

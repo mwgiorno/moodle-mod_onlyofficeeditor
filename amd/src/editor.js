@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/* @package    mod_onlyoffice
+/* @package    mod_onlyofficeeditor
  * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +23,7 @@
 define(['jquery'], function($) {
     var displayError = function(error) {
         require(['core/str'], function(str) {
-            var errorIsAvailable = str.get_string(error, 'onlyoffice');
+            var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
             $.when(errorIsAvailable).done(function(localizedStr) {
                 $("#onlyoffice-editor").text = localizedStr;
                 $("#onlyoffice-editor").text(localizedStr).addClass("error");
@@ -37,7 +37,7 @@ define(['jquery'], function($) {
                 displayError('docserverunreachable');
                 return;
             }
-            var ajaxUrl = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
+            var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
                 cmid: cmid

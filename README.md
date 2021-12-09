@@ -31,7 +31,7 @@ Community Edition vs Enterprise Edition comparison can be found [here](#onlyoffi
 
 This plugin is an __activity module__.
 
-Follow the usual Moodle plugin installation steps to install this plugin into your __mod/onlyoffice__ directory. Please see [Moodle Documentation](https://docs.moodle.org/311/en/Installing_plugins) for more information.
+Follow the usual Moodle plugin installation steps to install this plugin into your __mod/onlyofficeeditor__ directory. Please see [Moodle Documentation](https://docs.moodle.org/311/en/Installing_plugins) for more information.
 
 The latest compiled package files are available [here](https://github.com/ONLYOFFICE/onlyoffice-moodle/releases).
 

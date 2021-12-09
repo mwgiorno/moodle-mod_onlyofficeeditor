@@ -17,19 +17,19 @@
 /**
  * Key and permissions for document.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
+namespace mod_onlyofficeeditor;
 
 /**
  * Document class.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
@@ -44,9 +44,9 @@ class document {
      */
     public static function get_key($cm) {
         global $DB;
-        if (!$key = $DB->get_field('onlyoffice', 'documentkey', ['id' => $cm->instance])) {
+        if (!$key = $DB->get_field('onlyofficeeditor', 'documentkey', ['id' => $cm->instance])) {
             $key = random_string(20);
-            $DB->set_field('onlyoffice', 'documentkey', $key, ['id' => $cm->instance]);
+            $DB->set_field('onlyofficeeditor', 'documentkey', $key, ['id' => $cm->instance]);
         }
         return $key;
     }
@@ -58,7 +58,7 @@ class document {
     public static function set_key($cm) {
         global $DB;
         $key = random_string(20);
-        $DB->set_field('onlyoffice', 'documentkey', $key, ['id' => $cm->instance]);
+        $DB->set_field('onlyofficeeditor', 'documentkey', $key, ['id' => $cm->instance]);
     }
 
     /**
@@ -70,8 +70,8 @@ class document {
     public static function get_permissions($context, $cm) {
         global $DB;
         $canmanage = has_capability('moodle/course:manageactivities', $context);
-        $canedit = has_capability('mod/onlyoffice:editdocument', $context);
-        $editorperms = $DB->get_field('onlyoffice', 'permissions', ['id' => $cm->instance]);
+        $canedit = has_capability('mod/onlyofficeeditor:editdocument', $context);
+        $editorperms = $DB->get_field('onlyofficeeditor', 'permissions', ['id' => $cm->instance]);
         $permissions = \array_map('boolval', unserialize($editorperms));
         $permissions['print'] = empty($permissions['print']) ? $canmanage : true;
         $permissions['download'] = empty($permissions['download']) ? $canmanage : true;
