@@ -15,3 +15,14 @@
 #onlyoffice-editor.error {
     color: red;
 }
+
+.onlyoffice-convert-icon {
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+}
+
+.icon.onlyofficeactivityicon {
+    position: relative;
+    top: -1px;
+}

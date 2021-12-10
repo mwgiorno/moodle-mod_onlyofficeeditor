@@ -35,6 +35,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once(__DIR__ . '/vendor/autoload.php');
 
 use mod_onlyoffice\util;
+use mod_onlyoffice\onlyoffice_file_utility;
 
 /**
  * Returns the information on whether the module supports a feature
@@ -187,9 +188,37 @@ function onlyoffice_get_coursemodule_info($coursemodule) {
  * @param cm_info $cm Course module information
  */
 function onlyoffice_cm_info_view(cm_info $cm) {
-    global $OUTPUT;
+    global $OUTPUT, $CFG;
+    $context = $cm->context;
+
     $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyoffice'), 'onlyoffice', array('class' => 'onlyofficeactivityicon'));
-    $cm->set_after_link(' ' . html_writer::tag('span', $icon));
+    $afterlinkicons = ' ' . html_writer::tag('i', $icon);
+
+    if (has_capability('mod/onlyoffice:addinstance', $context)) {
+        $fs = get_file_storage();
+        $files = $fs->get_area_files($context->id, 'mod_onlyoffice', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+        if (count($files) >= 1) {
+            $file = reset($files);
+            $ext = '.' . pathinfo($file->get_filename(), PATHINFO_EXTENSION);
+            $editableext = onlyoffice_file_utility::get_editable_ext($ext);
+
+            if (in_array($ext, \mod_onlyoffice\onlyoffice_file_utility::get_convertible_extensions()) && $editableext != null) {
+                $courseid = $cm->get_course()->id;
+                $ajaxurl = $CFG->wwwroot . "/mod/onlyoffice/convertaction.php?courseid=" . $courseid . "&cmid=" . $cm->id . "&ext=" . $editableext;
+                $jscode = "$.ajax('$ajaxurl', {
+                    type: 'POST',
+                    dataType: 'json'
+                });";
+                $afterlinkicons .= html_writer::tag('i', '',
+                    [
+                        'class' => 'icon fa fa-refresh onlyoffice-convert-icon',
+                        'title' => get_string('onlyofficeconveticon', 'onlyoffice'),
+                        'onclick' => $jscode
+                    ]);
+            }
+        }
+    }
+    $cm->set_after_link($afterlinkicons);
 }
 
 /**
