@@ -69,7 +69,11 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         /**
          * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
          */
-        $filemanager_options['accepted_types'] = '*'; // $config->allowedformats; // 
+        $acceptedtypes = array_merge(
+            \mod_onlyoffice\onlyoffice_file_utility::get_editable_extensions(),
+            \mod_onlyoffice\onlyoffice_file_utility::get_convertible_extensions(),
+            \mod_onlyoffice\onlyoffice_file_utility::get_viewable_extensions());
+        $filemanager_options['accepted_types'] = $acceptedtypes;
         $filemanager_options['maxbytes'] = -1;
         $filemanager_options['maxfiles'] = 1;
 

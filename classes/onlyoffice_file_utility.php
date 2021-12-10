@@ -28,6 +28,8 @@ namespace mod_onlyoffice;
 
 defined('MOODLE_INTERNAL') || die();
 
+use \mod_onlyoffice\convert_map;
+
 /**
  * Onlyoffice file utility class.
  *
@@ -91,11 +93,11 @@ class onlyoffice_file_utility{
      * Convertible extensions.
      * @return string[] Convertible extensions.
      */
-    public static function get_convertible_exntensions() {
+    public static function get_convertible_extensions() {
         return array('.docm', '.doc', '.dotx', '.dotm', '.dot', '.odt', '.fodt', '.ott',
             '.xlsm', '.xls', '.xltx', '.xltm', '.xlt', '.ods', '.fods', '.ots', '.pptm', '.ppt',
             '.ppsx', '.ppsm', '.pps', '.potx', '.potm', '.pot', '.odp', '.fodp', '.otp',
-            '.rtf', '.mht', '.html', '.htm', '.xml', '.epub', '.fb2');
+            '.rtf', '.mht', '.html', '.htm', '.xml', '.epub', '.fb2', '.txt', '.csv');
     }
 
     /**
@@ -113,6 +115,51 @@ class onlyoffice_file_utility{
             }
         }
         return $array;
+    }
+
+    /**
+     * Get document type by extension.
+     * @param string $ext File extension.
+     * @return string|null
+     */
+    public static function get_document_type($ext) {
+        if (in_array($ext, self::get_accepted_document_formats())) return 'word';
+        if (in_array($ext, self::get_accepted_spreadsheet_formats())) return 'cell';
+        if (in_array($ext, self::get_accepted_presentation_formats())) return 'slide';
+        return null;
+    }
+
+    /**
+     * Return ooxml extension, if $ext can be converted to editable extension.
+     * @param string $ext File extension.
+     * @return string
+     */
+    public static function get_editable_ext($ext) {
+        $doctype = self::get_document_type($ext);
+        $canconvert = null;
+        if ($doctype != null) {
+            switch ($doctype) {
+                case 'word':
+                    if (in_array('.docx', convert_map::get_convert_map()[$ext])) {
+                        $canconvert = '.docx';
+                    }
+                    break;
+                case 'cell':
+                    if (in_array('.xlsx', convert_map::get_convert_map()[$ext])) {
+                        $canconvert = '.xlsx';
+                    }
+                    break;
+                case 'slide':
+                    if (in_array('.pptx', convert_map::get_convert_map()[$ext])) {
+                        $canconvert = '.pptx';
+                    }
+                    break;
+                default:
+                    $canconvert = null;
+                    break;
+            }
+        }
+        return $canconvert;
     }
 
 }
