@@ -133,8 +133,9 @@ class util {
             $mimetype = $file->get_mimetype();
             if (in_array($mimetype, self::SHOULD_CONVERT_BACK)) {
                 $key = document::get_key($hash->cm);
+                $converteduri = '';
                 try {
-                    $converteduri = converter::get_converted_uri($downloadurl, $downloadext, $curext, $key, FALSE);
+                    $percent = converter::get_converted_uri($downloadurl, $downloadext, $curext, $key, false, $converteduri);
                     if (!empty($converteduri)) {
                         $downloadurl = $converteduri;
                     }
@@ -166,6 +167,48 @@ class util {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Generate new module for converted file;
+     * @param object $moduleinfo Onlyoffice module info.
+     * @param object $course Course.
+     * @param object $cm Course module.
+     * @return object|\stdClass
+     * @throws \moodle_exception
+     */
+    public static function generate_new_module_info($moduleinfo, $course, $cm) {
+        $newmoduleinfo = $moduleinfo;
+        $newtime = time();
+        $permissions = unserialize($moduleinfo->permissions);
+
+        $newmoduleinfo->download = $permissions['download'];
+        $newmoduleinfo->print = $permissions['print'];
+        $newmoduleinfo->instance = 0;
+        $newmoduleinfo->coursemodule = 0;
+        $newmoduleinfo->section = $cm->section - 1;
+        $newmoduleinfo->course = $course->id;
+        $newmoduleinfo->add = 'onlyoffice';
+        $newmoduleinfo->cmidnumber = '';
+        $newmoduleinfo->completionunlocked = 1;
+        $newmoduleinfo->completion = $cm->completion;
+        $newmoduleinfo->completionexpected = $cm->completionexpected;
+        $newmoduleinfo->showdescription = $cm->showdescription;
+        $newmoduleinfo->visible = $cm->visible;
+        $newmoduleinfo->visibleoncoursepage = $cm->visibleoncoursepage;
+        $newmoduleinfo->tags = [];
+        $newmoduleinfo->update = 0;
+        $newmoduleinfo->return = 0;
+        $newmoduleinfo->sr = 0;
+        $newmoduleinfo->competencies = [];
+        $newmoduleinfo->competency_rule = 0;
+        $newmoduleinfo->timecreated = $newtime;
+        $newmoduleinfo->timemodified = $newtime;
+        $newmoduleinfo->documentkey = null;
+        $newmoduleinfo->availabilityconditionsjson = '{"op":"&","c":[],"showc":[]}';
+
+        $newmoduleinfo = add_moduleinfo($newmoduleinfo, $course);
+        return $newmoduleinfo;
     }
 
 }
