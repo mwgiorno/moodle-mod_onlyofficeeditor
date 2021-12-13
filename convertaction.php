@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Onlyoffice convert service.
+ * Onlyoffice convert action.
  *
  * @package     mod_onlyoffice
  * @subpackage
@@ -23,6 +23,7 @@
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once(dirname(__FILE__) . '/lib.php');
 
 use mod_onlyoffice\converter;
 
@@ -31,11 +32,25 @@ defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
 $courseid = required_param('courseid', PARAM_INT);
 $cmid = required_param('cmid', PARAM_INT);
 $convertto = required_param('ext', PARAM_TEXT);
+$result = optional_param('res', '', PARAM_TEXT);
 
-try {
-    converter::create_new_converted_file($courseid, $cmid, $convertto);
-} catch (moodle_exception $e) {
-    throw new moodle_exception($e);
+require_login($courseid);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    try {
+        $percent = converter::create_new_converted_file($courseid, $cmid, $convertto);
+    } catch (moodle_exception $e) {
+        throw new \Exception($e);
+    }
+    echo json_encode(array('percent' => $percent));
+} else {
+    echo $OUTPUT->header();
+    if ($result == 'suc') {
+        echo $OUTPUT->notification(get_string('onlyofficeconvertsuccess', 'onlyoffice'), 'notifysuccess');
+    } else if ($result == 'failure') {
+        echo $OUTPUT->notification(get_string('onlyofficeconverterror', 'onlyoffice'), 'error');
+    }
+    echo $OUTPUT->continue_button($CFG->wwwroot . '/course/view.php?id=' . $courseid);
+    echo $OUTPUT->footer();
 }
 
 die();

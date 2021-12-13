@@ -205,14 +205,31 @@ function onlyoffice_cm_info_view(cm_info $cm) {
             if (in_array($ext, \mod_onlyoffice\onlyoffice_file_utility::get_convertible_extensions()) && $editableext != null) {
                 $courseid = $cm->get_course()->id;
                 $ajaxurl = $CFG->wwwroot . "/mod/onlyoffice/convertaction.php?courseid=" . $courseid . "&cmid=" . $cm->id . "&ext=" . $editableext;
-                $jscode = "$.ajax('$ajaxurl', {
-                    type: 'POST',
-                    dataType: 'json'
-                });";
+                $jscode = "var startConvert = function(url) {
+                    $.ajax(url, {
+                        type: 'POST',
+                        dataType: 'json',
+                        complete: function(data) {
+                            var responseText = data.responseText;
+                            try {
+                                var response = $.parseJSON(responseText);
+                            } catch (e) {
+                                window.open(url + '&res=failure');
+                            }
+                            if (response.percent < 100) {
+                                startConvert(url);
+                            } else if (response.percent >= 100) {
+                                window.open(url + '&res=suc');
+                                location.reload();
+                            }
+                        }
+                    });
+                };
+                startConvert('$ajaxurl')";
                 $afterlinkicons .= html_writer::tag('i', '',
                     [
                         'class' => 'icon fa fa-refresh onlyoffice-convert-icon',
-                        'title' => get_string('onlyofficeconveticon', 'onlyoffice'),
+                        'title' => get_string('onlyofficeconverticon', 'onlyoffice'),
                         'onclick' => $jscode
                     ]);
             }

@@ -23,7 +23,9 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['onlyofficeconveticon'] = 'Convert using ONLYOFFICE';
+$string['onlyofficeconvertsuccess'] = 'File was successfully converted';
+$string['onlyofficeconverterror'] = 'Could not convert file';
+$string['onlyofficeconverticon'] = 'Convert using ONLYOFFICE';
 $string['editor_allow_filetype'] = 'Customize editable formats';
 $string['editor_allow_filetype_desc'] = 'Open the file for editing (due to format restrictions, the data might be lost when saving to the formats from the list below)';
 $string['modulename'] = 'ONLYOFFICE document';
