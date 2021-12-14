@@ -29,6 +29,7 @@ namespace mod_onlyoffice;
 defined('MOODLE_INTERNAL') || die();
 
 use mod_onlyoffice\crypt;
+use mod_onlyoffice\onlyoffice_file_utility;
 use mod_onlyoffice\document;
 use Firebase\JWT\JWT;
 
@@ -123,6 +124,7 @@ class editor {
         $config['type'] = $devicetype;
         $config['document'] = $document;
         $config['editorConfig'] = $editorconfig;
+        $config['documentType'] = onlyoffice_file_utility::get_document_type('.' . $ext);
 
         // add token
         if (!empty($this->modconfig->documentserversecret)) {
