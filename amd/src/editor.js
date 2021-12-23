@@ -20,19 +20,43 @@
  */
 
 
-define(['jquery'], function ($) {
-    var displayError = function (error) {
-        require(['core/str'], function (str) {
-            var errorIsAvailable = str.get_string(error, 'onlyoffice');
-            $.when(errorIsAvailable).done(function (localizedStr) {
-                $("#onlyoffice-editor").text = localizedStr;
-                $("#onlyoffice-editor").text(localizedStr).addClass("error");
+define(['jquery'], function($) {
+    var displayError = function(error) {
+        require(['core/notification'], function(notification) {
+            require(['core/str'], function(str) {
+                var errorIsAvailable = str.get_string(error, 'onlyoffice');
+                $.when(errorIsAvailable).done(function(localizedStr) {
+                    notification.addNotification({
+                        message: localizedStr,
+                        type: 'error'
+                    });
+                });
             });
         });
     };
 
+    $.urlParam = function(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results === null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    };
+
+    var replaceActionLink = function(href, linkParam) {
+        var link;
+        var actionIndex = href.indexOf("&actionType=");
+        if (actionIndex != -1) {
+            link = href.substring(0, actionIndex) + "&actionType=" + encodeURIComponent(linkParam.type) +
+                "&actionData=" + encodeURIComponent(linkParam.data);
+        } else {
+            link = href + "&actionType=" + encodeURIComponent(linkParam.type) + "&actionData=" + encodeURIComponent(linkParam.data);
+        }
+        return link;
+    };
+
     return {
-        init: function (courseid, cmid) {
+        init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
                 displayError('docserverunreachable');
                 return;
@@ -40,8 +64,54 @@ define(['jquery'], function ($) {
             var ajax_url = M.cfg.wwwroot + '/mod/onlyoffice/dsconfig.php';
             $.getJSON(ajax_url, {
                 courseid: courseid,
-                cmid: cmid
-            }).done(function (config) {
+                cmid: cmid,
+                actionType: $.urlParam('actionType'),
+                actionData: $.urlParam('actionData')
+            }).done(function(data) {
+                let config = data.config;
+
+                var onMakeActionLink = function(event) {
+                    var actionData = event.data.action;
+                    docEditor.setActionLink(replaceActionLink(location.href, actionData));
+                };
+                config.events = {
+                    'onMakeActionLink': onMakeActionLink
+                };
+
+                var onRequestUsers = function() {
+                    docEditor.setUsers({'users': usersToMention});
+                };
+
+                var onRequestSendNotify = function(event) {
+                    var comment = event.data.message;
+                    var emails = event.data.emails;
+                    var replacedActionLink = replaceActionLink(location.href, event.data.actionLink.action);
+
+                    var mentionData = {
+                        comment: comment,
+                        emails: emails,
+                        link: replacedActionLink
+                    };
+
+                    $.ajax(M.cfg.wwwroot + '/mod/onlyoffice/onlyofficeeditorapi.php?apiType=mention&cmid=' + $.urlParam('id'), {
+                        type: 'POST',
+                        dataType: 'json',
+                        data: mentionData,
+                        complete: function(response) {
+                            if (response.status != 200) {
+                                displayError('onmentionerror');
+                            }
+                        }
+                    });
+                };
+
+                var usersToMention = data.userstomention;
+                if (usersToMention !== null) {
+                    config.events.onRequestUsers = onRequestUsers;
+                    config.events.onRequestSendNotify = onRequestSendNotify;
+                }
+
+                // eslint-disable-next-line no-undef
                 var docEditor = new DocsAPI.DocEditor("onlyoffice-editor", config);
             });
         }
