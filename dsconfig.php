@@ -30,6 +30,9 @@ defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
 $courseid = required_param('courseid', PARAM_INT);
 $cmid = required_param('cmid', PARAM_INT);
 
+$actiontype = optional_param('actionType', '', PARAM_TEXT);
+$actiondata = optional_param('actionData', '', PARAM_TEXT);
+
 $context = CONTEXT_MODULE::instance($cmid);
 require_capability('mod/onlyoffice:view', $context);
 
@@ -38,5 +41,11 @@ $modinfo = get_fast_modinfo($courseid);
 $cm = $modinfo->get_cm($cmid)->get_course_module_record();
 $editor = new \mod_onlyoffice\editor($courseid, $context, $cm, $modconfig);
 $editorconfig = $editor->config();
-echo json_encode($editorconfig);
+if (!empty($actiondata) && !empty($actiontype)) {
+    $editorconfig['editorConfig']['actionLink']['action'] = ['type' => $actiontype, 'data' => $actiondata];
+}
+
+$userstomention = \mod_onlyoffice\util::get_users_to_mention_in_comments($context);
+$data = ['config' => $editorconfig, 'userstomention' => $userstomention];
+echo json_encode($data);
 die();

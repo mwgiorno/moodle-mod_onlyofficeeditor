@@ -23,6 +23,10 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['onmentionerror'] = 'Error on mentioning.';
+$string['mentioncontexturlname'] = 'Link to the comment.';
+$string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
+$string['mentionnotifier:notification'] = 'mentioned you in document comment in module ';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
 $string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
