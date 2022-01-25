@@ -18,7 +18,7 @@
  * The mod_onlyofficeeditor instance list viewed event.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * The mod_onlyofficeeditor instance list viewed event class.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
