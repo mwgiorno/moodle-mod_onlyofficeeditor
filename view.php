@@ -59,19 +59,19 @@ $PAGE->set_heading(format_string($course->fullname));
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading($cm->name);
-echo html_writer::start_div('', array('class' => 'onlyoffice-container')); // Start onlyoffice-container.
+echo html_writer::start_div('', array('class' => 'onlyofficeeditor-container')); // Start onlyofficeeditor-container.
 $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
 if (!isset($documentserverurl) ||
         empty($documentserverurl) ||
         \mod_onlyofficeeditor\util::get_connection_info($documentserverurl)['http_code'] != 200) {
     echo $OUTPUT->notification(get_string('docserverunreachable', 'onlyofficeeditor'), 'error');
 } else {
-    echo html_writer::div('', '', array('id' => 'onlyoffice-editor'));
+    echo html_writer::div('', '', array('id' => 'onlyofficeeditor-editor'));
     echo html_writer::tag('script', '', ['type' => 'text/javascript',
         'src' => $documentserverurl . '/web-apps/apps/api/documents/api.js']);
     $PAGE->requires->js_call_amd('mod_onlyofficeeditor/editor', 'init', [$course->id, $cm->id]);
 }
-echo html_writer::end_div(); // End onlyoffice-container.
+echo html_writer::end_div(); // End onlyofficeeditor-container.
 
 echo $OUTPUT->footer();
 

@@ -25,8 +25,8 @@ define(['jquery'], function($) {
         require(['core/str'], function(str) {
             var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
             $.when(errorIsAvailable).done(function(localizedStr) {
-                $("#onlyoffice-editor").text = localizedStr;
-                $("#onlyoffice-editor").text(localizedStr).addClass("error");
+                $("#onlyofficeeditor-editor").text = localizedStr;
+                $("#onlyofficeeditor-editor").text(localizedStr).addClass("error");
             });
         });
     };
@@ -43,7 +43,7 @@ define(['jquery'], function($) {
                 cmid: cmid
             }).done(function(config) {
                 // eslint-disable-next-line no-undef
-                new DocsAPI.DocEditor("onlyoffice-editor", config);
+                new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
             });
         }
     };
