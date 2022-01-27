@@ -3,15 +3,15 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-#page-content .onlyoffice .activityinstance > a {
+#page-content .onlyofficeeditor .activityinstance > a {
     display: inline-block;
 }
 
-.onlyoffice-container > iframe {
+.onlyofficeeditor-container > iframe {
     height: 80vh;
     max-height: 60rem;
 }
 
-#onlyoffice-editor.error {
+#onlyofficeeditor-editor.error {
     color: red;
 }
