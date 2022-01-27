@@ -1,5 +1,6 @@
 # Change Log
 
+## 2.0.0
 ## Changed
 - fixes according to markets code prechecks
 - renaming module name
