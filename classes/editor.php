@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,30 +15,66 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Construct editor config.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
+ * @subpackage
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace mod_onlyofficeeditor;
+
+defined('MOODLE_INTERNAL') || die();
+
+use mod_onlyofficeeditor\crypt;
+use mod_onlyofficeeditor\document;
+use Firebase\JWT\JWT;
+
+/**
+ * Editor config class.
+ *
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace mod_onlyoffice;
-
-defined('MOODLE_INTERNAL') || die();
-
-use mod_onlyoffice\crypt;
-use mod_onlyoffice\document;
-use Firebase\JWT\JWT;
-
 class editor {
 
-    var $courseid;
-    var $context;
-    var $cm;
-    var $modconfig;
-    var $file;
+    /**
+     * @var int the course id.
+     */
+    private $courseid;
 
+    /**
+     * @var context_module context instance.
+     */
+    private $context;
+
+    /**
+     * @var cm_info information about that course-module.
+     */
+    private $cm;
+
+    /**
+     * @var mixed config of mod.
+     */
+    private $modconfig;
+
+    /**
+     * @var mixed document file.
+     */
+    private $file;
+
+    /**
+     * Editor constructor.
+     * @param int $courseid the course id.
+     * @param context_module $context context instance.
+     * @param cm_info $cm information about that course-module.
+     * @param mixed $modconfig config of mod.
+     */
     public function __construct($courseid, $context, $cm, $modconfig) {
         $this->courseid = $courseid;
         $this->context = $context;
@@ -47,7 +82,7 @@ class editor {
         $this->modconfig = $modconfig;
 
         $fs = get_file_storage();
-        $files = $fs->get_area_files($this->context->id, 'mod_onlyoffice', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+        $files = $fs->get_area_files($this->context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
 
         if (count($files) >= 1) {
             $this->file = reset($files);
@@ -55,13 +90,19 @@ class editor {
     }
 
     /**
-     * @todo Warn if document is in format needing conversion. Send to ONLYOFFICE conversion service for conversion and overwrite current version before opening in editor
+     * @todo Warn if document is in format needing conversion.
+     * @todo Send to ONLYOFFICE conversion service for conversion and overwrite current version before opening in editor
+     */
+
+    /**
+     * Return editor config for document.
+     * @return array|null editor config.
      */
     public function config() {
         /*
-         * Note: It is important to preserv the case (camelCase) of the $config 
+         * Note: It is important to preserv the case (camelCase) of the $config
          * array keys, as they are used in the config passed to JS
-         * 
+         *
          * Note: Error "too many parameters passed to js_init_call()" occurs in DEBUG_DEVELOPER. See MDL-57614, MDL-62468
          */
 
@@ -73,14 +114,14 @@ class editor {
 
         $file = $this->file;
 
-        // top level config object
+        //Top level config object.
         $config = [];
         $crypt = new crypt();
 
-        // document
+        //Document.
         $document = [];
         $filename = $file->get_filename();
-        $path = '/' . $this->context->id . '/mod_onlyoffice/content' . $file->get_filepath() . $filename;
+        $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content' . $file->get_filepath() . $filename;
         $contenthash = $crypt->get_hash(['userid' => $USER->id, 'contenthash' => $file->get_contenthash()]);
         $documenturl = $CFG->wwwroot . '/pluginfile.php' . $path . '?doc=' . $contenthash;
 
@@ -91,27 +132,27 @@ class editor {
         $document['key'] = document::get_key($this->cm);
         $document['permissions'] = document::get_permissions($this->context, $this->cm);
 
-        // editorconfig
+        //Editorconfig.
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
-        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyoffice/callback.php?doc=' . $pathnamehash;
+        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
 
-        // user
+        //User.
         $user = [];
         $user['id'] = $USER->id;
         $user['name'] = \fullname($USER);
         $editorconfig['user'] = $user;
 
-        // customization
+        //Customization.
         $customization = [];
         $customization['goback']['blank'] = false;
-        $customization['goback']['text'] = get_string('returntodocument', 'onlyoffice');
+        $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
         $customization['goback']['url'] = $CFG->wwwroot . '/course/view.php?id=' . $this->courseid;
         $customization['forcesave'] = true;
         $customization['commentAuthorOnly'] = true;
         $editorconfig['customization'] = $customization;
 
-        // device type
+        //Device type.
         $devicetype = \core_useragent::get_device_type();
         if ($devicetype == 'tablet' || $devicetype == 'mobile') {
             $devicetype = 'mobile';
@@ -119,12 +160,12 @@ class editor {
             $devicetype = 'desktop';
         }
 
-        // package config object from parts
+        //Package config object from parts.
         $config['type'] = $devicetype;
         $config['document'] = $document;
         $config['editorConfig'] = $editorconfig;
 
-        // add token
+        //Add token.
         if (!empty($this->modconfig->documentserversecret)) {
             $token = JWT::encode($config, $this->modconfig->documentserversecret);
             $config['token'] = $token;

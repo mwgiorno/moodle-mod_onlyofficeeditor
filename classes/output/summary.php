@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,14 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Contains class mod_onlyofficeeditor\output\summary.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace mod_onlyoffice\output;
+namespace mod_onlyofficeeditor\output;
 
 use renderable;
 use templatable;
@@ -33,9 +33,15 @@ use stdClass;
 /**
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  */
+
 /**
- * class containing data form instance display
- * 
+ * Class containing data form instance display.
+ *
+ * @package     mod_onlyofficeeditor
+ * @subpackage
+ * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class summary implements renderable, templatable {
     /**
@@ -45,9 +51,7 @@ class summary implements renderable, templatable {
      */
     public function export_for_template(renderer_base $output) {
         $data = new stdClass();
-        
-        // do some stuff
-        
+        //Do some stuff.
         return $data;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -18,18 +17,20 @@
 /**
  * ONLYOFFICE module admin settings and defaults
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use mod_onlyoffice\util;
+use mod_onlyofficeeditor\util;
 
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
-    $settings->add(new admin_setting_configtext('onlyoffice/documentserverurl', get_string('documentserverurl', 'onlyoffice'), get_string('documentserverurl_desc', 'onlyoffice'), $defaulthost));
-    $settings->add(new admin_setting_configtext('onlyoffice/documentserversecret', get_string('documentserversecret', 'onlyoffice'), get_string('documentserversecret_desc', 'onlyoffice'), ''));
+    $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
+        get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'), $defaulthost));
+    $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
+        get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
 }
