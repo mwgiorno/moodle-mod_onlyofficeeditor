@@ -114,11 +114,11 @@ class editor {
 
         $file = $this->file;
 
-        //Top level config object.
+        // Top level config object.
         $config = [];
         $crypt = new crypt();
 
-        //Document.
+        // Document.
         $document = [];
         $filename = $file->get_filename();
         $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content' . $file->get_filepath() . $filename;
@@ -132,18 +132,18 @@ class editor {
         $document['key'] = document::get_key($this->cm);
         $document['permissions'] = document::get_permissions($this->context, $this->cm);
 
-        //Editorconfig.
+        // Editorconfig.
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
 
-        //User.
+        // User.
         $user = [];
         $user['id'] = $USER->id;
         $user['name'] = \fullname($USER);
         $editorconfig['user'] = $user;
 
-        //Customization.
+        // Customization.
         $customization = [];
         $customization['goback']['blank'] = false;
         $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
@@ -152,7 +152,7 @@ class editor {
         $customization['commentAuthorOnly'] = true;
         $editorconfig['customization'] = $customization;
 
-        //Device type.
+        // Device type.
         $devicetype = \core_useragent::get_device_type();
         if ($devicetype == 'tablet' || $devicetype == 'mobile') {
             $devicetype = 'mobile';
@@ -160,12 +160,12 @@ class editor {
             $devicetype = 'desktop';
         }
 
-        //Package config object from parts.
+        // Package config object from parts.
         $config['type'] = $devicetype;
         $config['document'] = $document;
         $config['editorConfig'] = $editorconfig;
 
-        //Add token.
+        // Add token.
         if (!empty($this->modconfig->documentserversecret)) {
             $token = JWT::encode($config, $this->modconfig->documentserversecret);
             $config['token'] = $token;
