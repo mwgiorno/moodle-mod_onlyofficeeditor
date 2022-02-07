@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package     mod_onlyofficeeditoreditor
+ * Define all the backup steps.
+ *
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,6 +32,13 @@
  */
 class backup_onlyofficeeditor_activity_structure_step extends backup_activity_structure_step {
 
+    /**
+     * Define structure.
+     *
+     * @return backup_nested_element
+     * @throws base_element_struct_exception
+     * @throws base_step_exception
+     */
     protected function define_structure() {
         // To know if we are including userinfo.
         $userinfo = $this->get_setting_value('userinfo');
