@@ -31,8 +31,6 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/vendor/autoload.php');
-
 use mod_onlyofficeeditor\util;
 
 /**
@@ -77,7 +75,7 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
 
     $data->id = $DB->insert_record('onlyofficeeditor', $data);
 
-    //We need to use context now, so we need to make sure all needed info is already in db.
+    // We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
