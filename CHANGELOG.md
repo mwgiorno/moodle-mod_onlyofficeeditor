@@ -3,6 +3,7 @@
 ##
 ## Added
 - backup api
+- privacy api
 
 ## Changed
 - fixes according to markets code prechecks
