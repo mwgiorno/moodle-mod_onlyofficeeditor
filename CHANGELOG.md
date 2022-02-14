@@ -1,6 +1,9 @@
 # Change Log
 
 ##
+## Added
+- backup api
+
 ## Changed
 - fixes according to markets code prechecks
 
