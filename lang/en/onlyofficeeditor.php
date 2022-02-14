@@ -54,3 +54,4 @@ $string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
+$string['privacy:metadata'] = 'No information is stored about user personal data.';
