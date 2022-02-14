@@ -33,7 +33,7 @@ This plugin is an __activity module__.
 
 Follow the usual Moodle plugin installation steps to install this plugin into your __mod/onlyofficeeditor__ directory. Please see [Moodle Documentation](https://docs.moodle.org/311/en/Installing_plugins) for more information.
 
-The latest compiled package files are available [here](https://github.com/ONLYOFFICE/onlyoffice-moodle/releases).
+The latest compiled package files are available [here](https://github.com/ONLYOFFICE/moodle-mod_onlyofficeeditor/releases).
 
 ## Configuring Moodle ONLYOFFICE Integration plugin
 
@@ -133,4 +133,4 @@ The table below will help you make the right choice.
 
 \* If supported by DMS.
 
-In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/onlyoffice-moodle/issues). Alternatively, you can contact ONLYOFFICE team on [forum.onlyoffice.com](https://forum.onlyoffice.com/).
+In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/moodle-mod_onlyofficeeditor/issues). Alternatively, you can contact ONLYOFFICE team on [forum.onlyoffice.com](https://forum.onlyoffice.com/).
