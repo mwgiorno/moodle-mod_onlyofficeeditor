@@ -49,7 +49,7 @@ if (empty($doc)) {
     die(json_encode($response));
 }
 
-$crypt = new \mod_onlyofficeeditor\crypt();
+$crypt = new \mod_onlyofficeeditor\hasher();
 list($hash, $error) = $crypt->read_hash($doc);
 
 if ($error || $hash == null) {

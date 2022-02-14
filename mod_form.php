@@ -76,7 +76,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $element->setAttributes($attributes);
         $filemanageroptions = array();
 
-        // @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc. ($config->allowedformats).
+        // Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc. ($config->allowedformats).
         $filemanageroptions['accepted_types'] = '*';
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
@@ -94,7 +94,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $mform->addHelpButton('print', 'print', 'onlyofficeeditor');
 
         // Add standard grading elements.
-        // @todo add grading capability. need use case for grading.
+        // Add grading capability. need use case for grading.
         // $this->standard_grading_coursemodule_elements();
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();

@@ -30,7 +30,8 @@ if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
-        get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'), $defaulthost));
+        get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
+        $defaulthost));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
 }
