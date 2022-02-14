@@ -37,7 +37,7 @@ use mod_onlyofficeeditor\util;
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class crypt {
+class hasher {
 
     /**
      * The plugin key from the plugin configuration.

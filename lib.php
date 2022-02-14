@@ -352,7 +352,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
 
     $doc = required_param('doc', PARAM_RAW);
 
-    $crypt = new \mod_onlyofficeeditor\crypt();
+    $crypt = new \mod_onlyofficeeditor\hasher();
     list($hash, $error) = $crypt->read_hash($doc);
     if ($error || ($hash == null)) {
         return false;
