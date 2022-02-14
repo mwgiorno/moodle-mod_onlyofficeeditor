@@ -15,41 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin renderer.
+ * Privacy api.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
- * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace mod_onlyofficeeditor\output;
 
-use plugin_renderer_base;
-
-/**
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
- */
+namespace mod_onlyofficeeditor\privacy;
 
 /**
- * Plugin renderer class.
+ * Privacy provider class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
- * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer extends plugin_renderer_base {
+class provider implements \core_privacy\local\metadata\null_provider {
 
     /**
-     * Returns html to display the content of mod_folder.
-     * @param summary_page $page the summary page to be rendered.
-     * @return mixed html for the page.
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
      */
-    public function render_summary($page) {
-        $data = $page->export_for_template($this);
-        return parent::render_from_template('mod_onlyofficeeditor/summary', $data);
+    public static function get_reason() : string {
+        return 'privacy:metadata';
     }
-
 }

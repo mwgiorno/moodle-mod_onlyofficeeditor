@@ -26,8 +26,6 @@
 
 namespace mod_onlyofficeeditor;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_onlyofficeeditor\util;
 
 /**
@@ -35,11 +33,11 @@ use mod_onlyofficeeditor\util;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class crypt {
+class hasher {
 
     /**
      * The plugin key from the plugin configuration.

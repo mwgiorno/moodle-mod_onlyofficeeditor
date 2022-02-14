@@ -30,6 +30,10 @@ defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
 $courseid = required_param('courseid', PARAM_INT);
 $cmid = required_param('cmid', PARAM_INT);
 
+$cm = get_coursemodule_from_id('onlyofficeeditor', $cmid, 0, false, MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+require_login($course, true, $cm);
+
 $context = CONTEXT_MODULE::instance($cmid);
 require_capability('mod/onlyofficeeditor:view', $context);
 

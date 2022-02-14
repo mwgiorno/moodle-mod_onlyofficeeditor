@@ -29,9 +29,6 @@
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-
-require_once(__DIR__ . '/vendor/autoload.php');
 
 use mod_onlyofficeeditor\util;
 
@@ -77,7 +74,7 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
 
     $data->id = $DB->insert_record('onlyofficeeditor', $data);
 
-    //We need to use context now, so we need to make sure all needed info is already in db.
+    // We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
@@ -355,7 +352,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
 
     $doc = required_param('doc', PARAM_RAW);
 
-    $crypt = new \mod_onlyofficeeditor\crypt();
+    $crypt = new \mod_onlyofficeeditor\hasher();
     list($hash, $error) = $crypt->read_hash($doc);
     if ($error || ($hash == null)) {
         return false;
@@ -367,7 +364,8 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     if (count($files) >= 1) {
         $file = reset($files);
         if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
-                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument'], $context, $hash->userid))) {
+                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument'],
+                    $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
     }
