@@ -26,8 +26,6 @@
 
 namespace mod_onlyofficeeditor;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_onlyofficeeditor\util;
 
 /**

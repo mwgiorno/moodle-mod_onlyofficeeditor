@@ -25,8 +25,6 @@
 
 namespace mod_onlyofficeeditor\event;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The mod_onlyofficeeditor instance viewed event class
  *

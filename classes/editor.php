@@ -26,8 +26,6 @@
 
 namespace mod_onlyofficeeditor;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_onlyofficeeditor\crypt;
 use mod_onlyofficeeditor\document;
 use Firebase\JWT\JWT;
@@ -82,7 +80,8 @@ class editor {
         $this->modconfig = $modconfig;
 
         $fs = get_file_storage();
-        $files = $fs->get_area_files($this->context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+        $files = $fs->get_area_files($this->context->id, 'mod_onlyofficeeditor', 'content', 0,
+            'sortorder DESC, id ASC', false, 0, 0, 1);
 
         if (count($files) >= 1) {
             $this->file = reset($files);
