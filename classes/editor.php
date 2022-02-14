@@ -26,7 +26,6 @@
 
 namespace mod_onlyofficeeditor;
 
-use mod_onlyofficeeditor\hasher;
 use mod_onlyofficeeditor\document;
 use Firebase\JWT\JWT;
 
@@ -115,7 +114,7 @@ class editor {
 
         // Top level config object.
         $config = [];
-        $crypt = new hasher();
+        $crypt = new \mod_onlyofficeeditor\hasher();
 
         // Document.
         $document = [];

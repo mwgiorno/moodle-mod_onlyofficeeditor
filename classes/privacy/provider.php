@@ -25,8 +25,6 @@
 
 namespace mod_onlyofficeeditor\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy provider class.
  *
