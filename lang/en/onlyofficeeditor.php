@@ -51,6 +51,9 @@ $string['download_desc'] = 'Allow documents to be downloaded via the ONLYOFFICE 
 $string['print'] = 'Document can be printed';
 $string['print_help'] = 'If this is off, documents will not be printable via the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
 $string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor app';
+$string['protect'] = 'Hide Protection tab';
+$string['protect_help'] = 'If this off, users have access to protection settings in the ONLYOFFICE editor. Note, users with <strong>course:manageactivities</strong> capability always have access to protection settings.';
+$string['protect_desc'] = 'Allow users open the protection tab in the ONLYOFFICE editor app';
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';

@@ -93,6 +93,10 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $mform->setDefault('print', 1);
         $mform->addHelpButton('print', 'print', 'onlyofficeeditor');
 
+        $mform->addElement('checkbox', 'protect', get_string('protect', 'onlyofficeeditor'));
+        $mform->setDefault('protect', 1);
+        $mform->addHelpButton('protect', 'protect', 'onlyofficeeditor');
+
         // Add standard grading elements.
         // Add grading capability. need use case for grading.
         // $this->standard_grading_coursemodule_elements();
@@ -147,6 +151,11 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
                 $defaultvalues['print'] = $permissions['print'];
             } else {
                 $defaultvalues['print'] = 0;
+            }
+            if (isset($permissions['protect'])) {
+                $defaultvalues['protect'] = $permissions['protect'];
+            } else {
+                $defaultvalues['protect'] = 0;
             }
         }
     }

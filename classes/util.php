@@ -85,6 +85,9 @@ class util {
         if (!empty($data->print)) {
             $permissions['print'] = 1;
         }
+        if (!empty($data->protect)) {
+            $permissions['protect'] = 1;
+        }
         $data->permissions = serialize($permissions);
     }
 
