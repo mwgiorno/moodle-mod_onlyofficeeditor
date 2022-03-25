@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,26 +15,47 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Utils for editor.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
+namespace mod_onlyofficeeditor;
 
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Utils class.
+ *
+ * @package     mod_onlyofficeeditor
+ * @subpackage
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class util {
 
+    /** No doc with the specified key can be found. */
     const STATUS_NOTFOUND = 0;
+
+    /** User has entered/exited editor. */
     const STATUS_EDITING = 1;
+
+    /** Document updated, changing content. */
     const STATUS_MUSTSAVE = 2;
+
+    /** Saving the document has failed. */
     const STATUS_ERRORSAVING = 3;
+
+    /** No document updates. */
     const STATUS_CLOSEDNOCHANGES = 4;
+
+    /** Document updated, force saving content. */
     const STATUS_FORCESAVE = 6;
+
+    /** Force saving the document has failed. */
     const STATUS_ERRORFORCESAVE = 7;
 
     /** Path locales to create file from ONLYOFFICE template. */
@@ -64,15 +84,26 @@ class util {
         "vi" => "vi-VN",
         "zh" => "zh-CN"];
 
+    /**
+     * Get plugin key.
+     *
+     * @return string plugin key from the plugin configuration.
+     * @throws \dml_exception
+     */
     public static function get_appkey() {
-        $key = get_config('onlyoffice', 'appkey');
+        $key = get_config('onlyofficeeditor', 'appkey');
         if (empty($key)) {
             $key = number_format(round(microtime(true) * 1000), 0, ".", "");
-            set_config('appkey', $key, 'onlyoffice');
+            set_config('appkey', $key, 'onlyofficeeditor');
         }
         return $key;
     }
 
+    /**
+     * Add permissions for document.
+     *
+     * @param \stdClass $data form data for new onlyoffice module.
+     */
     public static function save_document_permissions($data) {
         $permissions = [];
         if (!empty($data->download)) {
@@ -84,6 +115,11 @@ class util {
         $data->permissions = serialize($permissions);
     }
 
+    /**
+     * Save file.
+     *
+     * @param \stdClass $data form data for new onlyoffice module.
+     */
     public static function save_file($data) {
         $cmid = $data->coursemodule;
         $draftitemid = $data->file;
@@ -91,10 +127,16 @@ class util {
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
             $options = ['subdirs' => false];
-            file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyoffice', 'content', 0, $options);
+            file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyofficeeditor', 'content', 0, $options);
         }
     }
 
+    /**
+     * Get connections info.
+     *
+     * @param string $url url.
+     * @return mixed connection info.
+     */
     public static function get_connection_info($url) {
         $ch = new \curl();
         $ch->get($url);
@@ -102,7 +144,17 @@ class util {
         return $info;
     }
 
-    public static function save_document_to_moodle($data, $hash, $isForcesave) {
+    /**
+     * Save new or changed file.
+     *
+     * @param array $data callback json.
+     * @param object $hash encoded object.
+     * @param bool $isforcesave forcesave is enabled or not.
+     * @return bool saved or error.
+     *
+     * @throws \Exception
+     */
+    public static function save_document_to_moodle($data, $hash, $isforcesave) {
         $downloadurl = $data['url'];
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
@@ -120,8 +172,8 @@ class util {
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
-                if (!$isForcesave) {
-                    \mod_onlyoffice\document::set_key($hash->cm);
+                if (!$isforcesave) {
+                    \mod_onlyofficeeditor\document::set_key($hash->cm);
                 }
                 return true;
             } catch (\moodle_exception $e) {
@@ -157,12 +209,12 @@ class util {
             }
         }
         $pathlocale = util::PATH_LOCALE[$user->lang];
-        $pathname = $dirroot . '/mod/onlyoffice/newdocs/' . $pathlocale . '/new.' . $fileformat;
+        $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;
 
         $fileinfo = array(
             'author' => fullname($user),
             'contextid' => $contextid,
-            'component' => 'mod_onlyoffice',
+            'component' => 'mod_onlyofficeeditor',
             'filearea' => 'content',
             'userid' => $user->id,
             'itemid' => $fileid,

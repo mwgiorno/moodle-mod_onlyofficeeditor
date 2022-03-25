@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,10 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Strings for component 'onlyofficeeditor', language 'en'.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,8 +35,8 @@ $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
 $string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
-$string['onlyoffice:addinstance'] = 'Add a new ONLYOFFICE document activity';
-$string['onlyoffice:view'] = 'View ONLYOFFICE document activity';
+$string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
+$string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 
 $string['documentserverurl'] = 'Document Editing Service Address';
 $string['documentserverurl_desc'] = 'The Document Editing Service Address specifies the address of the server with the document services installed. Please replace \'https://documentserver.url\' above with the correct server address';
@@ -58,3 +58,4 @@ $string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
+$string['privacy:metadata'] = 'No information is stored about user personal data.';

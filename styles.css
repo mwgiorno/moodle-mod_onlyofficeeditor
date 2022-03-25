@@ -1,22 +1,22 @@
-/* @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+/* @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-#page-content .onlyoffice .activityinstance > a {
+#page-content .onlyofficeeditor .activityinstance > a {
     display: inline-block;
 }
 
-.onlyoffice-container > iframe {
+.onlyofficeeditor-container > iframe {
     height: 80vh;
     max-height: 60rem;
 }
 
-#onlyoffice-editor.error {
+#onlyofficeeditor-editor.error {
     color: red;
 }
 
-.onlyoffice-create-button {
+.onlyofficeeditor-create-button {
     position: relative;
     justify-content: center;
     min-width: 85px;
@@ -25,7 +25,7 @@
     background-repeat: no-repeat;
 }
 
-.onlyoffice-create-button input[type=radio] {
+.onlyofficeeditor-create-button input[type=radio] {
     margin: auto;
     appearance: none;
     position: absolute;
@@ -33,22 +33,22 @@
     opacity: 0.5;
 }
 
-.onlyoffice-create-button input[type=radio]:checked {
+.onlyofficeeditor-create-button input[type=radio]:checked {
     opacity: 1;
 }
 
-.onlyoffice-create-button input[value^="Document"] {
-    content: url([[pix:onlyoffice|file_docx]]);
+.onlyofficeeditor-create-button input[value^="Document"] {
+    content: url([[pix:onlyofficeeditor|file_docx]]);
 }
 
-.onlyoffice-create-button input[value^="Presentation"] {
-    content: url([[pix:onlyoffice|file_pptx]]);
+.onlyofficeeditor-create-button input[value^="Presentation"] {
+    content: url([[pix:onlyofficeeditor|file_pptx]]);
 }
 
-.onlyoffice-create-button input[value^="Spreadsheet"] {
-    content: url([[pix:onlyoffice|file_xlsx]]);
+.onlyofficeeditor-create-button input[value^="Spreadsheet"] {
+    content: url([[pix:onlyofficeeditor|file_xlsx]]);
 }
 
-.onlyoffice-create-button input[value^="Upload file"] {
-    content: url([[pix:onlyoffice|file_upload]]);
+.onlyofficeeditor-create-button input[value^="Upload file"] {
+    content: url([[pix:onlyofficeeditor|file_upload]]);
 }

@@ -15,9 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Uninstall onlyoffice xmldb.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,6 +26,6 @@
 /**
  * Custom uninstallation procedure
  */
-function xmldb_onlyoffice_uninstall() {
+function xmldb_onlyofficeeditor_uninstall() {
     return true;
 }
