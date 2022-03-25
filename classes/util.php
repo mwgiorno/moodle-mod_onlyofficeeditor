@@ -185,6 +185,8 @@ class util {
     }
 
     /**
+     * Create new empty file for ONLYOFFICE activity.
+     *
      * @param string $fileformat new file format.
      * @param object $user user.
      * @param int $contextid context id.

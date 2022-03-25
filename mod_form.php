@@ -75,10 +75,9 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
         $filemanageroptions = array();
-        /**
-         * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
-         */
-        $filemanageroptions['accepted_types'] = '*'; // $config->allowedformats; //
+
+        // Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc. ($config->allowedformats).
+        $filemanageroptions['accepted_types'] = '*';
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
 
@@ -104,7 +103,6 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
             $mform->hideIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
         }
 
-//-----------------------------------------------------------------------
         $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyofficeeditor'));
         $mform->addElement('checkbox', 'download', get_string('download', 'onlyofficeeditor'));
         $mform->setDefault('download', 1);
