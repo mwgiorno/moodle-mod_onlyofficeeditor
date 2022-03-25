@@ -25,6 +25,8 @@
 
 namespace mod_onlyofficeeditor\privacy;
 
+use core_privacy\local\metadata\collection;
+
 /**
  * Privacy provider class.
  *
@@ -33,15 +35,20 @@ namespace mod_onlyofficeeditor\privacy;
  * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+class provider implements \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\data_provider {
 
     /**
-     * Get the language string identifier with the component's language
-     * file to explain why this plugin stores no data.
-     *
-     * @return  string
+     * Extends metadata about system.
+     * @param collection $collection
+     * @return collection
      */
-    public static function get_reason() : string {
-        return 'privacy:metadata';
+    public static function get_metadata(collection $collection): collection
+    {
+        $collection->add_external_location_link('onlyofficeeditor',
+            ['userid' => 'privacy:metadata:onlyofficeeditor:userid'],
+            'privacy:metadata:onlyofficeeditor');
+        $collection->add_subsystem_link('core_files', [], 'privacy:metadata:onlyofficeeditor:core_files');
+        return $collection;
     }
 }

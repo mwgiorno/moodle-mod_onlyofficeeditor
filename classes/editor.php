@@ -137,7 +137,7 @@ class editor {
 
         // User.
         $user = [];
-        $user['id'] = $USER->id;
+        $user['id'] = hash('md5', $USER->id);
         $user['name'] = \fullname($USER);
         $editorconfig['user'] = $user;
 
