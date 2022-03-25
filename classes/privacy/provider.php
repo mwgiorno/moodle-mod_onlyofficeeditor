@@ -43,8 +43,7 @@ class provider implements \core_privacy\local\metadata\provider,
      * @param collection $collection
      * @return collection
      */
-    public static function get_metadata(collection $collection): collection
-    {
+    public static function get_metadata(collection $collection): collection{
         $collection->add_external_location_link('onlyofficeeditor',
             ['userid' => 'privacy:metadata:onlyofficeeditor:userid'],
             'privacy:metadata:onlyofficeeditor');

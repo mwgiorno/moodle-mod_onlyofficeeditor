@@ -60,6 +60,6 @@ $string['privacy:metadata:onlyofficeeditor:intro'] = 'General introduction of th
 $string['privacy:metadata:onlyofficeeditor:introformat'] = 'Format of the intro field (MOODLE, HTML, MARKDOWN...).';
 $string['privacy:metadata:onlyofficeeditor:permissions'] = 'Document permissions.';
 $string['privacy:metadata:onlyofficeeditor:name'] = 'Name of the ONLYOFFICE activity.';
-$string['privacy:metadata:onlyofficeeditor:course']= 'Course ONLYOFFICE activity belongs to.';
+$string['privacy:metadata:onlyofficeeditor:course'] = 'Course ONLYOFFICE activity belongs to.';
 $string['privacy:metadata:onlyofficeeditor'] = 'Information about documents edited with ONLYOFFICE.';
 $string['privacy:metadata:onlyofficeeditor:core_files'] = 'ONLYOFFICE document activity stores documents which have been edited.';
