@@ -15,9 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Install onlyoffice xmldb.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +28,7 @@
  *
  * @see upgrade_plugins_modules()
  */
-function xmldb_onlyoffice_install() {
+function xmldb_onlyofficeeditor_install() {
     return true;
 }
 
@@ -36,6 +37,6 @@ function xmldb_onlyoffice_install() {
  *
  * @see upgrade_plugins_modules()
  */
-function xmldb_onlyoffice_install_recovery() {
+function xmldb_onlyofficeeditor_install_recovery() {
     return true;
 }
