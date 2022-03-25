@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,23 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Strings for component 'onlyofficeeditor', language 'en'.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
- * @author      Olumuyiwa Taiwo {@link https://moodle.org/user/view.php?id=416594}
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
 $string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
-$string['pluginname'] = 'Onlyoffice document';
-$string['pluginadministration'] = 'Onlyoffice document activity administration';
+$string['pluginname'] = 'ONLYOFFICE document';
+$string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
 $string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
-$string['onlyoffice:addinstance'] = 'Add a new ONLYOFFICE document activity';
-$string['onlyoffice:view'] = 'View ONLYOFFICE document activity';
+$string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
+$string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 
 $string['documentserverurl'] = 'Document Editing Service Address';
 $string['documentserverurl_desc'] = 'The Document Editing Service Address specifies the address of the server with the document services installed. Please replace \'https://documentserver.url\' above with the correct server address';
@@ -46,15 +46,15 @@ $string['printintro'] = 'Print intro text';
 $string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
 $string['download'] = 'Document can be downloaded';
-$string['download_help'] = 'If this is off, documents will not be downloadable in the OnlyOffice editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to download documents via the app';
-$string['download_desc'] = 'Allow documents to be downloaded via the OnlyOffice editor app';
+$string['download_help'] = 'If this is off, documents will not be downloadable in the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to download documents via the app';
+$string['download_desc'] = 'Allow documents to be downloaded via the ONLYOFFICE editor app';
 $string['print'] = 'Document can be printed';
-$string['print_help'] = 'If this is off, documents will not be printable via the OnlyOffice editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
-$string['print_desc'] = 'Allow documents to be printed via the OnlyOffice editor app';
+$string['print_help'] = 'If this is off, documents will not be printable via the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
+$string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor app';
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
-
+$string['privacy:metadata'] = 'No information is stored about user personal data.';
 $string['forcesave'] = 'Enable Force Save';
 $string['editor_view'] = 'Editor customization settings';
 $string['editor_view_chat'] = 'Display Chat menu button';

@@ -1,12 +1,17 @@
-#page-content .onlyoffice .activityinstance > a {
+/* @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+#page-content .onlyofficeeditor .activityinstance > a {
     display: inline-block;
 }
 
-.onlyoffice-container > iframe {
+.onlyofficeeditor-container > iframe {
     height: 80vh;
     max-height: 60rem;
 }
 
-#onlyoffice-editor.error {
+#onlyofficeeditor-editor.error {
     color: red;
 }
