@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,22 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The main onlyoffice configuration form
+ * The main ONLYOFFICE configuration form
  *
  * It uses the standard core Moodle formslib. For more info about them, please
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
- * @package    mod_onlyoffice
- * @copyright  2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-use mod_onlyoffice\util;
+use mod_onlyofficeeditor\util;
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
-class mod_onlyoffice_mod_form extends moodleform_mod {
+/**
+ * New ONLYOFFICE module form.
+ *
+ * It uses the standard core Moodle formslib. For more info about them, please
+ * visit: http://docs.moodle.org/en/Development:lib/formslib.php
+ *
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class mod_onlyofficeeditor_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
@@ -41,17 +52,16 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
 
         $mform = $this->_form;
 
-        $config = get_config('onlyoffice');
+        $config = get_config('onlyofficeeditor');
 
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         // Adding the standard "name" field.
-        $mform->addElement('text', 'name', get_string('onlyofficename', 'onlyoffice'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('onlyofficename', 'onlyofficeeditor'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
-        }
-        else {
+        } else {
             $mform->setType('name', PARAM_CLEANHTML);
         }
         $mform->addRule('name', null, 'required', null, 'client');
@@ -64,31 +74,27 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $attributes = $element->getAttributes();
         $attributes['rows'] = 5;
         $element->setAttributes($attributes);
-        $filemanager_options = array();
-        /**
-         * @todo Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc.
-         */
-        $filemanager_options['accepted_types'] = '*'; // $config->allowedformats; // 
-        $filemanager_options['maxbytes'] = -1;
-        $filemanager_options['maxfiles'] = 1;
+        $filemanageroptions = array();
 
-        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyoffice'), null, $filemanager_options);
+        // Limit to types supported by ONLYOFFICE -- docx, xlsx, pptx, odt, csv, txt, etc. ($config->allowedformats).
+        $filemanageroptions['accepted_types'] = '*';
+        $filemanageroptions['maxbytes'] = -1;
+        $filemanageroptions['maxfiles'] = 1;
+
+        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyofficeeditor'), null, $filemanageroptions);
         $mform->addRule('file', get_string('required'), 'required', null, 'client');
 
-//-----------------------------------------------------------------------
-        $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyoffice'));
-        $mform->addElement('checkbox', 'download', get_string('download', 'onlyoffice'));
+        $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyofficeeditor'));
+        $mform->addElement('checkbox', 'download', get_string('download', 'onlyofficeeditor'));
         $mform->setDefault('download', 1);
-        $mform->addHelpButton('download', 'download', 'onlyoffice');
+        $mform->addHelpButton('download', 'download', 'onlyofficeeditor');
 
-        $mform->addElement('checkbox', 'print', get_string('print', 'onlyoffice'));
+        $mform->addElement('checkbox', 'print', get_string('print', 'onlyofficeeditor'));
         $mform->setDefault('print', 1);
-        $mform->addHelpButton('print', 'print', 'onlyoffice');
+        $mform->addHelpButton('print', 'print', 'onlyofficeeditor');
 
-        /**
-         * @todo add grading capability. need use case for grading
-         */
         // Add standard grading elements.
+        // Add grading capability. need use case for grading.
         // $this->standard_grading_coursemodule_elements();
         // Add standard elements, common to all modules.
         $this->standard_coursemodule_elements();
@@ -97,7 +103,15 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
-    function validation($data, $files) {
+    /**
+     * Form verification.
+     *
+     * @param array $data form data.
+     * @param array $files uploaded file.
+     * @return mixed of "element_name"=>"error_description" if there are errors,
+     *         or an empty array if everything is OK (true allowed for backwards compatibility too).
+     */
+    public function validation($data, $files) {
         global $USER;
 
         $errors = parent::validation($data, $files);
@@ -116,25 +130,23 @@ class mod_onlyoffice_mod_form extends moodleform_mod {
      *
      * Only available on moodleform_mod.
      *
-     * @param array $default_values passed by reference
+     * @param array $defaultvalues passed by reference
      */
-    function data_preprocessing(&$default_values) {
+    public function data_preprocessing(&$defaultvalues) {
         $draftitemid = file_get_submitted_draft_itemid('file');
-        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyoffice', 'content', 0, array('subdirs' => false));
-        $default_values['file'] = $draftitemid;
-        if (!empty($default_values['permissions'])) {
-            $permissions = unserialize($default_values['permissions']);
+        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_onlyofficeeditor', 'content', 0, array('subdirs' => false));
+        $defaultvalues['file'] = $draftitemid;
+        if (!empty($defaultvalues['permissions'])) {
+            $permissions = unserialize($defaultvalues['permissions']);
             if (isset($permissions['download'])) {
-                $default_values['download'] = $permissions['download'];
-            }
-            else {
-                $default_values['download'] = 0;
+                $defaultvalues['download'] = $permissions['download'];
+            } else {
+                $defaultvalues['download'] = 0;
             }
             if (isset($permissions['print'])) {
-                $default_values['print'] = $permissions['print'];
-            }
-            else {
-                $default_values['print'] = 0;
+                $defaultvalues['print'] = $permissions['print'];
+            } else {
+                $defaultvalues['print'] = 0;
             }
         }
     }

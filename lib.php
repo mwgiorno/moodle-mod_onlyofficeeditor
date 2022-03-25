@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,34 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module onlyoffice
+ * Library of interface functions and constants for module ONLYOFFICE
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the onlyoffice specific functions, needed to implement all the module
+ * All the ONLYOFFICE specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
- * @package    mod_onlyoffice
- * @copyright  2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/vendor/autoload.php');
-
-use mod_onlyoffice\util;
+use mod_onlyofficeeditor\util;
 
 /**
  * Returns the information on whether the module supports a feature
  *
- * See {@link plugin_supports()} for more info.
+ * See {@see plugin_supports()} for more info.
  *
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function onlyoffice_supports($feature) {
+function onlyofficeeditor_supports($feature) {
 
     switch ($feature) {
         case FEATURE_SHOW_DESCRIPTION:
@@ -54,7 +51,7 @@ function onlyoffice_supports($feature) {
 }
 
 /**
- * Saves a new instance of the onlyoffice into the database
+ * Saves a new instance of the ONLYOFFICE into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -62,10 +59,10 @@ function onlyoffice_supports($feature) {
  * of the new instance.
  *
  * @param stdClass $data Submitted data from the form in mod_form.php
- * @param mod_onlyoffice_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted onlyoffice record
+ * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted ONLYOFFICE record
  */
-function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform = null) {
+function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $cmid = $data->coursemodule;
@@ -75,29 +72,29 @@ function onlyoffice_add_instance(stdClass $data, mod_onlyoffice_mod_form $mform 
     util::save_document_permissions($data);
     util::save_file($data);
 
-    $data->id = $DB->insert_record('onlyoffice', $data);
+    $data->id = $DB->insert_record('onlyofficeeditor', $data);
 
-    // we need to use context now, so we need to make sure all needed info is already in db
+    // We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
-    \core_completion\api::update_completion_date_event($cmid, 'onlyoffice', $data->id, $completiontimeexpected);
+    \core_completion\api::update_completion_date_event($cmid, 'onlyofficeeditor', $data->id, $completiontimeexpected);
 
     return $data->id;
 }
 
 /**
- * Updates an instance of the onlyoffice in the database
+ * Updates an instance of the ONLYOFFICE in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
  * @param stdClass $data An object from the form in mod_form.php
- * @param mod_onlyoffice_mod_form $mform The form instance itself (if needed)
+ * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function onlyoffice_update_instance(stdClass $data, mod_onlyoffice_mod_form $mform = null) {
+function onlyofficeeditor_update_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $data->timemodified = time();
@@ -107,15 +104,15 @@ function onlyoffice_update_instance(stdClass $data, mod_onlyoffice_mod_form $mfo
     util::save_file($data);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
-    \core_completion\api::update_completion_date_event($data->coursemodule, 'onlyoffice', $data->id, $completiontimeexpected);
+    \core_completion\api::update_completion_date_event($data->coursemodule, 'onlyofficeeditor', $data->id, $completiontimeexpected);
 
-    $result = $DB->update_record('onlyoffice', $data);
+    $result = $DB->update_record('onlyofficeeditor', $data);
 
     return $result;
 }
 
 /**
- * Removes an instance of the onlyoffice from the database
+ * Removes an instance of the ONLYOFFICE from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -124,17 +121,17 @@ function onlyoffice_update_instance(stdClass $data, mod_onlyoffice_mod_form $mfo
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function onlyoffice_delete_instance($id) {
+function onlyofficeeditor_delete_instance($id) {
     global $DB;
 
-    if (!$onlyoffice = $DB->get_record('onlyoffice', array('id' => $id))) {
+    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', array('id' => $id))) {
         return false;
     }
 
-    $cm = get_coursemodule_from_instance('onlyoffice', $id);
-    \core_completion\api::update_completion_date_event($cm->id, 'onlyoffice', $id, null);
+    $cm = get_coursemodule_from_instance('onlyofficeeditor', $id);
+    \core_completion\api::update_completion_date_event($cm->id, 'onlyofficeeditor', $id, null);
 
-    $DB->delete_records('onlyoffice', array('id' => $onlyoffice->id));
+    $DB->delete_records('onlyofficeeditor', array('id' => $onlyoffice->id));
 
     return true;
 }
@@ -144,32 +141,33 @@ function onlyoffice_delete_instance($id) {
  * "extra" information that may be needed when printing
  * this activity in a course listing.
  *
- * See {@link get_array_of_activities()} in course/lib.php
+ * See {@see get_array_of_activities()} in course/lib.php.
  *
  * @param stdClass $coursemodule
  * @return cached_cm_info info
  */
-function onlyoffice_get_coursemodule_info($coursemodule) {
+function onlyofficeeditor_get_coursemodule_info($coursemodule) {
     global $CFG, $DB;
     require_once("$CFG->libdir/filelib.php");
     require_once($CFG->libdir . '/completionlib.php');
 
     $context = \context_module::instance($coursemodule->id);
 
-    if (!$onlyoffice = $DB->get_record('onlyoffice', array('id' => $coursemodule->instance), 'id, name, display, displayoptions, intro, introformat')) {
-        return NULL;
+    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', array('id' => $coursemodule->instance),
+        'id, name, display, displayoptions, intro, introformat')) {
+        return null;
     }
 
     $info = new cached_cm_info();
     $info->name = $onlyoffice->name;
     if ($coursemodule->showdescription) {
         // Convert intro to html. Do not filter cached version, filters run at display time.
-        $info->content = format_module_intro('onlyoffice', $onlyoffice, $coursemodule->id, false);
+        $info->content = format_module_intro('onlyofficeeditor', $onlyoffice, $coursemodule->id, false);
     }
 
     // See if there is at least one file.
     $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, 'mod_onlyoffice', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+    $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
         $info->icon = file_file_icon($file, 24);
@@ -185,18 +183,22 @@ function onlyoffice_get_coursemodule_info($coursemodule) {
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  * @param cm_info $cm Course module information
  */
-function onlyoffice_cm_info_view(cm_info $cm) {
+function onlyofficeeditor_cm_info_view(cm_info $cm) {
     global $OUTPUT;
-    $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyoffice'), 'onlyoffice', array('class' => 'onlyofficeactivityicon'));
+    $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
+        array('class' => 'onlyofficeactivityicon'));
     $cm->set_after_link(' ' . html_writer::tag('span', $icon));
 }
 
 /**
+ * Sets dynamic information about a course module.
+ *
+ * This function is called from cm_info when displaying the module.
+ *
  * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
  * @param cm_info $cm
  */
-function onlyoffice_cm_info_dynamic(cm_info $cm) {
-    
+function onlyofficeeditor_cm_info_dynamic(cm_info $cm) {
 }
 
 /**
@@ -211,10 +213,10 @@ function onlyoffice_cm_info_dynamic(cm_info $cm) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $onlyoffice The onlyoffice instance record
+ * @param stdClass $onlyoffice The ONLYOFFICE instance record
  * @return stdClass|null
  */
-function onlyoffice_user_outline($course, $user, $mod, $onlyoffice) {
+function onlyofficeeditor_user_outline($course, $user, $mod, $onlyoffice) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -233,22 +235,21 @@ function onlyoffice_user_outline($course, $user, $mod, $onlyoffice) {
  * @param cm_info $mod course module info
  * @param stdClass $onlyoffice the module instance record
  */
-function onlyoffice_user_complete($course, $user, $mod, $onlyoffice) {
-    
+function onlyofficeeditor_user_complete($course, $user, $mod, $onlyoffice) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in onlyoffice activities and print it out.
+ * that has occurred in ONLYOFFICE activities and print it out.
  *
  * @todo implement
- * 
+ *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function onlyoffice_print_recent_activity($course, $viewfullnames, $timestart) {
+function onlyofficeeditor_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -257,7 +258,7 @@ function onlyoffice_print_recent_activity($course, $viewfullnames, $timestart) {
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link onlyoffice_print_recent_mod_activity()}.
+ * {@see onlyofficeeditor_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -269,21 +270,19 @@ function onlyoffice_print_recent_activity($course, $viewfullnames, $timestart) {
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function onlyoffice_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0, $groupid = 0) {
-    
+function onlyofficeeditor_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0, $groupid = 0) {
 }
 
 /**
- * Prints single activity item prepared by {@link onlyoffice_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@see onlyofficeeditor_get_recent_mod_activity()}.
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
  * @param bool $detail print detailed report
- * @param array $modnames as returned by {@link get_module_types_names()}
+ * @param array $modnames as returned by {@see get_module_types_names()}.
  * @param bool $viewfullnames display users' full names
  */
-function onlyoffice_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
-    
+function onlyofficeeditor_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -294,7 +293,7 @@ function onlyoffice_print_recent_mod_activity($activity, $courseid, $detail, $mo
  *
  * @return array
  */
-function onlyoffice_get_extra_capabilities() {
+function onlyofficeeditor_get_extra_capabilities() {
     return array();
 }
 
@@ -304,21 +303,21 @@ function onlyoffice_get_extra_capabilities() {
  * Returns the lists of all browsable file areas within the given module context
  *
  * The file area 'intro' for the activity introduction field is added automatically
- * by {@link file_browser::get_file_info_context_module()}
+ * by {@see file_browser::get_file_info_context_module()}.
  *
  * @param stdClass $course
  * @param stdClass $cm
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function onlyoffice_get_file_areas($course, $cm, $context) {
+function onlyofficeeditor_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for onlyoffice file areas
+ * File browsing support for ONLYOFFICE file areas
  *
- * @package mod_onlyoffice
+ * @package mod_onlyofficeeditor
  * @category files
  *
  * @param file_browser $browser
@@ -332,39 +331,41 @@ function onlyoffice_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function onlyoffice_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function onlyofficeeditor_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the onlyoffice file areas
+ * Serves the files from the ONLYOFFICE file areas
  *
- * @package mod_onlyoffice
- * 
+ * @package mod_onlyofficeeditor
+ *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the onlyoffice's context
+ * @param stdClass $context the ONLYOFFICE's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function onlyoffice_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = array()) {
+function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = array()) {
 
     $doc = required_param('doc', PARAM_RAW);
 
-    $crypt = new \mod_onlyoffice\crypt();
+    $crypt = new \mod_onlyofficeeditor\hasher();
     list($hash, $error) = $crypt->read_hash($doc);
-    if ($error || ($hash == NULL)) {
+    if ($error || ($hash == null)) {
         return false;
     }
 
     $fs = get_file_storage();
 
-    $files = $fs->get_area_files($context->id, 'mod_onlyoffice', $filearea, false, 'sortorder DESC, id ASC', false, 0, 0, 1);
+    $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', $filearea, false, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
-        if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true) || has_any_capability(['moodle/course:manageactivities', 'mod/onlyoffice:editdocument'], $context, $hash->userid))) {
+        if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
+                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument'],
+                    $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
     }

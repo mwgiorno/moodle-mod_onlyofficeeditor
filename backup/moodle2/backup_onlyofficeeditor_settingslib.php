@@ -15,23 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade code for the onlyoffice.
+ * Inherits backup settings.
  *
- * @package    mod_onlyofficeeditor
- * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
- * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_onlyofficeeditor
+ * @subpackage
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Execute ONLYOFFICE upgrade from the given old version
- *
- * @param int $oldversion
- * @return bool
- */
-function xmldb_onlyofficeeditor_upgrade($oldversion) {
-    global $DB;
-    $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
+defined('MOODLE_INTERNAL') || die();
 
-    return true;
-}
+// This activity has not particular settings but the inherited from the generic
+// backup_activity_task so here there isn't any class definition, like the ones
+// existing in /backup/moodle2/backup_settingslib.php (activities section).
