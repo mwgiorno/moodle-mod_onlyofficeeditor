@@ -210,7 +210,7 @@ class util {
                 break;
             }
         }
-        $pathlocale = util::PATH_LOCALE[$user->lang];
+        $pathlocale = self::PATH_LOCALE[$user->lang];
         $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;
 
         $fileinfo = array(

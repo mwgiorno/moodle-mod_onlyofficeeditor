@@ -74,7 +74,11 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
     util::save_file($data);
 
     if ($fileformat != null && $fileformat != 'Upload file') {
-        $records = $DB->get_records('files', ['itemid' => $data->file, 'component' => 'mod_onlyofficeeditor', 'filearea' => 'content']);
+        $records = $DB->get_records('files', [
+            'itemid' => $data->file,
+            'component' => 'mod_onlyofficeeditor',
+            'filearea' => 'content'
+        ]);
         foreach ($records as $record) {
             $record->contextid = context_module::instance($cmid)->id;
             $record->itemid = 0;

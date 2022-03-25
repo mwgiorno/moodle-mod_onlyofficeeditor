@@ -83,17 +83,17 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
 
         if (!$this->_instance) {
             $attr = ['class' => 'onlyofficeeditor-create-button'];
-            $create_buttons = array();
-            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+            $createbuttons = array();
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('docxformname', 'onlyofficeeditor'), 'Document', $attr);
-            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('xlsxformname', 'onlyofficeeditor'), 'Spreadsheet', $attr);
-            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('pptxformname', 'onlyofficeeditor'), 'Presentation', $attr);
-            $create_buttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('uploadformname', 'onlyofficeeditor'), 'Upload file', $attr);
 
-            $mform->addGroup($create_buttons, 'create_buttons',
+            $mform->addGroup($createbuttons, 'create_buttons',
                 get_string('selectfile', 'onlyofficeeditor'), array(' '), false);
             $mform->addRule('create_buttons', get_string('required'), 'required',
                 null, 'client');
