@@ -192,10 +192,11 @@ class util {
      * @param int $contextid context id.
      * @param string $dirroot moodle dir root.
      * @param int $fileid new file id.
+     * @param string $name name of the new file.
      * @throws \file_exception
      * @throws \stored_file_creation_exception
      */
-    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $dirroot, $fileid) {
+    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $dirroot, $fileid, $name) {
         switch ($fileformat) {
             case 'Document': {
                 $fileformat = 'docx';
@@ -221,7 +222,7 @@ class util {
             'userid' => $user->id,
             'itemid' => $fileid,
             'filepath' => '/',
-            'filename' => 'new.' . $fileformat);
+            'filename' => $name . '.' . $fileformat);
 
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname($fileinfo, $pathname);
