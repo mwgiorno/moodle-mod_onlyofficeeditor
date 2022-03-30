@@ -210,6 +210,10 @@ class util {
                 $fileformat = 'pptx';
                 break;
             }
+            case 'Form template': {
+                $fileformat = 'docxf';
+                break;
+            }
         }
         $pathlocale = self::PATH_LOCALE[$user->lang];
         $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;

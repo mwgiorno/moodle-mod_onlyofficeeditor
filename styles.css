@@ -49,6 +49,10 @@
     content: url([[pix:onlyofficeeditor|file_xlsx]]);
 }
 
+.onlyofficeeditor-create-button input[value^="Form template"] {
+    content: url([[pix:onlyofficeeditor|file_docxf]]);
+}
+
 .onlyofficeeditor-create-button input[value^="Upload file"] {
     content: url([[pix:onlyofficeeditor|file_upload]]);
 }

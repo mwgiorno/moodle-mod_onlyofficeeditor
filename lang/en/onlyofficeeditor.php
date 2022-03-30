@@ -26,6 +26,7 @@
 $string['docxformname'] = 'Document';
 $string['pptxformname'] = 'Presentation';
 $string['xlsxformname'] = 'Spreadsheet';
+$string['docxfformname'] = 'Form template';
 $string['uploadformname'] = 'Upload file';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
