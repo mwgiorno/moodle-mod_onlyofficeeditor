@@ -81,6 +81,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
 
+        $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
         if (!$this->_instance) {
             $attr = ['class' => 'onlyofficeeditor-create-button'];
             $createbuttons = array();
@@ -98,7 +99,6 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
             $mform->addRule('create_buttons', get_string('required'), 'required',
                 null, 'client');
 
-            $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
             $mform->disabledIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
             $mform->hideIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
         }
