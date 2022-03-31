@@ -27,8 +27,8 @@
  * Custom uninstallation procedure
  */
 function xmldb_onlyofficeeditor_uninstall() {
-    $core_types = core_filetypes::get_types();
-    if ($core_types["docxf"] !== null && $core_types["oform"] !== null) {
+    $coretypes = core_filetypes::get_types();
+    if ($coretypes["docxf"] !== null && $coretypes["oform"] !== null) {
         core_filetypes::delete_type("docxf");
         core_filetypes::delete_type("oform");
     }

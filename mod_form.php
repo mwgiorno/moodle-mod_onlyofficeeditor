@@ -142,7 +142,8 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
             $fileformat = $data['onlyofficetemplateformat'];
             if ($fileformat != null && $fileformat != 'Upload file') {
-                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot, $data['file'], $data['name']);
+                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot,
+                    $data['file'], $data['name']);
             } else {
                 $errors['file'] = get_string('required');
             }
