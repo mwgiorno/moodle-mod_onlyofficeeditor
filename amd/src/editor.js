@@ -20,11 +20,11 @@
  */
 
 
-define(['jquery'], function ($) {
-    var displayError = function (error) {
-        require(['core/str'], function (str) {
+define(['jquery'], function($) {
+    var displayError = function(error) {
+        require(['core/str'], function(str) {
             var errorIsAvailable = str.get_string(error, 'onlyoffice');
-            $.when(errorIsAvailable).done(function (localizedStr) {
+            $.when(errorIsAvailable).done(function(localizedStr) {
                 $("#onlyoffice-editor").text = localizedStr;
                 $("#onlyoffice-editor").text(localizedStr).addClass("error");
             });
@@ -32,7 +32,7 @@ define(['jquery'], function ($) {
     };
 
     return {
-        init: function (courseid, cmid) {
+        init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
                 displayError('docserverunreachable');
                 return;
@@ -41,9 +41,13 @@ define(['jquery'], function ($) {
             $.getJSON(ajax_url, {
                 courseid: courseid,
                 cmid: cmid
-            }).done(function (config) {
+            }).done(function(config) {
+                var favicon = config.documentType;
+                if (config.fileType === 'docxf' || config.fileType === 'oform') {
+                    favicon = config.fileType;
+                }
                 document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyoffice/pix/'
-                    + config.documentType + '.ico" />';
+                    + favicon + '.ico" />';
                 // eslint-disable-next-line no-undef
                 new DocsAPI.DocEditor("onlyoffice-editor", config);
             });
