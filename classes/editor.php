@@ -28,9 +28,9 @@ namespace mod_onlyofficeeditor;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_onlyoffice\crypt;
-use mod_onlyoffice\onlyoffice_file_utility;
-use mod_onlyoffice\document;
+use mod_onlyofficeeditor\crypt;
+use mod_onlyofficeeditor\onlyoffice_file_utility;
+use mod_onlyofficeeditor\document;
 use Firebase\JWT\JWT;
 
 /**

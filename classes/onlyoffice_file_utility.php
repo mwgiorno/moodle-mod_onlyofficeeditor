@@ -17,34 +17,29 @@
 /**
  * Onlyoffice file utility.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
-
-
-defined('MOODLE_INTERNAL') || die();
-
-use \mod_onlyoffice\convert_map;
+namespace mod_onlyofficeeditor;
 
 /**
  * Onlyoffice file utility class.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class onlyoffice_file_utility{
+class onlyoffice_file_utility {
 
     /**
      * Get accepted spreadsheets exntensions.
      * @return string[] Accepted extensions of spreadsheet files
      */
-    public static function get_accepted_spreadsheet_formats(){
+    public static function get_accepted_spreadsheet_formats() {
         return array('.xls', '.xlsx', '.xlsm',
             '.xlt', '.xltx', '.xltm',
             '.ods', '.fods', '.ots', '.csv');
@@ -54,7 +49,7 @@ class onlyoffice_file_utility{
      * Get accepted document extensions.
      * @return string[] Accepted extensions of document files.
      */
-    public static function get_accepted_document_formats(){
+    public static function get_accepted_document_formats() {
         return array('.doc', '.docx', '.docm',
             '.dot', '.dotx', '.dotm',
             '.odt', '.fodt', '.ott', '.rtf', '.txt',
@@ -66,7 +61,7 @@ class onlyoffice_file_utility{
      * Get accepted presentation extensions.
      * @return string[] Accepted extensions of presentation files.
      */
-    public static function get_accepted_presentation_formats(){
+    public static function get_accepted_presentation_formats() {
         return array('.pps', '.ppsx', '.ppsm',
             '.ppt', '.pptx', '.pptm',
             '.pot', '.potx', '.potm',
@@ -79,9 +74,15 @@ class onlyoffice_file_utility{
      * @return string|null
      */
     public static function get_document_type($ext) {
-        if (in_array($ext, self::get_accepted_document_formats())) return 'word';
-        if (in_array($ext, self::get_accepted_spreadsheet_formats())) return 'cell';
-        if (in_array($ext, self::get_accepted_presentation_formats())) return 'slide';
+        if (in_array($ext, self::get_accepted_document_formats())) {
+            return 'word';
+        }
+        if (in_array($ext, self::get_accepted_spreadsheet_formats())) {
+            return 'cell';
+        }
+        if (in_array($ext, self::get_accepted_presentation_formats())) {
+            return 'slide';
+        }
         return null;
     }
 
