@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- add ability to create activity with empty file
+
 ## 2.1.0
 ## Added
 - backup api
