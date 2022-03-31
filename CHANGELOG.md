@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- add ability to open editor in fullscreen mode
+
 ## 2.1.0
 ## Added
 - backup api
