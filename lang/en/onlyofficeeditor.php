@@ -55,3 +55,7 @@ $string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
 $string['privacy:metadata'] = 'No information is stored about user personal data.';
+$string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
+$string['saveaserror'] = 'Something went wrong.';
+$string['saveassuccess'] = 'Document was successfully saved.';
+$string['saveastitle'] = 'Choose Course Section to Save the document';
