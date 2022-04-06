@@ -30,14 +30,36 @@ $apitype = required_param('apiType', PARAM_TEXT);
 
 $context = CONTEXT_MODULE::instance($cmid);
 switch ($apitype) {
+    case 'sections':
+        try {
+            $courseid = $_GET['courseid'];
+            require_login($courseid);
+            $moduleinfo = get_fast_modinfo($courseid);
+            $sections = course_get_format($courseid)->get_sections();
+            $data = new stdClass;
+            $data->sections = [];
+            for ($sectionnumber = 0; $sectionnumber < count($sections); $sectionnumber++) {
+                $sectioninfo = $moduleinfo->get_section_info($sectionnumber);
+
+                $sectionobject = new stdClass();
+                $sectionobject->sectionid = $sectioninfo->id;
+                $sectionobject->sectionname = get_section_name($courseid, $sectioninfo);
+                $data->sections[] = $sectionobject;
+            }
+            echo json_encode($data);
+        } catch (\Exception $e) {
+            throw new \Exception();
+        }
+        break;
     case 'saveas':
         try {
+            $courseid = $_POST['courseid'];
+            require_login($courseid);
             $url = $_POST['url'];
             $title = $_POST['title'];
-            $courseid = $_POST['courseid'];
             $section = $_POST['section'];
             \mod_onlyofficeeditor\util::save_as_document($url, $title, $context, $cmid, $courseid, $section);
-        } catch (moodle_exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception();
         }
         break;

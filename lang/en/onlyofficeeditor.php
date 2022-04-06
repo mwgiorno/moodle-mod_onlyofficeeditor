@@ -59,3 +59,4 @@ $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on
 $string['saveaserror'] = 'Something went wrong.';
 $string['saveassuccess'] = 'Document was successfully saved.';
 $string['saveastitle'] = 'Choose Course Section to Save the document';
+$string['saveasbutton'] = 'Choose';
