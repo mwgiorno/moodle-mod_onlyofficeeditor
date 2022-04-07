@@ -26,6 +26,8 @@
 
 namespace mod_onlyofficeeditor;
 
+require_once("$CFG->dirroot/course/modlib.php");
+
 /**
  * Utils class.
  *
@@ -175,7 +177,7 @@ class util {
         $newmoduleinfo->print = $permissions['print'];
         $newmoduleinfo->instance = 0;
         $newmoduleinfo->coursemodule = 0;
-        $newmoduleinfo->section = $section ? $section : $cm->section - 1;
+        $newmoduleinfo->section = $section ? $section - 1 : $cm->section - 1;
         $newmoduleinfo->course = $course->id;
         $newmoduleinfo->add = 'onlyofficeeditor';
         $newmoduleinfo->cmidnumber = '';

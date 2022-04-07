@@ -59,6 +59,7 @@ switch ($apitype) {
             $title = $_POST['title'];
             $section = $_POST['section'];
             \mod_onlyofficeeditor\util::save_as_document($url, $title, $context, $cmid, $courseid, $section);
+            echo json_encode($title);
         } catch (\Exception $e) {
             throw new \Exception();
         }
