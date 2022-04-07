@@ -13,37 +13,111 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/* @package    mod_onlyofficeeditor
+/**
+ * @module mod_onlyofficeeditor/editor
  * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-
+ **/
 define(['jquery'], function($) {
-    var displayError = function(error) {
-        require(['core/str'], function(str) {
-            var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
-            $.when(errorIsAvailable).done(function(localizedStr) {
-                $("#onlyofficeeditor-editor").text = localizedStr;
-                $("#onlyofficeeditor-editor").text(localizedStr).addClass("error");
+    var displayNotification = function(error, type) {
+        require(['core/notification'], function(notification) {
+            require(['core/str'], function(str) {
+                var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
+                $.when(errorIsAvailable).done(function(localizedStr) {
+                    notification.addNotification({
+                        message: localizedStr,
+                        type: type
+                    });
+                });
             });
         });
+    };
+
+    var saveAsModal = null;
+
+    var displaySaveAsModal = function(saveAsData, cmid, courseid) {
+        require(['jquery', 'core/templates', 'core/modal_factory', 'mod_onlyofficeeditor/modal_saveas'],
+            function($, Templates, ModalFactory, ModalSaveas) {
+                var trigger = $('.onlyofficeeditor-container');
+                if (saveAsModal === null) {
+                    saveAsModal = ModalFactory.create({
+                        type: ModalSaveas.TYPE
+                    }, trigger);
+                }
+                saveAsModal.then((modal) => {
+                    modal.courseid = courseid;
+                    modal.CMID = cmid;
+                    modal.saveAsData = saveAsData;
+                });
+                saveAsModal.done((modal) => {
+                    modal.renderSections(modal.getBody(), cmid, courseid);
+                    modal.show();
+                });
+            });
     };
 
     return {
         init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
-                displayError('docserverunreachable');
+                displayNotification('docserverunreachable', 'error');
                 return;
             }
             var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
                 cmid: cmid
-            }).done(function(config) {
-                // eslint-disable-next-line no-undef
-                new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
+            }).done(function(data) {
+                var docEditor = null;
+                var config = data.config;
+                var canAddInstance = data.addinstance;
+
+                const innerAlert = (message, inEditor) => {
+                    // eslint-disable-next-line no-console
+                    if (console && console.log) {
+                        // eslint-disable-next-line no-console
+                        console.log(message);
+                    }
+                    if (inEditor && docEditor) {
+                        docEditor.showMessage(message);
+                    }
+                };
+                const onAppReady = () => {
+                    innerAlert("Document editor ready");
+                };
+
+                const onError = (event) => {
+                    if (event) {
+                        innerAlert(event.data);
+                    }
+                };
+                config.events = {
+                    'onAppReady': onAppReady,
+                    'onError': onError
+                };
+
+                var onRequestSaveAs = function(event) {
+                    var saveAsData = {
+                        title: event.data.title,
+                        url: event.data.url,
+                        courseid: courseid,
+                        section: null
+                    };
+                    displaySaveAsModal(saveAsData, cmid, courseid);
+                };
+
+                if (canAddInstance) {
+                    config.events.onRequestSaveAs = onRequestSaveAs;
+                }
+
+                if ((config.document.fileType === "docxf" || config.document.fileType === "oform")
+                    // eslint-disable-next-line no-undef
+                    && DocsAPI.DocEditor.version().split(".")[0] < 7) {
+                    displayNotification('oldversion', 'error');
+                } else {
+                    // eslint-disable-next-line no-undef
+                    docEditor = new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
+                }
             });
         }
     };
