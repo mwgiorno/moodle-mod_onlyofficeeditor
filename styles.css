@@ -17,7 +17,7 @@
 }
 
 .onlyofficeeditor-saveas-section {
-    max-width: 100% !important;
+    max-width: 100%;
     padding: 0.5rem 0;
     color: rgb(44, 123, 194);
     font-size: 20px;

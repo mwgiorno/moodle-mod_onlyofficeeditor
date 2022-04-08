@@ -126,10 +126,12 @@ define(['jquery', 'core/notification', 'core/custom_interaction_events', 'core/m
                 data: {courseid: courseid}
             }).done((response) => {
                 var sections = response.sections;
+                // eslint-disable-next-line promise/catch-or-return
                 Templates.render('mod_onlyofficeeditor/modal_saveas_sections_list', {sections: sections})
                     .then((html, js) => {
                         var container = body.find(SELECTORS.CONTAINER)[0];
                         Templates.replaceNode(container, html, js);
+                        return;
                     })
                     .always(() => {
                         hideLoadingIcon(body);

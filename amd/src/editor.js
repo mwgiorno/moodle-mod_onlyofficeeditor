@@ -45,12 +45,10 @@ define(['jquery'], function($) {
                         type: ModalSaveas.TYPE
                     }, trigger);
                 }
-                saveAsModal.then((modal) => {
+                saveAsModal.done((modal) => {
                     modal.courseid = courseid;
                     modal.CMID = cmid;
                     modal.saveAsData = saveAsData;
-                });
-                saveAsModal.done((modal) => {
                     modal.renderSections(modal.getBody(), cmid, courseid);
                     modal.show();
                 });

@@ -26,6 +26,7 @@
 
 namespace mod_onlyofficeeditor;
 
+defined('MOODLE_INTERNAL') || die();
 require_once("$CFG->dirroot/course/modlib.php");
 
 /**
@@ -235,7 +236,7 @@ class util {
 
             $moduleinfo->module = $module->id;
             $moduleinfo->modulename = $modulename->modulename;
-            $moduleinfo = util::generate_new_module_info($moduleinfo, $course, $cm, $section);
+            $moduleinfo = self::generate_new_module_info($moduleinfo, $course, $cm, $section);
 
             $fileinfo = array(
                 'author' => $file->get_author(),
