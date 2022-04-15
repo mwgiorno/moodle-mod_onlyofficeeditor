@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,43 +15,64 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Hash handler.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice;
+namespace mod_onlyofficeeditor;
 
-defined('MOODLE_INTERNAL') || die();
+use mod_onlyofficeeditor\util;
 
-use mod_onlyoffice\util;
-
-class crypt {
+/**
+ * Hash handler class.
+ *
+ * @package     mod_onlyofficeeditor
+ * @subpackage
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class hasher {
 
     /**
-     * The secret key from the application configuration
+     * The plugin key from the plugin configuration.
      *
      * @var string
      */
     private $appkey;
 
+    /**
+     * crypt constructor.
+     */
     public function __construct() {
         $this->appkey = util::get_appkey();
     }
-    
+
+    /**
+     * Get hash for object.
+     * @param mixed $object object.
+     * @return string encoded object.
+     */
     public function get_hash($object) {
-        $primaryKey = json_encode($object);
-        $hash = $this->signature_create($primaryKey);
+        $primarykey = json_encode($object);
+        $hash = $this->signature_create($primarykey);
         return $hash;
     }
 
+    /**
+     * Decode hash.
+     * @param string $hash encoded object.
+     * @return array decoded object.
+     */
     public function read_hash($hash) {
-        $result = NULL;
-        $error = NULL;
-        if ($hash === NULL) {
+        $result = null;
+        $error = null;
+        if ($hash === null) {
             return [$result, "hash is empty"];
         }
         try {
@@ -64,21 +84,23 @@ class crypt {
 
                 if ($payloadparts[0] === $encode) {
                     $result = json_decode($payloadparts[1]);
-                }
-                else {
+                } else {
                     $error = "hash not equal";
                 }
-            }
-            else {
+            } else {
                 $error = "incorrect hash";
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $error = $e->getMessage();
         }
         return [$result, $error];
     }
 
+    /**
+     * Create hash.
+     * @param string $key json encoded string.
+     * @return string hash of payload.
+     */
     private function signature_create($key) {
         $payload = base64_encode(hash("sha256", ($key . $this->appkey), true)) . "?" . $key;
         $base64str = base64_encode($payload);

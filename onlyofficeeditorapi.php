@@ -17,8 +17,8 @@
 /**
  * The ONLYOFFICE editor api.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,12 +31,12 @@ $apitype = required_param('apiType', PARAM_TEXT);
 $context = CONTEXT_MODULE::instance($cmid);
 switch ($apitype) {
     case 'mention':
-        require_capability('mod/onlyoffice:editdocument', $context);
+        require_capability('mod/onlyofficeeditor:editdocument', $context);
         try {
             $actionlink = $_POST['link'];
             $emails = $_POST['emails'];
             $comment = $_POST['comment'];
-            \mod_onlyoffice\util::mention_user_in_comment($actionlink, $comment, $emails, $context);
+            \mod_onlyofficeeditor\util::mention_user_in_comment($actionlink, $comment, $emails, $context);
         } catch (moodle_exception $e) {
             throw new \Exception();
         }

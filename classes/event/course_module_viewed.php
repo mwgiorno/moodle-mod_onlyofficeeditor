@@ -17,24 +17,22 @@
 /**
  * Defines the view event.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_onlyoffice\event;
-
-defined('MOODLE_INTERNAL') || die();
+namespace mod_onlyofficeeditor\event;
 
 /**
- * The mod_onlyoffice instance viewed event class
+ * The mod_onlyofficeeditor instance viewed event class
  *
  * If the view mode needs to be stored as well, you may need to
  * override methods get_url() and get_legacy_log_data(), too.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -44,7 +42,7 @@ class course_module_viewed extends \core\event\course_module_viewed {
      * Initialize the event
      */
     protected function init() {
-        $this->data['objecttable'] = 'onlyoffice';
+        $this->data['objecttable'] = 'onlyofficeeditor';
         parent::init();
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,10 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Callback handler.
  *
- * @package     mod_onlyoffice
+ * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -49,7 +49,7 @@ if (empty($doc)) {
     die(json_encode($response));
 }
 
-$crypt = new \mod_onlyoffice\crypt();
+$crypt = new \mod_onlyofficeeditor\hasher();
 list($hash, $error) = $crypt->read_hash($doc);
 
 if ($error || $hash == null) {
@@ -70,28 +70,28 @@ if ($data === null) {
 if (isset($data['status'])) {
     $status = (int) $data['status'];
     switch ($status) {
-        case mod_onlyoffice\util::STATUS_NOTFOUND:
+        case mod_onlyofficeeditor\util::STATUS_NOTFOUND:
             $response['error'] = 1;
             break;
 
-        case mod_onlyoffice\util::STATUS_MUSTSAVE:
-        case mod_onlyoffice\util::STATUS_FORCESAVE:
-            $isForcesave = $status === mod_onlyoffice\util::STATUS_FORCESAVE;
+        case mod_onlyofficeeditor\util::STATUS_MUSTSAVE:
+        case mod_onlyofficeeditor\util::STATUS_FORCESAVE:
+            $isforcesave = $status === mod_onlyofficeeditor\util::STATUS_FORCESAVE;
             // Save to Moodle.
-            if (mod_onlyoffice\util::save_document_to_moodle($data, $hash, $isForcesave)) {
+            if (mod_onlyofficeeditor\util::save_document_to_moodle($data, $hash, $isforcesave)) {
                 $response['error'] = 0;
             } else {
                 $response['error'] = 1;
             }
             break;
 
-        case mod_onlyoffice\util::STATUS_ERRORSAVING:
-        case mod_onlyoffice\util::STATUS_ERRORFORCESAVE:
+        case mod_onlyofficeeditor\util::STATUS_ERRORSAVING:
+        case mod_onlyofficeeditor\util::STATUS_ERRORFORCESAVE:
             $response['error'] = 1;
             break;
 
-        case mod_onlyoffice\util::STATUS_EDITING:
-        case mod_onlyoffice\util::STATUS_CLOSEDNOCHANGES:
+        case mod_onlyofficeeditor\util::STATUS_EDITING:
+        case mod_onlyofficeeditor\util::STATUS_CLOSEDNOCHANGES:
             $response['error'] = 0;
             break;
 

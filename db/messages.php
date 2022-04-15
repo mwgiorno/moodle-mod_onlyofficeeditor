@@ -17,8 +17,8 @@
 /**
  * Defines message providers (types of message sent) for the ONLYOFFICE module.
  *
- * @package    mod_onlyoffice
- * @copyright  2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @package    mod_onlyofficeeditor
+ * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 $messageproviders = array(
     // Notify user if he was mentioned in document.
     'mentionnotifier' => array(
-        'capability' => 'mod/onlyoffice:view',
+        'capability' => 'mod/onlyofficeeditor:view',
         'defaults' => array(
             'airnotifier' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
             'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF
