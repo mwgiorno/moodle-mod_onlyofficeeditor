@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- add mentions in comments in editor
+
 ## 2.1.0
 ## Added
 - backup api
