@@ -33,10 +33,13 @@ switch ($apitype) {
     case 'mention':
         require_capability('mod/onlyofficeeditor:editdocument', $context);
         try {
+            $courseid = $_GET['courseid'];
+            require_login($courseid);
             $actionlink = $_POST['link'];
             $emails = $_POST['emails'];
             $comment = $_POST['comment'];
             \mod_onlyofficeeditor\util::mention_user_in_comment($actionlink, $comment, $emails, $context);
+            echo json_encode($comment);
         } catch (moodle_exception $e) {
             throw new \Exception();
         }

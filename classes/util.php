@@ -205,10 +205,12 @@ class util {
             $message->name = 'mentionnotifier';
             $message->userfrom = \core_user::get_noreply_user();
             $message->userto = $user;
-            $message->subject = $USER->firstname . ' ' . $USER->lastname . ' ' . get_string('mentionnotifier:notification', 'onlyofficeeditor');
+            $message->subject = $USER->firstname . ' ' . $USER->lastname . ' '
+                . get_string('mentionnotifier:notification', 'onlyofficeeditor');
             $message->fullmessageformat = FORMAT_HTML;
             $message->fullmessagehtml =
-                '<p><strong>' . $USER->firstname . ' ' . $USER->lastname . '</strong> ' . get_string('mentionnotifier:notification', 'onlyofficeeditor')
+                '<p><strong>' . $USER->firstname . ' ' . $USER->lastname . '</strong> '
+                . get_string('mentionnotifier:notification', 'onlyofficeeditor')
                 . '<strong>' . $modulename . ' </strong>'
                 . strtolower(get_string('course')) . ' <strong>' . $coursename . '</strong>:</p>'
                 . '<p>' . $comment . '</p>';

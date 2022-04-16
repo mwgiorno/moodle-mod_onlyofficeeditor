@@ -36,7 +36,7 @@ define(['jquery'], function($) {
     };
 
     $.urlParam = function(name) {
-        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
         if (results === null) {
             return null;
         }
@@ -90,7 +90,8 @@ define(['jquery'], function($) {
                     var mentionData = {
                         comment: comment,
                         emails: emails,
-                        link: replacedActionLink
+                        link: replacedActionLink,
+                        courseid: courseid
                     };
 
                     $.ajax(M.cfg.wwwroot + '/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=mention&cmid=' + cmid, {
