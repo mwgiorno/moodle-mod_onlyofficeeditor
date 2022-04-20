@@ -128,7 +128,7 @@ class editor {
         $document['fileType'] = $ext;
         $document['title'] = $filename;
         $document['key'] = document::get_key($this->cm);
-        $document['permissions'] = document::get_permissions($this->context, $this->cm);
+        $document['permissions'] = document::get_permissions($this->context, $this->cm, $filename);
 
         // Editorconfig.
         $editorconfig = [];
@@ -162,6 +162,7 @@ class editor {
         $config['type'] = $devicetype;
         $config['document'] = $document;
         $config['editorConfig'] = $editorconfig;
+        $config['documentType'] = onlyoffice_file_utility::get_document_type('.' . $ext);
 
         // Add token.
         if (!empty($this->modconfig->documentserversecret)) {
