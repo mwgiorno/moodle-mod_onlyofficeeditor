@@ -2,6 +2,10 @@
 
 ## Added
 - add favicon on editor page
+- editor interface customization
+
+## Changed
+- set editor interface language
 
 ## 2.1.0
 ## Added
