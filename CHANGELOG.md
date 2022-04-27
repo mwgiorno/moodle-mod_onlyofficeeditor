@@ -1,6 +1,7 @@
 # Change Log
 
 ## Added
+- add favicon on editor page
 - editor interface customization
 
 ## Changed

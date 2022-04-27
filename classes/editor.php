@@ -26,6 +26,8 @@
 
 namespace mod_onlyofficeeditor;
 
+
+use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\document;
 use Firebase\JWT\JWT;
 
@@ -168,6 +170,7 @@ class editor {
         $config['type'] = $devicetype;
         $config['document'] = $document;
         $config['editorConfig'] = $editorconfig;
+        $config['documentType'] = onlyoffice_file_utility::get_document_type('.' . $ext);
 
         // Add token.
         if (!empty($this->modconfig->documentserversecret)) {

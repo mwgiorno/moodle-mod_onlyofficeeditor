@@ -42,6 +42,12 @@ define(['jquery'], function($) {
                 courseid: courseid,
                 cmid: cmid
             }).done(function(config) {
+                var favicon = config.documentType;
+                if (config.fileType === 'docxf' || config.fileType === 'oform') {
+                    favicon = config.fileType;
+                }
+                document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyofficeeditor/pix/'
+                    + favicon + '.ico" />';
                 // eslint-disable-next-line no-undef
                 new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
             });
