@@ -68,6 +68,14 @@ define(['jquery'], function($) {
             }).done(function(data) {
                 var docEditor = null;
                 var config = data.config;
+
+                var favicon = config.documentType;
+                if (config.fileType === 'docxf' || config.fileType === 'oform') {
+                    favicon = config.fileType;
+                }
+                document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyofficeeditor/pix/'
+                    + favicon + '.ico" />';
+
                 var canAddInstance = data.addinstance;
 
                 const innerAlert = (message, inEditor) => {

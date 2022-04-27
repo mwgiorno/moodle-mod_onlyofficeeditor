@@ -16,6 +16,47 @@
     color: red;
 }
 
+.onlyofficeeditor-create-button {
+    position: relative;
+    justify-content: center;
+    min-width: 85px;
+    margin-top: 10px;
+    padding: 45px 5px 6px;
+    background-repeat: no-repeat;
+}
+
+.onlyofficeeditor-create-button input[type=radio] {
+    margin: auto;
+    appearance: none;
+    position: absolute;
+    top: 0;
+    opacity: 0.5;
+}
+
+.onlyofficeeditor-create-button input[type=radio]:checked {
+    opacity: 1;
+}
+
+.onlyofficeeditor-create-button input[value^="Document"] {
+    content: url([[pix:onlyofficeeditor|file_docx]]);
+}
+
+.onlyofficeeditor-create-button input[value^="Presentation"] {
+    content: url([[pix:onlyofficeeditor|file_pptx]]);
+}
+
+.onlyofficeeditor-create-button input[value^="Spreadsheet"] {
+    content: url([[pix:onlyofficeeditor|file_xlsx]]);
+}
+
+.onlyofficeeditor-create-button input[value^="Form template"] {
+    content: url([[pix:onlyofficeeditor|file_docxf]]);
+}
+
+.onlyofficeeditor-create-button input[value^="Upload file"] {
+    content: url([[pix:onlyofficeeditor|file_upload]]);
+}
+
 .onlyofficeeditor-saveas-section {
     max-width: 100%;
     padding: 0.5rem 0;
