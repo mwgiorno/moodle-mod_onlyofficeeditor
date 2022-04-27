@@ -69,6 +69,7 @@ class util {
         "en" => "en-US",
         "es" => "es-ES",
         "fr" => "fr-FR",
+        "gl" => "gl-ES",
         "it" => "it-IT",
         "ja" => "ja-JP",
         "ko" => "ko-KR",
@@ -80,6 +81,7 @@ class util {
         "ru" => "ru-RU",
         "sk" => "sk-SK",
         "sv" => "sv-SE",
+        "tr" => "tr-TR",
         "uk" => "uk-UA",
         "vi" => "vi-VN",
         "zh" => "zh-CN"];
