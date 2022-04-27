@@ -134,10 +134,11 @@ class editor {
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
+        $editorconfig['lang'] = $USER->lang;
 
         // User.
         $user = [];
-        $user['id'] = $USER->id;
+        $user['id'] = hash('md5', $USER->id);
         $user['name'] = \fullname($USER);
         $editorconfig['user'] = $user;
 
