@@ -23,14 +23,19 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['docxformname'] = 'Document';
+$string['pptxformname'] = 'Presentation';
+$string['xlsxformname'] = 'Spreadsheet';
+$string['docxfformname'] = 'Form template';
+$string['uploadformname'] = 'Upload file';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
 $string['pluginname'] = 'ONLYOFFICE document';
 $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
-$string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
+$string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
 $string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 
@@ -41,7 +46,7 @@ $string['documentserversecret_desc'] = 'The secret is used to generate the token
 $string['allowedformats'] = 'Allowed formats';
 $string['allowedformats_desc'] = '';
 
-$string['selectfile'] = 'Select file';
+$string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
 $string['printintro'] = 'Print intro text';
 $string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
@@ -55,3 +60,24 @@ $string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
 $string['privacy:metadata'] = 'No information is stored about user personal data.';
+$string['privacy:metadata:onlyofficeeditor:userid'] = 'Actual user ID is not sent to the ONLYOFFICE editor.';
+$string['privacy:metadata:onlyofficeeditor:intro'] = 'General introduction of the ONLYOFFICE activity';
+$string['privacy:metadata:onlyofficeeditor:introformat'] = 'Format of the intro field (MOODLE, HTML, MARKDOWN...).';
+$string['privacy:metadata:onlyofficeeditor:permissions'] = 'Document permissions.';
+$string['privacy:metadata:onlyofficeeditor:name'] = 'Name of the ONLYOFFICE activity.';
+$string['privacy:metadata:onlyofficeeditor:course'] = 'Course ONLYOFFICE activity belongs to.';
+$string['privacy:metadata:onlyofficeeditor'] = 'Information about documents edited with ONLYOFFICE.';
+$string['privacy:metadata:onlyofficeeditor:core_files'] = 'ONLYOFFICE document activity stores documents which have been edited.';
+$string['forcesave'] = 'Enable Force Save';
+$string['editor_view'] = 'Editor customization settings';
+$string['editor_view_chat'] = 'Display Chat menu button';
+$string['editor_view_help'] = 'Display Help menu button';
+$string['editor_view_header'] = 'Display the header more compact';
+$string['editor_view_feedback'] = 'Display Feedback & Support menu button';
+$string['editor_view_toolbar'] = 'Display monochrome toolbar header';
+
+$string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
+$string['saveaserror'] = 'Something went wrong.';
+$string['saveassuccess'] = 'Document was successfully saved.';
+$string['saveastitle'] = 'Choose Course Section to Save the document';
+$string['saveasbutton'] = 'Choose';

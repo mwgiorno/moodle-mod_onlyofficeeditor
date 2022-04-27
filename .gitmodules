@@ -1,0 +1,4 @@
+[submodule "newdocs"]
+	path = newdocs
+	url = https://github.com/ONLYOFFICE/document-templates
+	branch = main/new
