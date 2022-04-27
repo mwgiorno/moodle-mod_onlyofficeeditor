@@ -1,6 +1,7 @@
 # Change Log
 
 ## Added
+- add ability to create activity with empty file
 - add favicon on editor page
 - editor interface customization
 

@@ -23,14 +23,19 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['docxformname'] = 'Document';
+$string['pptxformname'] = 'Presentation';
+$string['xlsxformname'] = 'Spreadsheet';
+$string['docxfformname'] = 'Form template';
+$string['uploadformname'] = 'Upload file';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
 $string['pluginname'] = 'ONLYOFFICE document';
 $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
-$string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
+$string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
 $string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 
@@ -41,7 +46,7 @@ $string['documentserversecret_desc'] = 'The secret is used to generate the token
 $string['allowedformats'] = 'Allowed formats';
 $string['allowedformats_desc'] = '';
 
-$string['selectfile'] = 'Select file';
+$string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
 $string['printintro'] = 'Print intro text';
 $string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
