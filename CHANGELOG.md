@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- editor interface customization
+
 ## Changed
 - set editor interface language
 

@@ -63,3 +63,11 @@ $string['privacy:metadata:onlyofficeeditor:name'] = 'Name of the ONLYOFFICE acti
 $string['privacy:metadata:onlyofficeeditor:course'] = 'Course ONLYOFFICE activity belongs to.';
 $string['privacy:metadata:onlyofficeeditor'] = 'Information about documents edited with ONLYOFFICE.';
 $string['privacy:metadata:onlyofficeeditor:core_files'] = 'ONLYOFFICE document activity stores documents which have been edited.';
+$string['forcesave'] = 'Enable Force Save';
+$string['editor_view'] = 'Editor customization settings';
+$string['editor_view_chat'] = 'Display Chat menu button';
+$string['editor_view_help'] = 'Display Help menu button';
+$string['editor_view_header'] = 'Display the header more compact';
+$string['editor_view_feedback'] = 'Display Feedback & Support menu button';
+$string['editor_view_toolbar'] = 'Display monochrome toolbar header';
+

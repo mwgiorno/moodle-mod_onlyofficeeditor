@@ -147,7 +147,12 @@ class editor {
         $customization['goback']['blank'] = false;
         $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
         $customization['goback']['url'] = $CFG->wwwroot . '/course/view.php?id=' . $this->courseid;
-        $customization['forcesave'] = true;
+        $customization['forcesave'] = $this->modconfig->forcesave == 1;
+        $customization['chat'] = $this->modconfig->editor_view_chat == 1;
+        $customization['help'] = $this->modconfig->editor_view_help == 1;
+        $customization['header'] = $this->modconfig->editor_view_header == 1;
+        $customization['feedback'] = $this->modconfig->editor_view_feedback == 1;
+        $customization['toolbar'] = $this->modconfig->editor_view_toolbar == 1;
         $customization['commentAuthorOnly'] = true;
         $editorconfig['customization'] = $customization;
 
