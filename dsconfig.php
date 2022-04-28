@@ -48,7 +48,8 @@ if (!empty($actiondata) && !empty($actiontype)) {
     $editorconfig['editorConfig']['actionLink']['action'] = ['type' => $actiontype, 'data' => $actiondata];
 }
 
+$addinstance = has_capability('mod/onlyofficeeditor:addinstance', $context);
 $userstomention = \mod_onlyofficeeditor\util::get_users_to_mention_in_comments($context);
-$data = ['config' => $editorconfig, 'userstomention' => $userstomention];
+$data = ['config' => $editorconfig, 'userstomention' => $userstomention, 'addinstance' => $addinstance];
 echo json_encode($data);
 die();

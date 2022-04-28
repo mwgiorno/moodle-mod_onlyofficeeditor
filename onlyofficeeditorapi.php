@@ -44,6 +44,40 @@ switch ($apitype) {
             throw new \Exception();
         }
         break;
+    case 'sections':
+        try {
+            $courseid = $_GET['courseid'];
+            require_login($courseid);
+            $moduleinfo = get_fast_modinfo($courseid);
+            $sections = course_get_format($courseid)->get_sections();
+            $data = new stdClass;
+            $data->sections = [];
+            for ($sectionnumber = 0; $sectionnumber < count($sections); $sectionnumber++) {
+                $sectioninfo = $moduleinfo->get_section_info($sectionnumber);
+
+                $sectionobject = new stdClass();
+                $sectionobject->sectionid = $sectioninfo->id;
+                $sectionobject->sectionname = get_section_name($courseid, $sectioninfo);
+                $data->sections[] = $sectionobject;
+            }
+            echo json_encode($data);
+        } catch (\Exception $e) {
+            throw new \Exception();
+        }
+        break;
+    case 'saveas':
+        try {
+            $courseid = $_POST['courseid'];
+            require_login($courseid);
+            $url = $_POST['url'];
+            $title = $_POST['title'];
+            $section = $_POST['section'];
+            \mod_onlyofficeeditor\util::save_as_document($url, $title, $context, $cmid, $courseid, $section);
+            echo json_encode($title);
+        } catch (\Exception $e) {
+            throw new \Exception();
+        }
+        break;
     default:
         break;
 }

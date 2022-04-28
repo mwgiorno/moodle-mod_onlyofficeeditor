@@ -65,12 +65,15 @@ class document {
      * Get document permissions.
      * @param context_module $context context instance.
      * @param cm_info $cm information about that course-module.
+     * @param string $filename file name.
      * @return array permissions of editor config.
      */
-    public static function get_permissions($context, $cm) {
+    public static function get_permissions($context, $cm, $filename) {
         global $DB;
+        $editableexts = onlyoffice_file_utility::get_editable_extensions();
+        $extension = strtolower('.' . pathinfo($filename, PATHINFO_EXTENSION));
         $canmanage = has_capability('moodle/course:manageactivities', $context);
-        $canedit = has_capability('mod/onlyofficeeditor:editdocument', $context);
+        $canedit = has_capability('mod/onlyofficeeditor:editdocument', $context) && in_array($extension, $editableexts);
         $editorperms = $DB->get_field('onlyofficeeditor', 'permissions', ['id' => $cm->instance]);
         $permissions = \array_map('boolval', unserialize($editorperms));
         $permissions['print'] = empty($permissions['print']) ? $canmanage : true;
@@ -78,6 +81,7 @@ class document {
 
         $permissions['edit'] = $canedit;
         $permissions['review'] = $canedit;
+        $permissions['fillForms'] = $canedit && $extension === '.oform';
 
         return $permissions;
     }
