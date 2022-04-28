@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace mod_onlyofficeeditor;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2021 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_file_utility {
@@ -83,7 +83,15 @@ class onlyoffice_file_utility {
         if (in_array($ext, self::get_accepted_presentation_formats())) {
             return 'slide';
         }
-        return null;
+        return 'word';
+    }
+
+    /**
+     * Editable extensions.
+     * @return string[] Editable extensions.
+     */
+    public static function get_editable_extensions() {
+        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform');
     }
 
 }

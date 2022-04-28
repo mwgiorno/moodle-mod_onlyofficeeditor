@@ -130,7 +130,7 @@ class editor {
         $document['fileType'] = $ext;
         $document['title'] = $filename;
         $document['key'] = document::get_key($this->cm);
-        $document['permissions'] = document::get_permissions($this->context, $this->cm);
+        $document['permissions'] = document::get_permissions($this->context, $this->cm, $filename);
 
         // Editorconfig.
         $editorconfig = [];

@@ -42,5 +42,8 @@ $modinfo = get_fast_modinfo($courseid);
 $cm = $modinfo->get_cm($cmid)->get_course_module_record();
 $editor = new \mod_onlyofficeeditor\editor($courseid, $context, $cm, $modconfig);
 $editorconfig = $editor->config();
-echo json_encode($editorconfig);
+
+$addinstance = has_capability('mod/onlyofficeeditor:addinstance', $context);
+$data = ['config' => $editorconfig, 'addinstance' => $addinstance];
+echo json_encode($data);
 die();

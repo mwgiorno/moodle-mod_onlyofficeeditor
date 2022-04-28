@@ -25,14 +25,19 @@
  */
 $string['editorenterfullscreen'] = 'Open full screen';
 $string['editorexitfullscreen'] = 'Exit full screen';
+$string['docxformname'] = 'Document';
+$string['pptxformname'] = 'Presentation';
+$string['xlsxformname'] = 'Spreadsheet';
+$string['docxfformname'] = 'Form template';
+$string['uploadformname'] = 'Upload file';
 $string['modulename'] = 'ONLYOFFICE document';
 $string['modulenameplural'] = 'ONLYOFFICE documents';
-$string['modulename_help'] = 'The ONLYOFFICE module enables the users to edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
+$string['modulename_help'] = 'The ONLYOFFICE module enables the users to create and edit office documents stored locally in Moodle using ONLYOFFICE Document Server, allows multiple users to collaborate in real time and to save back those changes to Moodle';
 $string['pluginname'] = 'ONLYOFFICE document';
 $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['onlyofficename'] = 'Activity Name';
 
-$string['onlyofficeactivityicon'] = 'ONLYOFFICE icon';
+$string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
 $string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 
@@ -43,7 +48,7 @@ $string['documentserversecret_desc'] = 'The secret is used to generate the token
 $string['allowedformats'] = 'Allowed formats';
 $string['allowedformats_desc'] = '';
 
-$string['selectfile'] = 'Select file';
+$string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
 $string['printintro'] = 'Print intro text';
 $string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
@@ -73,3 +78,8 @@ $string['editor_view_header'] = 'Display the header more compact';
 $string['editor_view_feedback'] = 'Display Feedback & Support menu button';
 $string['editor_view_toolbar'] = 'Display monochrome toolbar header';
 
+$string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
+$string['saveaserror'] = 'Something went wrong.';
+$string['saveassuccess'] = 'Document was successfully saved.';
+$string['saveastitle'] = 'Choose Course Section to Save the document';
+$string['saveasbutton'] = 'Choose';
