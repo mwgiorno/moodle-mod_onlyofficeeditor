@@ -33,10 +33,10 @@ define(['jquery'], function($) {
 
     var createFullScreenButtons = function() {
         require(['core/str'], function(str) {
-            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyoffice');
-            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyoffice');
+            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyofficeeditor');
+            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyofficeeditor');
             var navButton = $('nav .nav-link.btn')[0];
-            var editorContainer = $('.onlyoffice-container')[0];
+            var editorContainer = $('.onlyofficeeditor-container')[0];
 
             $.when(enterFullScreenText).done(function(localized) {
                 enterFullScreenText = localized;
@@ -44,10 +44,9 @@ define(['jquery'], function($) {
                 var enterIcon = document.createElement('i');
                 enterIcon.className = 'icon fa fa-expand fa-fw';
                 enterButton.appendChild(enterIcon);
-                enterButton.className = 'onlyoffice-editor-fs-button';
-                enterButton.id = 'onlyoffice-enter-fs-button';
+                enterButton.className = 'onlyofficeeditor-editor-fs-button';
+                enterButton.id = 'onlyofficeeditor-enter-fs-button';
                 enterButton.innerHTML += enterFullScreenText;
-                enterButton.style.cssText = 'padding: 5px; margin-top: -5px; margin-right: 10px;';
 
                 enterButton.onclick = function() {
                     $('header').hide();
@@ -57,8 +56,9 @@ define(['jquery'], function($) {
                     }
                     editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
                         'padding: 0 16px 0 16px; z-index: 100;';
-                    $('#onlyoffice-enter-fs-button').hide();
-                    $('#onlyoffice-exit-fs-button').show();
+                    editorContainer.children[0].style.height = '93.5vh';
+                    $('#onlyofficeeditor-enter-fs-button').hide();
+                    $('#onlyofficeeditor-exit-fs-button').show();
                 };
                 $("#region-main-settings-menu .menubar")[0].prepend(enterButton);
             });
@@ -69,18 +69,19 @@ define(['jquery'], function($) {
                 exitIcon.className = 'icon fa fa-compress fa-fw';
                 exitButton.appendChild(exitIcon);
                 exitButton.innerHTML += exitFullScreenText;
-                exitButton.className = 'onlyoffice-editor-fs-button';
-                exitButton.id = 'onlyoffice-exit-fs-button';
+                exitButton.className = 'onlyofficeeditor-editor-fs-button';
+                exitButton.id = 'onlyofficeeditor-exit-fs-button';
 
                 exitButton.onclick = function() {
                     editorContainer.style.cssText = '';
+                    editorContainer.children[0].style.height = '95vh';
                     $('header').show();
                     $('footer').show();
-                    $('#onlyoffice-enter-fs-button').show();
-                    $('#onlyoffice-exit-fs-button').hide();
+                    $('#onlyofficeeditor-enter-fs-button').show();
+                    $('#onlyofficeeditor-exit-fs-button').hide();
                 };
                 $('.usernav .nav-item')[0].prepend(exitButton);
-                $('#onlyoffice-exit-fs-button').hide();
+                $('#onlyofficeeditor-exit-fs-button').hide();
             });
         });
     };

@@ -16,8 +16,14 @@
     color: red;
 }
 
-.onlyoffice-editor-fs-button {
+.onlyofficeeditor-editor-fs-button {
     border: 1px solid rgb(15, 111, 197);
     background: white;
     color: rgb(15, 111, 197);
+}
+
+#onlyofficeeditor-enter-fs-button {
+    padding: 5px;
+    margin-top: -5px;
+    margin-right: 10px;
 }
