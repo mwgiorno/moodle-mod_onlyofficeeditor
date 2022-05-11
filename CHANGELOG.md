@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- add protect option for editor
+
 ## 2.1.0
 ## Added
 - backup api
