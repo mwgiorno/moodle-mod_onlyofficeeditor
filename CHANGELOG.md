@@ -2,6 +2,13 @@
 
 ## Added
 - add protect option for editor
+- "save as" in editor
+- add ability to create activity with empty file
+- add favicon on editor page
+- editor interface customization
+
+## Changed
+- set editor interface language
 
 ## 2.1.0
 ## Added
