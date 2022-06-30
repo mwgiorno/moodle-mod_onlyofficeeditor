@@ -186,7 +186,6 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
     $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
-        $info->icon = file_file_icon($file, 24);
         $onlyoffice->file = $file->get_filename();
     }
 
