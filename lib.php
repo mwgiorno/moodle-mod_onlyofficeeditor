@@ -202,7 +202,6 @@ function onlyofficeeditor_cm_info_view(cm_info $cm) {
     global $OUTPUT;
     $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
         array('class' => 'onlyofficeactivityicon'));
-    $cm->set_after_link(' ' . html_writer::tag('span', $icon));
 }
 
 /**
