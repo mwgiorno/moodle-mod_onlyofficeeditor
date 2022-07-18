@@ -1,6 +1,7 @@
 # Change Log
 
 ## Added
+- add ability to open editor in fullscreen mode
 - "save as" in editor
 - add ability to create activity with empty file
 - add favicon on editor page

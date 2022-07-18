@@ -23,6 +23,8 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['editorenterfullscreen'] = 'Open full screen';
+$string['editorexitfullscreen'] = 'Exit full screen';
 $string['docxformname'] = 'Document';
 $string['pptxformname'] = 'Presentation';
 $string['xlsxformname'] = 'Spreadsheet';

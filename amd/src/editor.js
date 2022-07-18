@@ -34,6 +34,61 @@ define(['jquery'], function($) {
         });
     };
 
+    var createFullScreenButtons = function() {
+        require(['core/str'], function(str) {
+            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyofficeeditor');
+            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyofficeeditor');
+            var navButton = $('nav .nav-link.btn')[0];
+            var editorContainer = $('.onlyofficeeditor-container')[0];
+
+            $.when(enterFullScreenText).done(function(localized) {
+                enterFullScreenText = localized;
+                var enterButton = document.createElement('button');
+                var enterIcon = document.createElement('i');
+                enterIcon.className = 'icon fa fa-expand fa-fw';
+                enterButton.appendChild(enterIcon);
+                enterButton.className = 'onlyofficeeditor-editor-fs-button';
+                enterButton.id = 'onlyofficeeditor-enter-fs-button';
+                enterButton.innerHTML += enterFullScreenText;
+
+                enterButton.onclick = function() {
+                    $('header').hide();
+                    $('footer').hide();
+                    if (navButton.getAttribute('aria-expanded') === 'true') {
+                        $('nav .nav-link.btn')[0].click();
+                    }
+                    editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
+                        'padding: 0 16px 0 16px; z-index: 100;';
+                    editorContainer.children[0].style.height = '93.5vh';
+                    $('#onlyofficeeditor-enter-fs-button').hide();
+                    $('#onlyofficeeditor-exit-fs-button').show();
+                };
+                $("#region-main-settings-menu .menubar")[0].prepend(enterButton);
+            });
+            $.when(exitFullScreenText).done(function(localized) {
+                exitFullScreenText = localized;
+                var exitButton = document.createElement('button');
+                var exitIcon = document.createElement('i');
+                exitIcon.className = 'icon fa fa-compress fa-fw';
+                exitButton.appendChild(exitIcon);
+                exitButton.innerHTML += exitFullScreenText;
+                exitButton.className = 'onlyofficeeditor-editor-fs-button';
+                exitButton.id = 'onlyofficeeditor-exit-fs-button';
+
+                exitButton.onclick = function() {
+                    editorContainer.style.cssText = '';
+                    editorContainer.children[0].style.height = '95vh';
+                    $('header').show();
+                    $('footer').show();
+                    $('#onlyofficeeditor-enter-fs-button').show();
+                    $('#onlyofficeeditor-exit-fs-button').hide();
+                };
+                $('.usernav .nav-item')[0].prepend(exitButton);
+                $('#onlyofficeeditor-exit-fs-button').hide();
+            });
+        });
+    };
+
     var saveAsModal = null;
 
     var displaySaveAsModal = function(saveAsData, cmid, courseid) {
@@ -61,6 +116,7 @@ define(['jquery'], function($) {
                 displayNotification('docserverunreachable', 'error');
                 return;
             }
+            createFullScreenButtons();
             var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
