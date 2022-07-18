@@ -345,8 +345,10 @@ class util {
         $userstomention = array();
         foreach ($users as $user) {
             if ($user->id !== $USER->id) {
-                $array = array('email' => $user->email, 'name' => $user->firstname . ' ' . $user->lastname);
-                $userstomention[] =& $array;
+                array_push($userstomention, array(
+                    'email' => $user->email,
+                    'name' => $user->firstname . ' ' . $user->lastname
+                ));
             }
         }
         return $userstomention;
