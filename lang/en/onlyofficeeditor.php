@@ -25,6 +25,10 @@
  */
 $string['editorenterfullscreen'] = 'Open full screen';
 $string['editorexitfullscreen'] = 'Exit full screen';
+$string['onmentionerror'] = 'Error on mentioning.';
+$string['mentioncontexturlname'] = 'Link to the comment.';
+$string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
+$string['mentionnotifier:notification'] = 'mentioned you in document comment in module ';
 $string['docxformname'] = 'Document';
 $string['pptxformname'] = 'Presentation';
 $string['xlsxformname'] = 'Spreadsheet';

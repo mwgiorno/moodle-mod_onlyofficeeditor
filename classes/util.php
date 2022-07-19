@@ -332,4 +332,72 @@ class util {
         }
     }
 
+    /**
+     * Returns all users who can be mentioned in the comments.
+     *
+     * @param \context $context Module context.
+     * @return array Users array for mentioning.
+     * @throws \coding_exception
+     */
+    public static function get_users_to_mention_in_comments($context) {
+        global $USER;
+        $users = get_users_by_capability($context, 'mod/onlyofficeeditor:view');
+        $userstomention = array();
+        foreach ($users as $user) {
+            if ($user->id !== $USER->id) {
+                array_push($userstomention, array(
+                    'email' => $user->email,
+                    'name' => $user->firstname . ' ' . $user->lastname
+                ));
+            }
+        }
+        return $userstomention;
+    }
+
+    /**
+     * Send notification to users about mentioning in the comment.
+     *
+     * @param string $actionlink Link to the comment.
+     * @param string $comment Comment text.
+     * @param array $emails Emails of mentioned users.
+     * @param \context $context Module context.
+     * @return array Array of mentioned users.
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function mention_user_in_comment($actionlink, $comment, $emails, $context) {
+        global $DB, $USER;
+        $mentionedusers = array();
+        $modulename = $context->get_context_name(false);
+        $coursename = $context->get_course_context()->get_context_name(false);
+
+        foreach ($emails as $email) {
+            $user = $DB->get_record('user', array('email' => $email));
+            $permission = has_capability('mod/onlyofficeeditor:editdocument', $context, $user) ? 'Full Access' : 'Read only';
+            $mentioneduser = ['permissions' => $permission, 'user' => $user->firstname . ' ' . $user->lastname];
+            $mentionedusers[] =& $mentioneduser;
+
+            $message = new \core\message\message();
+            $message->component = 'mod_onlyofficeeditor';
+            $message->name = 'mentionnotifier';
+            $message->userfrom = \core_user::get_noreply_user();
+            $message->userto = $user;
+            $message->subject = $USER->firstname . ' ' . $USER->lastname . ' '
+                . get_string('mentionnotifier:notification', 'onlyofficeeditor');
+            $message->fullmessageformat = FORMAT_HTML;
+            $message->fullmessagehtml =
+                '<p><strong>' . $USER->firstname . ' ' . $USER->lastname . '</strong> '
+                . get_string('mentionnotifier:notification', 'onlyofficeeditor')
+                . '<strong>' . $modulename . ' </strong>'
+                . strtolower(get_string('course')) . ' <strong>' . $coursename . '</strong>:</p>'
+                . '<p>' . $comment . '</p>';
+            $message->notification = 1;
+            $message->contexturl = $actionlink;
+            $message->contexturlname = get_string('mentioncontexturlname', 'onlyofficeeditor');
+
+            $messageid = message_send($message);
+        }
+        return $mentionedusers;
+    }
+
 }

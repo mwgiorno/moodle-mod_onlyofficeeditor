@@ -89,6 +89,26 @@ define(['jquery'], function($) {
         });
     };
 
+    $.urlParam = function(name) {
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results === null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    };
+
+    var replaceActionLink = function(href, linkParam) {
+        var link;
+        var actionIndex = href.indexOf("&actionType=");
+        if (actionIndex != -1) {
+            link = href.substring(0, actionIndex) + "&actionType=" + encodeURIComponent(linkParam.type) +
+                "&actionData=" + encodeURIComponent(linkParam.data);
+        } else {
+            link = href + "&actionType=" + encodeURIComponent(linkParam.type) + "&actionData=" + encodeURIComponent(linkParam.data);
+        }
+        return link;
+    };
+
     var saveAsModal = null;
 
     var displaySaveAsModal = function(saveAsData, cmid, courseid) {
@@ -120,7 +140,9 @@ define(['jquery'], function($) {
             var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
-                cmid: cmid
+                cmid: cmid,
+                actionType: $.urlParam('actionType'),
+                actionData: $.urlParam('actionData')
             }).done(function(data) {
                 var docEditor = null;
                 var config = data.config;
@@ -144,6 +166,33 @@ define(['jquery'], function($) {
                         docEditor.showMessage(message);
                     }
                 };
+
+                var onMakeActionLink = function(event) {
+                    var actionData = event.data.action;
+                    docEditor.setActionLink(replaceActionLink(location.href, actionData));
+                };
+
+                var onRequestSendNotify = function(event) {
+                    var comment = event.data.message;
+                    var emails = event.data.emails;
+                    var replacedActionLink = replaceActionLink(location.href, event.data.actionLink.action);
+
+                    var mentionData = {
+                        comment: comment,
+                        emails: emails,
+                        link: replacedActionLink,
+                        courseid: courseid
+                    };
+
+                    $.ajax(M.cfg.wwwroot + '/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=mention&cmid=' + cmid, {
+                        type: 'POST',
+                        dataType: 'json',
+                        data: mentionData
+                    }).fail(() => {
+                        displayNotification('onmentionerror', 'error');
+                    });
+                };
+
                 const onAppReady = () => {
                     innerAlert("Document editor ready");
                 };
@@ -155,7 +204,8 @@ define(['jquery'], function($) {
                 };
                 config.events = {
                     'onAppReady': onAppReady,
-                    'onError': onError
+                    'onError': onError,
+                    'onMakeActionLink': onMakeActionLink
                 };
 
                 var onRequestSaveAs = function(event) {
@@ -170,6 +220,17 @@ define(['jquery'], function($) {
 
                 if (canAddInstance) {
                     config.events.onRequestSaveAs = onRequestSaveAs;
+                }
+
+                var usersToMention = data.userstomention;
+
+                var onRequestUsers = function() {
+                    docEditor.setUsers({'users': usersToMention});
+                };
+
+                if (usersToMention !== null) {
+                    config.events.onRequestUsers = onRequestUsers;
+                    config.events.onRequestSendNotify = onRequestSendNotify;
                 }
 
                 if ((config.document.fileType === "docxf" || config.document.fileType === "oform")
