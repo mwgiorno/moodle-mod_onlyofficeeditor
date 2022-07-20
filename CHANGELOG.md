@@ -2,6 +2,8 @@
 
 ## Added
 - add protect option for editor
+- add ability to open editor in fullscreen mode
+- add mentions in comments in editor
 - "save as" in editor
 - add ability to create activity with empty file
 - add favicon on editor page

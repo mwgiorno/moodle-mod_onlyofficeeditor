@@ -23,6 +23,12 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['editorenterfullscreen'] = 'Open full screen';
+$string['editorexitfullscreen'] = 'Exit full screen';
+$string['onmentionerror'] = 'Error on mentioning.';
+$string['mentioncontexturlname'] = 'Link to the comment.';
+$string['messageprovider:mentionnotifier'] = 'ONLYOFFICE mentioning notification in module document.';
+$string['mentionnotifier:notification'] = 'mentioned you in document comment in module ';
 $string['docxformname'] = 'Document';
 $string['pptxformname'] = 'Presentation';
 $string['xlsxformname'] = 'Spreadsheet';
