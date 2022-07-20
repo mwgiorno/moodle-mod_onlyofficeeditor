@@ -78,6 +78,7 @@ class document {
         $permissions = \array_map('boolval', unserialize($editorperms));
         $permissions['print'] = empty($permissions['print']) ? $canmanage : true;
         $permissions['download'] = empty($permissions['download']) ? $canmanage : true;
+        $permissions['protect'] = $canmanage || empty($permissions['protect']);
 
         $permissions['edit'] = $canedit;
         $permissions['review'] = $canedit;

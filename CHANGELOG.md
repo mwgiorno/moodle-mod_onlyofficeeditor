@@ -1,6 +1,7 @@
 # Change Log
 
 ## Added
+- add protect option for editor
 - add ability to open editor in fullscreen mode
 - add mentions in comments in editor
 - "save as" in editor
