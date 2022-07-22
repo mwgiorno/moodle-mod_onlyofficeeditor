@@ -3,6 +3,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+#page-content h2,
 #page-content .onlyofficeeditor .activityinstance > a {
     display: inline-block;
 }
@@ -87,6 +88,7 @@
     border: 1px solid rgb(15, 111, 197);
     background: white;
     color: rgb(15, 111, 197);
+    float: right;
 }
 
 #onlyofficeeditor-enter-fs-button {
