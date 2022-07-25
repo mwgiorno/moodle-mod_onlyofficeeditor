@@ -13,6 +13,19 @@
     max-height: 60rem;
 }
 
+.onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 0 0 50px;
+    z-index: 100;
+}
+
+.onlyofficeeditor-container.onlyofficeeditor-rightindent {
+    margin-right: 43px !important;
+}
+
 #onlyofficeeditor-editor.error {
     color: red;
 }
@@ -95,4 +108,8 @@
     padding: 5px;
     margin-top: -5px;
     margin-right: 10px;
+}
+
+#onlyofficeeditor-exit-fs-button {
+    margin: 12px;
 }

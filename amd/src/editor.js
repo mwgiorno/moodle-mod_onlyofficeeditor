@@ -61,8 +61,10 @@ define(['jquery'], function($) {
                     if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navRightButton).click();
                     }
-                    editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
-                        'margin: 0 43px 0 50px; z-index: 100;';
+                    if ($('.editmode-switch-form')[0][0].checked) {
+                        $(editorContainer).addClass('onlyofficeeditor-rightindent');
+                    }
+                    $(editorContainer).addClass('onlyofficeeditor-fullscreen');
                     editorContainer.children[0].style.height = '93vh';
                     $('#onlyofficeeditor-enter-fs-button').hide();
                     $('#onlyofficeeditor-exit-fs-button').show();
@@ -80,7 +82,8 @@ define(['jquery'], function($) {
                 exitButton.id = 'onlyofficeeditor-exit-fs-button';
 
                 exitButton.onclick = function() {
-                    editorContainer.style.cssText = '';
+                    $(editorContainer).removeClass('onlyofficeeditor-fullscreen');
+                    $(editorContainer).removeClass('onlyofficeeditor-rightindent');
                     editorContainer.children[0].style.height = '95vh';
                     $('header').show();
                     $('footer').show();
