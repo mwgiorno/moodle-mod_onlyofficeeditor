@@ -61,7 +61,7 @@ define(['jquery'], function($) {
                     if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navRightButton).click();
                     }
-                    if ($('.editmode-switch-form')[0][0].checked) {
+                    if ($('.editmode-switch-form').length > 0 && $('.editmode-switch-form')[0][0].checked) {
                         $(editorContainer).addClass('onlyofficeeditor-rightindent');
                     }
                     $(editorContainer).addClass('onlyofficeeditor-fullscreen');
