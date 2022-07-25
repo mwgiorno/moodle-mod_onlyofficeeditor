@@ -55,10 +55,10 @@ define(['jquery'], function($) {
                 enterButton.onclick = function() {
                     $('header').hide();
                     $('footer').hide();
-                    if (navLeftButton.getAttribute('data-aria-hidden-tab-index') === null) {
+                    if (navLeftButton && navLeftButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navLeftButton).click();
                     }
-                    if (navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
+                    if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
                         $(navRightButton).click();
                     }
                     editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
