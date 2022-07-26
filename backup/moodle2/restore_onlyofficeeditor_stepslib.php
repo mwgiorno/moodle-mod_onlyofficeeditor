@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the restore steps.
+ * Define restore_onlyofficeeditor_activity_structure_step class
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
@@ -23,6 +23,9 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Define all the restore steps.
+ */
 class restore_onlyofficeeditor_activity_structure_step extends restore_activity_structure_step {
 
     protected function define_structure() {
