@@ -54,6 +54,7 @@ class backup_onlyofficeeditor_activity_structure_step extends backup_activity_st
 
         // Define file annotations.
         $onlyofficeeditor->annotate_files('mod_onlyofficeeditor', 'intro', null);
+        $onlyofficeeditor->annotate_files('mod_onlyofficeeditor', 'content', null);
 
         // Return the root element (instance), wrapped into standard activity structure.
         return $this->prepare_activity_structure($onlyofficeeditor);
