@@ -11,6 +11,7 @@
 
 ## Changed
 - set editor interface language
+- fixes building backup and restore
 
 ## 2.1.0
 ## Added
