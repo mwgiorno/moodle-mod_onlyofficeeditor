@@ -371,8 +371,10 @@ class util {
     public static function mention_user_in_comment($actionlink, $comment, $emails, $context) {
         global $DB, $USER;
         $mentionedusers = array();
-        $modulename = $context->get_context_name(false);
-        $coursename = $context->get_course_context()->get_context_name(false);
+
+        $messagedata = new \stdClass();
+        $messagedata->notifier = $USER->firstname . ' ' . $USER->lastname;
+        $messagedata->course = $context->get_course_context()->get_context_name(false);
 
         foreach ($emails as $email) {
             $user = $DB->get_record('user', array('email' => $email));
@@ -385,15 +387,9 @@ class util {
             $message->name = 'mentionnotifier';
             $message->userfrom = \core_user::get_noreply_user();
             $message->userto = $user;
-            $message->subject = $USER->firstname . ' ' . $USER->lastname . ' '
-                . get_string('mentionnotifier:notification', 'onlyofficeeditor');
+            $message->subject = get_string('mentionnotifier:notification', 'onlyofficeeditor', $messagedata);
             $message->fullmessageformat = FORMAT_HTML;
-            $message->fullmessagehtml =
-                '<p><strong>' . $USER->firstname . ' ' . $USER->lastname . '</strong> '
-                . get_string('mentionnotifier:notification', 'onlyofficeeditor')
-                . '<strong>' . $modulename . ' </strong>'
-                . strtolower(get_string('course')) . ' <strong>' . $coursename . '</strong>:</p>'
-                . '<p>' . $comment . '</p>';
+            $message->fullmessagehtml = '<p>' . $comment . '</p>';
             $message->notification = 1;
             $message->contexturl = $actionlink;
             $message->contexturlname = get_string('mentioncontexturlname', 'onlyofficeeditor');
