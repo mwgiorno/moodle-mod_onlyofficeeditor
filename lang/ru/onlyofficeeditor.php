@@ -22,6 +22,12 @@
  * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+$string['editorenterfullscreen'] = '';
+$string['editorexitfullscreen'] = '';
+$string['onmentionerror'] = '';
+$string['mentioncontexturlname'] = '';
+$string['messageprovider:mentionnotifier'] = '';
+$string['mentionnotifier:notification'] = '';
 $string['docxformname'] = 'Документ';
 $string['pptxformname'] = 'Презентация';
 $string['xlsxformname'] = 'Таблица';
@@ -55,6 +61,9 @@ $string['download_desc'] = '';
 $string['print'] = '';
 $string['print_help'] = '';
 $string['print_desc'] = '';
+$string['protect'] = '';
+$string['protect_help'] = '';
+$string['protect_desc'] = '';
 
 $string['returntodocument'] = '';
 $string['docserverunreachable'] = '';
