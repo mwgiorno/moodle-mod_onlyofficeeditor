@@ -23,7 +23,7 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
+defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 
 $cmid = required_param('cmid', PARAM_INT);
 $apitype = required_param('apiType', PARAM_TEXT);
