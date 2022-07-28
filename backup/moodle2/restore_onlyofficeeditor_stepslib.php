@@ -28,6 +28,9 @@
  */
 class restore_onlyofficeeditor_activity_structure_step extends restore_activity_structure_step {
 
+    /**
+     * Define structure.
+     */
     protected function define_structure() {
 
         $paths = array();
@@ -35,10 +38,15 @@ class restore_onlyofficeeditor_activity_structure_step extends restore_activity_
 
         $paths[] = new restore_path_element('onlyofficeeditor', '/activity/onlyofficeeditor');
 
-        // Return the paths wrapped into standard activity structure
+        // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
     }
 
+    /**
+     * Define restore process.
+     *
+     * @param array $data restore data array.
+     */
     protected function process_onlyofficeeditor($data) {
         global $DB;
 
@@ -49,6 +57,9 @@ class restore_onlyofficeeditor_activity_structure_step extends restore_activity_
         $this->apply_activity_instance($newitemid);
     }
 
+    /**
+     * After restore.
+     */
     protected function after_restore() {
         $this->add_related_files('mod_onlyofficeeditor', 'intro', null);
         $this->add_related_files('mod_onlyofficeeditor', 'content', null);

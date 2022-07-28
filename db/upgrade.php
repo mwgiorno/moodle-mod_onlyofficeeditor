@@ -39,6 +39,6 @@ function xmldb_onlyofficeeditor_upgrade($oldversion) {
         core_filetypes::add_type("oform", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.oform",
             "document", array(), '', 'ONLYOFFICE oform');
     }
-    
+
     return true;
 }
