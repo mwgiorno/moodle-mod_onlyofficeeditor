@@ -48,22 +48,15 @@ $string['documentserverurl'] = 'Serviceadresse der Dokumentbearbeitung';
 $string['documentserverurl_desc'] = 'Die Adresse des Dienstes für die Dokumentenbearbeitung ist die Adresse des Servers, auf dem die Dokumentendienste installiert sind. Bitte ersetzen Sie \'https://documentserver.url\' oben durch die richtige Serveradresse';
 $string['documentserversecret'] = 'Geheimschlüssel des Document Servers';
 $string['documentserversecret_desc'] = 'Der Geheimschlüssel wird verwendet, um das Token (eine verschlüsselte Signatur) im Browser für das Öffnen des Dokumenteditors und den Aufruf der Methoden und der Anfragen an den Dokumentbefehlsdienst und den Dokumentkonvertierungsdienst zu generieren. Das Token verhindert die Ersetzung wichtiger Parameter in ONLYOFFICE Document Server-Anfragen.';
-$string['allowedformats'] = 'Unterstützte Formate';
-$string['allowedformats_desc'] = '';
 
 $string['selectfile'] = 'Wählen Sie eine vorhandene Datei aus oder erstellen Sie eine neue, indem Sie auf eines der Symbole klicken';
-$string['printintro'] = 'Einleitungstext drucken';
-$string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Zugriffsrechte auf Dokumente';
 $string['download'] = 'Das Dokument kann heruntergeladen werden';
 $string['download_help'] = 'Wenn deaktiviert, Herunterladen von Dokumenten über ONLYOFFICE-Editoren wird unmöglich. Benutzer mit der Zugriffsebene <strong>course:manageactivities</strong> dürfen Dokumente immer über die App herunterladen';
-$string['download_desc'] = 'Herunterladen von Dokumenten über die ONLYOFFICE-App erlauben';
 $string['print'] = 'Dokument kann gedruckt werden';
 $string['print_help'] = 'Wenn deaktiviert, Drucken von Dokumenten über ONLYOFFICE-Editoren wird unmöglich. Benutzer mit der Zugriffsebene <strong>course:manageactivities</strong> dürfen Dokumente immer über die App drucken';
-$string['print_desc'] = 'Drucken von Dokumenten über die ONLYOFFICE-App erlauben';
 $string['protect'] = 'Registerkarte Schutz ausblenden';
 $string['protect_help'] = 'Wenn deaktiviert, Benutzer haben Zugriff auf die Schutzeinstellungen im ONLYOFFICE-Editor. Für Benutzer mit der Zugriffsebene <strong>course:manageactivities</strong> sind diese Einstellungen immer verfügbar.';
-$string['protect_desc'] = 'Öffnung der Registerkarte "Schutz" in der ONLYOFFICE-App erlauben';
 
 $string['returntodocument'] = 'Zur Kursseite';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server kann nicht erreicht werden. Bitte kontaktieren Sie Admin';

@@ -45,25 +45,18 @@ $string['onlyofficeeditor:addinstance'] = 'Añadir una nueva actividad documenta
 $string['onlyofficeeditor:view'] = 'Ver la actividad documental de ONLYOFFICE';
 
 $string['documentserverurl'] = 'Dirección del Servicio de Edición de Documentos';
-$string['documentserverurl_desc'] = 'La Dirección del Servicio de Edición de Documentos especifica la dirección del servidor con los servicios de documentos instalados. Por favor, reemplace \ 'https://documentserver.url\' arriba con la dirección correcta del servidor';
+$string['documentserverurl_desc'] = 'La Dirección del Servicio de Edición de Documentos especifica la dirección del servidor con los servicios de documentos instalados. Por favor, reemplace \'https://documentserver.url\' arriba con la dirección correcta del servidor';
 $string['documentserversecret'] = 'Secreto del Servidor de Documentos';
 $string['documentserversecret_desc'] = 'El secreto se utiliza para generar el token (una firma cifrada) en el navegador para que el editor de documentos abra y llame a los métodos y las solicitudes al servicio de comando de documentos y al servicio de conversión de documentos. El token bloquea la sustitución de parámetros importantes en las solicitudes del Servidor de Documentos de ONLYOFFICE.';
-$string['allowedformats'] = 'Formatos permitidos';
-$string['allowedformats_desc'] = '';
 
 $string['selectfile'] = 'Seleccione un archivo existente o cree uno nuevo haciendo clic en uno de los iconos';
-$string['printintro'] = 'Imprimir texto de introducción';
-$string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Permisos para los documentos';
 $string['download'] = 'Documento puede descargarse';
 $string['download_help'] = 'Si está desactivado, los documentos no se podrán descargar en la aplicación del editor ONLYOFFICE. Tenga en cuenta que los usuarios con capacidad para <strong>course:manageactivities</strong> siempre pueden descargar documentos a través de la aplicación.';
-$string['download_desc'] = 'Permitir la descarga de documentos a través de la aplicación del editor ONLYOFFICE';
 $string['print'] = 'Documento puede imprimirse';
 $string['print_help'] = 'Si está desactivado, los documentos no se podrán imprimir en la aplicación del editor ONLYOFFICE. Tenga en cuenta que los usuarios con capacidad para <strong>course:manageactivities</strong> siempre pueden imprimir documentos a través de la aplicación.';
-$string['print_desc'] = 'Permitir la impresión de documentos a través de la aplicación del editor ONLYOFFICE';
 $string['protect'] = 'Ocultar la pestaña Protección';
 $string['protect_help'] = 'Si está desactivado, los usuarios tienen acceso a la configuración de protección en el editor ONLYOFFICE. Tenga en cuenta que los usuarios con capacidad para <strong>course:manageactivities</strong> siempre tienen acceso a la configuración de protección.';
-$string['protect_desc'] = 'Permitir a los usuarios abrir la pestaña protección en la aplicación del editor ONLYOFFICE';
 
 $string['returntodocument'] = 'Volver a la página del curso';
 $string['docserverunreachable'] = 'No se puede acceder al Servidor de Documentos de ONLYOFFICE. Por favor, póngase en contacto con el administrador';

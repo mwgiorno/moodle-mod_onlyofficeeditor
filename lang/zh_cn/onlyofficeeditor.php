@@ -48,22 +48,15 @@ $string['documentserverurl'] = '文档编辑的服务地址';
 $string['documentserverurl_desc'] = '文档编辑服务地址指定了带有文档服务的服务器地址。请用正确的服务器地址替换上面的 \'https://documentserver.url\'';
 $string['documentserversecret'] = '文件服务器秘密';
 $string['documentserversecret_desc'] = '该秘密在浏览器中生成令牌（加密签名），用于文档编辑器的打开和调用对文档命令服务和文档转换服务的方法和请求。该令牌可以防止ONLYOFFICE文档服务器请求中的重要参数替换。';
-$string['allowedformats'] = '可用的格式';
-$string['allowedformats_desc'] = '';
 
 $string['selectfile'] = '选择现有文件或通过点击其中一个图标创建新文件';
-$string['printintro'] = ' 打印介绍文本';
-$string['printintroexplain'] = '';
 $string['documentpermissions'] = '文件权限';
 $string['download'] = '文件可下载';
 $string['download_help'] = '如果该功能被禁用，文件将不能在ONLYOFFICE编辑器应用程序中下载。请注意，具有<strong>course:manageactivities</strong>能力的用户总是能够通过应用程序下载文件';
-$string['download_desc'] = ' 允许通过ONLYOFFICE编辑器应用程序下载文件';
 $string['print'] = '文件可打印';
 $string['print_help'] = '如果该功能被禁用，文件将不能在ONLYOFFICE编辑器应用程序中打印。请注意，具有<strong>course:manageactivities</strong> 能力的用户总是能够通过应用程序打印文件';
-$string['print_desc'] = ' 允许通过ONLYOFFICE编辑器应用程序打印文件';
 $string['protect'] = '隐藏保护选项卡';
 $string['protect_help'] = '如果该功能被禁用，用户可以在ONLYOFFICE编辑器中访问保护设置。请注意，具有<strong>course:manageactivities</strong> 能力的用户总是能够访问保护设置。';
-$string['protect_desc'] = ' 允许用户在ONLYOFFICE编辑器应用程序中打开保护选项卡';
 
 $string['returntodocument'] = '返回到课程页面';
 $string['docserverunreachable'] = 'ONLYOFFICE文档服务器无法访问。请联系管理员';

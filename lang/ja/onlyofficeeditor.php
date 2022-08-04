@@ -48,22 +48,15 @@ $string['documentserverurl'] = '文書編集サービスのアドレス';
 $string['documentserverurl_desc'] = '文書編集サービスアドレスは、文書サービスがインストールされているサーバーのアドレ スを指定します。上の \'https://documentserver.url\' を正しいサーバーアドレスに置き換えてください。';
 $string['documentserversecret'] = 'ドキュメントサーバーのシクレット';
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
-$string['allowedformats'] = '許可されたフォーマット';
-$string['allowedformats_desc'] = '';
 
 $string['selectfile'] = 'アイコンをクリックして、既存のファイルを選択するか、新規ファイルを作成します。';
-$string['printintro'] = '見出しのテキストを表示する';
-$string['printintroexplain'] = '';
 $string['documentpermissions'] = 'ドキュメントの権限';
 $string['download'] = 'ドキュメントをダウンロードできます';
 $string['download_help'] = 'このオプションがオフの場合、ONLYOFFICEエディタアプリで文書をダウンロードすることはできません。ご注意：<strong>course:manageactivities</strong> 権を持つユーザーは、常にアプリからドキュメントをダウンロードすることができます。';
-$string['download_desc'] = 'ONLYOFFICEエディタアプリからドキュメントをダウンロードできるようにする';
 $string['print'] = 'ドキュメントの印刷が可能になっています';
 $string['print_help'] = 'このオプションがオフの場合、ONLYOFFICEエディタアプリからドキュメントを印刷することはできません。ご注意：<strong>course:manageactivities</strong> 権を持つユーザーは、常にアプリで文書を印刷することができます。';
-$string['print_desc'] = 'ONLYOFFICEエディタアプリからドキュメントを印刷できるようにする';
 $string['protect'] = '保護タブを隠す';
 $string['protect_help'] = 'このオプションがオフの場合、ユーザーはONLYOFFICEエディタで保護設定にアクセスすることができます。なお、<strong>course:manageactivities</strong> 権を持つユーザーは、常に保護設定にアクセスすることができます。';
-$string['protect_desc'] = 'ONLYOFFICEエディタアプリで保護タブを開くことができるようにする';
 
 $string['returntodocument'] = 'コースページに戻る';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server にアクセスできません。管理者にご連絡ください。';
