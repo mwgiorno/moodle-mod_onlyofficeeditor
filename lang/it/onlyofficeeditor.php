@@ -37,7 +37,7 @@ $string['modulename'] = 'Documento ONLYOFFICE';
 $string['modulenameplural'] = 'Documenti ONLYOFFICE';
 $string['modulename_help'] = 'Modulo ONLYOFFICE consente di creare e modificare i documenti di office archiviati localmente in Moodle utilizzando ONLYOFFICE Document Server, permette a più utenti di collaborare in tempo reale e di salvare le modifiche in Moodle';
 $string['pluginname'] = 'Documento ONLYOFFICE';
-$string['pluginadministration'] = 'Amministrazione dell' attività Documenti di ONLYOFFICE';
+$string['pluginadministration'] = 'Amministrazione dell'attività Documenti di ONLYOFFICE';
 $string['onlyofficename'] = 'Nome dell'attività';
 
 $string['onlyofficeactivityicon'] = 'Aprire in ONLYOFFICE';
