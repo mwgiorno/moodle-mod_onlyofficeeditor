@@ -9,6 +9,7 @@
 - add ability to create activity with empty file
 - add favicon on editor page
 - editor interface customization
+- de, es, fr, it, ja, ru, zh_cn translations
 
 ## Changed
 - set editor interface language
