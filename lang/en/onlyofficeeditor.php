@@ -49,22 +49,15 @@ $string['documentserverurl'] = 'Document Editing Service Address';
 $string['documentserverurl_desc'] = 'The Document Editing Service Address specifies the address of the server with the document services installed. Please replace \'https://documentserver.url\' above with the correct server address';
 $string['documentserversecret'] = 'Document Server Secret';
 $string['documentserversecret_desc'] = 'The secret is used to generate the token (an encrypted signature) in the browser for the document editor opening and calling the methods and the requests to the document command service and document conversion service. The token prevents the substitution of important parameters in ONLYOFFICE Document Server requests.';
-$string['allowedformats'] = 'Allowed formats';
-$string['allowedformats_desc'] = '';
 
 $string['selectfile'] = 'Select existing file or create new by clicking one of the icons';
-$string['printintro'] = 'Print intro text';
-$string['printintroexplain'] = '';
 $string['documentpermissions'] = 'Document permissions';
 $string['download'] = 'Document can be downloaded';
 $string['download_help'] = 'If this is off, documents will not be downloadable in the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to download documents via the app';
-$string['download_desc'] = 'Allow documents to be downloaded via the ONLYOFFICE editor app';
 $string['print'] = 'Document can be printed';
 $string['print_help'] = 'If this is off, documents will not be printable via the ONLYOFFICE editor app. Note, users with <strong>course:manageactivities</strong> capability are always able to print documents via the app';
-$string['print_desc'] = 'Allow documents to be printed via the ONLYOFFICE editor app';
 $string['protect'] = 'Hide Protection tab';
 $string['protect_help'] = 'If this off, users have access to protection settings in the ONLYOFFICE editor. Note, users with <strong>course:manageactivities</strong> capability always have access to protection settings.';
-$string['protect_desc'] = 'Allow users open the protection tab in the ONLYOFFICE editor app';
 
 $string['returntodocument'] = 'Return to course page';
 $string['docserverunreachable'] = 'ONLYOFFICE Document Server cannot be reached. Please contact admin';
