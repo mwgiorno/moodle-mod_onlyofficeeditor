@@ -44,6 +44,7 @@ $string['onlyofficename'] = 'Activity Name';
 $string['onlyofficeactivityicon'] = 'Open in ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Add a new ONLYOFFICE document activity';
 $string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
+$string['onlyofficeeditor:editdocument'] = 'Edit ONLYOFFICE document activity';
 
 $string['documentserverurl'] = 'Document Editing Service Address';
 $string['documentserverurl_desc'] = 'The Document Editing Service Address specifies the address of the server with the document services installed. Please replace \'https://documentserver.url\' above with the correct server address';
