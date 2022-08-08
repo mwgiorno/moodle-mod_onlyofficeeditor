@@ -43,6 +43,7 @@ $string['onlyofficename'] = 'Наименование элемента';
 $string['onlyofficeactivityicon'] = 'Открыть в ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Добавить новый элемент Документ ONLYOFFICE';
 $string['onlyofficeeditor:view'] = 'Просмотр элемента Документ ONLYOFFICE';
+$string['onlyofficeeditor:editdocument'] = 'Редактирование элемента Документ ONLYOFFICE';
 
 $string['documentserverurl'] = 'Адрес службы редактирования документов';
 $string['documentserverurl_desc'] = 'Адрес службы редактирования документов определяет адрес сервера с установленными сервисами документов. Пожалуйста, измените \'https://documentserver.url\' выше на верный адрес сервера';
