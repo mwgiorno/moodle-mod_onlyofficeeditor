@@ -80,6 +80,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $filemanageroptions['accepted_types'] = '*';
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
+        $filemanageroptions['subdirs'] = 0;
 
         $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
         if (!$this->_instance) {
