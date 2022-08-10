@@ -87,7 +87,7 @@ class util {
         "tr" => "tr-TR",
         "uk" => "uk-UA",
         "vi" => "vi-VN",
-        "zh" => "zh-CN"];
+        "zh_cn" => "zh-CN"];
 
     /**
      * Get plugin key.
@@ -224,6 +224,10 @@ class util {
             }
         }
         $pathlocale = self::PATH_LOCALE[$user->lang];
+        if ($pathlocale === null) {
+            $pathlocale = "en-US";
+        }
+
         $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;
 
         $fileinfo = array(
