@@ -43,6 +43,7 @@ $string['onlyofficename'] = 'Aktivitätsname';
 $string['onlyofficeactivityicon'] = 'In ONLYOFFICE öffnen';
 $string['onlyofficeeditor:addinstance'] = 'Neue Aktivität für ONLYOFFICE-Dokumente hinzufügen';
 $string['onlyofficeeditor:view'] = 'ONLYOFFICE-Dokumentenaktivität anzeigen';
+$string['onlyofficeeditor:editdocument'] = 'ONLYOFFICE-Dokumentenaktivität bearbeiten';
 
 $string['documentserverurl'] = 'Serviceadresse der Dokumentbearbeitung';
 $string['documentserverurl_desc'] = 'Die Adresse des Dienstes für die Dokumentenbearbeitung ist die Adresse des Servers, auf dem die Dokumentendienste installiert sind. Bitte ersetzen Sie \'https://documentserver.url\' oben durch die richtige Serveradresse';

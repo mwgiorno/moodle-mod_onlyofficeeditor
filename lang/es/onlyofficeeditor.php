@@ -43,6 +43,7 @@ $string['onlyofficename'] = 'Nombre de la actividad';
 $string['onlyofficeactivityicon'] = 'Abrir en ONLYOFFICE';
 $string['onlyofficeeditor:addinstance'] = 'Añadir una nueva actividad documental de ONLYOFFICE';
 $string['onlyofficeeditor:view'] = 'Ver la actividad documental de ONLYOFFICE';
+$string['onlyofficeeditor:editdocument'] = 'Editar la actividad documental de ONLYOFFICE';
 
 $string['documentserverurl'] = 'Dirección del Servicio de Edición de Documentos';
 $string['documentserverurl_desc'] = 'La Dirección del Servicio de Edición de Documentos especifica la dirección del servidor con los servicios de documentos instalados. Por favor, reemplace \'https://documentserver.url\' arriba con la dirección correcta del servidor';

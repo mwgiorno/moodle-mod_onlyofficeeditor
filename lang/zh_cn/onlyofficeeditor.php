@@ -43,6 +43,7 @@ $string['onlyofficename'] = '活动名称';
 $string['onlyofficeactivityicon'] = '用 ONLYOFFICE 打开';
 $string['onlyofficeeditor:addinstance'] = '添加新的ONLYOFFICE文档活动';
 $string['onlyofficeeditor:view'] = '查看ONLYOFFICE文档活动';
+$string['onlyofficeeditor:editdocument'] = '编辑ONLYOFFICE文档活动';
 
 $string['documentserverurl'] = '文档编辑的服务地址';
 $string['documentserverurl_desc'] = '文档编辑服务地址指定了带有文档服务的服务器地址。请用正确的服务器地址替换上面的 \'https://documentserver.url\'';

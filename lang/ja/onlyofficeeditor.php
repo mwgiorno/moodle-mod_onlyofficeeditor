@@ -43,6 +43,7 @@ $string['onlyofficename'] = '活動名';
 $string['onlyofficeactivityicon'] = 'ONLYOFFICEで開く';
 $string['onlyofficeeditor:addinstance'] = '新しいONLYOFFICEドキュメントの活動を追加する';
 $string['onlyofficeeditor:view'] = 'ONLYOFFICEドキュメントの活動を表示する';
+$string['onlyofficeeditor:editdocument'] = 'ONLYOFFICEドキュメントの活動を編集する';
 
 $string['documentserverurl'] = '文書編集サービスのアドレス';
 $string['documentserverurl_desc'] = '文書編集サービスアドレスは、文書サービスがインストールされているサーバーのアドレ スを指定します。上の \'https://documentserver.url\' を正しいサーバーアドレスに置き換えてください。';
