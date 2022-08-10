@@ -253,7 +253,7 @@ class util {
      * @return object|\stdClass
      * @throws \moodle_exception
      */
-    public static function generate_new_module_info($moduleinfo, $course, $cm, $section = null) {
+    public static function generate_new_module_info($moduleinfo, $course, $cm, $section) {
         $newmoduleinfo = $moduleinfo;
         $newtime = time();
         $permissions = unserialize($moduleinfo->permissions);
@@ -262,7 +262,7 @@ class util {
         $newmoduleinfo->print = $permissions['print'];
         $newmoduleinfo->instance = 0;
         $newmoduleinfo->coursemodule = 0;
-        $newmoduleinfo->section = $section ? $section - 1 : $cm->section - 1;
+        $newmoduleinfo->section = $section;
         $newmoduleinfo->course = $course->id;
         $newmoduleinfo->add = 'onlyofficeeditor';
         $newmoduleinfo->cmidnumber = '';

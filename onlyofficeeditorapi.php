@@ -52,11 +52,9 @@ switch ($apitype) {
             $sections = course_get_format($courseid)->get_sections();
             $data = new stdClass;
             $data->sections = [];
-            for ($sectionnumber = 0; $sectionnumber < count($sections); $sectionnumber++) {
-                $sectioninfo = $moduleinfo->get_section_info($sectionnumber);
-
+            foreach ($sections as $key => $sectioninfo) {
                 $sectionobject = new stdClass();
-                $sectionobject->sectionid = $sectioninfo->id;
+                $sectionobject->sectionid = $sectioninfo->section;
                 $sectionobject->sectionname = get_section_name($courseid, $sectioninfo);
                 $data->sections[] = $sectionobject;
             }
