@@ -316,7 +316,7 @@ class util {
             $moduleinfo = (object)$DB->get_record('onlyofficeeditor', array('id' => $cm->instance));
             $course = get_course($courseid);
             $modulename = (object) array('modulename' => 'onlyofficeeditor');
-            list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $cm->section);
+            list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $section);
 
             $moduleinfo->module = $module->id;
             $moduleinfo->modulename = $modulename->modulename;
