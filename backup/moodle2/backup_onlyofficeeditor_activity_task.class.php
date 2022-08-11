@@ -43,7 +43,7 @@ class backup_onlyofficeeditor_activity_task extends backup_activity_task {
      * Defines a backup step to store the instance data in the onlyofficeeditor.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_onlyofficeeditor_activity_structure_step('onlyofficeeditor structure', 'onlyofficeeditor.xml'));
+        $this->add_step(new backup_onlyofficeeditor_activity_structure_step('onlyofficeeditor_structure', 'onlyofficeeditor.xml'));
     }
 
     /**

@@ -34,4 +34,19 @@ if ($ADMIN->fulltree) {
         $defaulthost));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
+        get_string('forcesave', 'onlyofficeeditor'), '', 0));
+    $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
+        get_string('editor_view', 'onlyofficeeditor'), ''));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
+        get_string('editor_view_chat', 'onlyofficeeditor'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_help',
+        get_string('editor_view_help', 'onlyofficeeditor'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_header',
+        get_string('editor_view_header', 'onlyofficeeditor'), '', 0));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_feedback',
+        get_string('editor_view_feedback', 'onlyofficeeditor'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_toolbar',
+        get_string('editor_view_toolbar', 'onlyofficeeditor'), '', 0));
+
 }

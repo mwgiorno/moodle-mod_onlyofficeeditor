@@ -28,7 +28,7 @@
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 
-defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
+defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 
 $doc = required_param('doc', PARAM_RAW);
 header('Content-Type: application/json; charset=utf-8');

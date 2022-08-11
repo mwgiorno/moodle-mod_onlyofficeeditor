@@ -32,6 +32,13 @@
 function xmldb_onlyofficeeditor_upgrade($oldversion) {
     global $DB;
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
+    $coretypes = core_filetypes::get_types();
+    if ($coretypes["docxf"] === null && $coretypes["oform"] === null) {
+        core_filetypes::add_type("docxf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.docxf",
+            "document", array(), '', 'ONLYOFFICE docxf');
+        core_filetypes::add_type("oform", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.oform",
+            "document", array(), '', 'ONLYOFFICE oform');
+    }
 
     return true;
 }

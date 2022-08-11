@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Uninstall onlyoffice xmldb.
+ * Defines message providers (types of message sent) for the ONLYOFFICE module.
  *
  * @package    mod_onlyofficeeditor
  * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
- * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Custom uninstallation procedure
- */
-function xmldb_onlyofficeeditor_uninstall() {
-    $coretypes = core_filetypes::get_types();
-    if ($coretypes["docxf"] !== null && $coretypes["oform"] !== null) {
-        core_filetypes::delete_type("docxf");
-        core_filetypes::delete_type("oform");
-    }
-    return true;
-}
+defined('MOODLE_INTERNAL') || die();
+
+$messageproviders = array(
+    // Notify user if he was mentioned in document.
+    'mentionnotifier' => array(
+        'capability' => 'mod/onlyofficeeditor:view',
+        'defaults' => array(
+            'airnotifier' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
+            'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF
+        ),
+    )
+);

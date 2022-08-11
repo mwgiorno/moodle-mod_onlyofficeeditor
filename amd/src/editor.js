@@ -13,37 +13,234 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/* @package    mod_onlyofficeeditor
+/**
+ * @module mod_onlyofficeeditor/editor
  * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-
+ **/
 define(['jquery'], function($) {
-    var displayError = function(error) {
-        require(['core/str'], function(str) {
-            var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
-            $.when(errorIsAvailable).done(function(localizedStr) {
-                $("#onlyofficeeditor-editor").text = localizedStr;
-                $("#onlyofficeeditor-editor").text(localizedStr).addClass("error");
+    var displayNotification = function(error, type) {
+        require(['core/notification'], function(notification) {
+            require(['core/str'], function(str) {
+                var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
+                $.when(errorIsAvailable).done(function(localizedStr) {
+                    notification.addNotification({
+                        message: localizedStr,
+                        type: type
+                    });
+                });
             });
         });
+    };
+
+    var createFullScreenButtons = function() {
+        require(['core/str'], function(str) {
+            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyofficeeditor');
+            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyofficeeditor');
+            var navButton = $('nav .nav-link.btn')[0];
+            var editorContainer = $('.onlyofficeeditor-container')[0];
+
+            $.when(enterFullScreenText).done(function(localized) {
+                enterFullScreenText = localized;
+                var enterButton = document.createElement('button');
+                var enterIcon = document.createElement('i');
+                enterIcon.className = 'icon fa fa-expand fa-fw';
+                enterButton.appendChild(enterIcon);
+                enterButton.className = 'onlyofficeeditor-editor-fs-button';
+                enterButton.id = 'onlyofficeeditor-enter-fs-button';
+                enterButton.innerHTML += enterFullScreenText;
+
+                enterButton.onclick = function() {
+                    $('header').hide();
+                    $('footer').hide();
+                    if (navButton.getAttribute('aria-expanded') === 'true') {
+                        $('nav .nav-link.btn')[0].click();
+                    }
+                    editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
+                        'padding: 0 16px 0 16px; z-index: 100;';
+                    editorContainer.children[0].style.height = '93.5vh';
+                    $('#onlyofficeeditor-enter-fs-button').hide();
+                    $('#onlyofficeeditor-exit-fs-button').show();
+                };
+                editorContainer.before(enterButton);
+            });
+            $.when(exitFullScreenText).done(function(localized) {
+                exitFullScreenText = localized;
+                var exitButton = document.createElement('button');
+                var exitIcon = document.createElement('i');
+                exitIcon.className = 'icon fa fa-compress fa-fw';
+                exitButton.appendChild(exitIcon);
+                exitButton.innerHTML += exitFullScreenText;
+                exitButton.className = 'onlyofficeeditor-editor-fs-button';
+                exitButton.id = 'onlyofficeeditor-exit-fs-button';
+
+                exitButton.onclick = function() {
+                    editorContainer.style.cssText = '';
+                    editorContainer.children[0].style.height = '95vh';
+                    $('header').show();
+                    $('footer').show();
+                    $('#onlyofficeeditor-enter-fs-button').show();
+                    $('#onlyofficeeditor-exit-fs-button').hide();
+                };
+                $('.usernav .nav-item')[0].prepend(exitButton);
+                $('#onlyofficeeditor-exit-fs-button').hide();
+            });
+        });
+    };
+
+    $.urlParam = function(name) {
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results === null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    };
+
+    var replaceActionLink = function(href, linkParam) {
+        var link;
+        var actionIndex = href.indexOf("&actionType=");
+        if (actionIndex != -1) {
+            link = href.substring(0, actionIndex) + "&actionType=" + encodeURIComponent(linkParam.type) +
+                "&actionData=" + encodeURIComponent(linkParam.data);
+        } else {
+            link = href + "&actionType=" + encodeURIComponent(linkParam.type) + "&actionData=" + encodeURIComponent(linkParam.data);
+        }
+        return link;
+    };
+
+    var saveAsModal = null;
+
+    var displaySaveAsModal = function(saveAsData, cmid, courseid) {
+        require(['jquery', 'core/templates', 'core/modal_factory', 'mod_onlyofficeeditor/modal_saveas'],
+            function($, Templates, ModalFactory, ModalSaveas) {
+                var trigger = $('.onlyofficeeditor-container');
+                if (saveAsModal === null) {
+                    saveAsModal = ModalFactory.create({
+                        type: ModalSaveas.TYPE
+                    }, trigger);
+                }
+                saveAsModal.done((modal) => {
+                    modal.courseid = courseid;
+                    modal.CMID = cmid;
+                    modal.saveAsData = saveAsData;
+                    modal.renderSections(modal.getBody(), cmid, courseid);
+                    modal.show();
+                });
+            });
     };
 
     return {
         init: function(courseid, cmid) {
             if (typeof DocsAPI === "undefined") {
-                displayError('docserverunreachable');
+                displayNotification('docserverunreachable', 'error');
                 return;
             }
+            createFullScreenButtons();
             var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
-                cmid: cmid
-            }).done(function(config) {
-                // eslint-disable-next-line no-undef
-                new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
+                cmid: cmid,
+                actionType: $.urlParam('actionType'),
+                actionData: $.urlParam('actionData')
+            }).done(function(data) {
+                var docEditor = null;
+                var config = data.config;
+
+                var favicon = config.documentType;
+                if (config.fileType === 'docxf' || config.fileType === 'oform') {
+                    favicon = config.fileType;
+                }
+                document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyofficeeditor/pix/'
+                    + favicon + '.ico" />';
+
+                var canAddInstance = data.addinstance;
+
+                const innerAlert = (message, inEditor) => {
+                    // eslint-disable-next-line no-console
+                    if (console && console.log) {
+                        // eslint-disable-next-line no-console
+                        console.log(message);
+                    }
+                    if (inEditor && docEditor) {
+                        docEditor.showMessage(message);
+                    }
+                };
+
+                var onMakeActionLink = function(event) {
+                    var actionData = event.data.action;
+                    docEditor.setActionLink(replaceActionLink(location.href, actionData));
+                };
+
+                var onRequestSendNotify = function(event) {
+                    var comment = event.data.message;
+                    var emails = event.data.emails;
+                    var replacedActionLink = replaceActionLink(location.href, event.data.actionLink.action);
+
+                    var mentionData = {
+                        comment: comment,
+                        emails: emails,
+                        link: replacedActionLink,
+                        courseid: courseid
+                    };
+
+                    $.ajax(M.cfg.wwwroot + '/mod/onlyofficeeditor/onlyofficeeditorapi.php?apiType=mention&cmid=' + cmid, {
+                        type: 'POST',
+                        dataType: 'json',
+                        data: mentionData
+                    }).fail(() => {
+                        displayNotification('onmentionerror', 'error');
+                    });
+                };
+
+                const onAppReady = () => {
+                    innerAlert("Document editor ready");
+                };
+
+                const onError = (event) => {
+                    if (event) {
+                        innerAlert(event.data);
+                    }
+                };
+                config.events = {
+                    'onAppReady': onAppReady,
+                    'onError': onError,
+                    'onMakeActionLink': onMakeActionLink
+                };
+
+                var onRequestSaveAs = function(event) {
+                    var saveAsData = {
+                        title: event.data.title,
+                        url: event.data.url,
+                        courseid: courseid,
+                        section: null
+                    };
+                    displaySaveAsModal(saveAsData, cmid, courseid);
+                };
+
+                if (canAddInstance) {
+                    config.events.onRequestSaveAs = onRequestSaveAs;
+                }
+
+                var usersToMention = data.userstomention;
+
+                var onRequestUsers = function() {
+                    docEditor.setUsers({'users': usersToMention});
+                };
+
+                if (usersToMention !== null) {
+                    config.events.onRequestUsers = onRequestUsers;
+                    config.events.onRequestSendNotify = onRequestSendNotify;
+                }
+
+                if ((config.document.fileType === "docxf" || config.document.fileType === "oform")
+                    // eslint-disable-next-line no-undef
+                    && DocsAPI.DocEditor.version().split(".")[0] < 7) {
+                    displayNotification('oldversion', 'error');
+                } else {
+                    // eslint-disable-next-line no-undef
+                    docEditor = new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
+                }
             });
         }
     };

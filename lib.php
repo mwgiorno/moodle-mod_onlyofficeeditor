@@ -45,6 +45,8 @@ function onlyofficeeditor_supports($feature) {
     switch ($feature) {
         case FEATURE_SHOW_DESCRIPTION:
             return true;
+        case FEATURE_BACKUP_MOODLE2:
+            return true;
         default:
             return null;
     }
@@ -68,9 +70,23 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
     $cmid = $data->coursemodule;
     $data->timecreated = time();
     $data->timemodified = $data->timecreated;
+    $fileformat = $data->onlyofficetemplateformat;
 
     util::save_document_permissions($data);
     util::save_file($data);
+
+    if ($fileformat != null && $fileformat != 'Upload file') {
+        $records = $DB->get_records('files', [
+            'itemid' => $data->file,
+            'component' => 'mod_onlyofficeeditor',
+            'filearea' => 'content'
+        ]);
+        foreach ($records as $record) {
+            $record->contextid = context_module::instance($cmid)->id;
+            $record->itemid = 0;
+            $DB->update_record('files', $record);
+        }
+    }
 
     $data->id = $DB->insert_record('onlyofficeeditor', $data);
 

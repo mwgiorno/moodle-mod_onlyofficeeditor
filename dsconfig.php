@@ -25,7 +25,7 @@
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 
-defined('AJAX_SCRIPT') or define('AJAX_SCRIPT', true);
+defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 
 $courseid = required_param('courseid', PARAM_INT);
 $cmid = required_param('cmid', PARAM_INT);
@@ -34,6 +34,8 @@ $cm = get_coursemodule_from_id('onlyofficeeditor', $cmid, 0, false, MUST_EXIST);
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 require_login($course, true, $cm);
 
+$actiontype = optional_param('actionType', '', PARAM_TEXT);
+$actiondata = optional_param('actionData', '', PARAM_TEXT);
 $context = CONTEXT_MODULE::instance($cmid);
 require_capability('mod/onlyofficeeditor:view', $context);
 
@@ -42,5 +44,12 @@ $modinfo = get_fast_modinfo($courseid);
 $cm = $modinfo->get_cm($cmid)->get_course_module_record();
 $editor = new \mod_onlyofficeeditor\editor($courseid, $context, $cm, $modconfig);
 $editorconfig = $editor->config();
-echo json_encode($editorconfig);
+if (!empty($actiondata) && !empty($actiontype)) {
+    $editorconfig['editorConfig']['actionLink']['action'] = ['type' => $actiontype, 'data' => $actiondata];
+}
+
+$addinstance = has_capability('mod/onlyofficeeditor:addinstance', $context);
+$userstomention = \mod_onlyofficeeditor\util::get_users_to_mention_in_comments($context);
+$data = ['config' => $editorconfig, 'userstomention' => $userstomention, 'addinstance' => $addinstance];
+echo json_encode($data);
 die();

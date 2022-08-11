@@ -80,9 +80,31 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $filemanageroptions['accepted_types'] = '*';
         $filemanageroptions['maxbytes'] = -1;
         $filemanageroptions['maxfiles'] = 1;
+        $filemanageroptions['subdirs'] = 0;
 
-        $mform->addElement('filemanager', 'file', get_string('selectfile', 'onlyofficeeditor'), null, $filemanageroptions);
-        $mform->addRule('file', get_string('required'), 'required', null, 'client');
+        $mform->addElement('filemanager', 'file', null, null, $filemanageroptions);
+        if (!$this->_instance) {
+            $attr = ['class' => 'onlyofficeeditor-create-button'];
+            $createbuttons = array();
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('docxformname', 'onlyofficeeditor'), 'Document', $attr);
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('xlsxformname', 'onlyofficeeditor'), 'Spreadsheet', $attr);
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('pptxformname', 'onlyofficeeditor'), 'Presentation', $attr);
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('docxfformname', 'onlyofficeeditor'), 'Form template', $attr);
+            $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
+                get_string('uploadformname', 'onlyofficeeditor'), 'Upload file', $attr);
+
+            $mform->addGroup($createbuttons, 'create_buttons',
+                get_string('selectfile', 'onlyofficeeditor'), array(' '), false);
+            $mform->addRule('create_buttons', get_string('required'), 'required',
+                null, 'client');
+
+            $mform->disabledIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
+            $mform->hideIf('file', 'onlyofficetemplateformat', 'notchecked', 'Upload file');
+        }
 
         $mform->addElement('header', 'documentpermissions', get_string('documentpermissions', 'onlyofficeeditor'));
         $mform->addElement('checkbox', 'download', get_string('download', 'onlyofficeeditor'));
@@ -92,6 +114,10 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'print', get_string('print', 'onlyofficeeditor'));
         $mform->setDefault('print', 1);
         $mform->addHelpButton('print', 'print', 'onlyofficeeditor');
+
+        $mform->addElement('checkbox', 'protect', get_string('protect', 'onlyofficeeditor'));
+        $mform->setDefault('protect', 1);
+        $mform->addHelpButton('protect', 'protect', 'onlyofficeeditor');
 
         // Add standard grading elements.
         // Add grading capability. need use case for grading.
@@ -112,14 +138,20 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
      */
     public function validation($data, $files) {
-        global $USER;
+        global $USER, $CFG;
 
         $errors = parent::validation($data, $files);
 
         $usercontext = \context_user::instance($USER->id);
         $fs = get_file_storage();
         if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
-            $errors['file'] = get_string('required');
+            $fileformat = $data['onlyofficetemplateformat'];
+            if ($fileformat != null && $fileformat != 'Upload file') {
+                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot,
+                    $data['file'], $data['name']);
+            } else {
+                $errors['file'] = get_string('required');
+            }
         }
         return $errors;
     }
@@ -147,6 +179,11 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
                 $defaultvalues['print'] = $permissions['print'];
             } else {
                 $defaultvalues['print'] = 0;
+            }
+            if (isset($permissions['protect'])) {
+                $defaultvalues['protect'] = $permissions['protect'];
+            } else {
+                $defaultvalues['protect'] = 0;
             }
         }
     }

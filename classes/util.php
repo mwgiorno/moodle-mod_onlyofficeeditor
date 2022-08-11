@@ -26,6 +26,9 @@
 
 namespace mod_onlyofficeeditor;
 
+defined('MOODLE_INTERNAL') || die();
+require_once("$CFG->dirroot/course/modlib.php");
+
 /**
  * Utils class.
  *
@@ -58,10 +61,39 @@ class util {
     /** Force saving the document has failed. */
     const STATUS_ERRORFORCESAVE = 7;
 
+    /** Path locales to create file from ONLYOFFICE template. */
+    const PATH_LOCALE = [
+        "az" => "az-Latn-AZ",
+        "bg" => "bg-BG",
+        "cs" => "cs-CZ",
+        "de" => "de-DE",
+        "el" => "el-GR",
+        "en" => "en-GB",
+        "en_us" => "en-US",
+        "es" => "es-ES",
+        "fr" => "fr-FR",
+        "gl" => "gl-ES",
+        "it" => "it-IT",
+        "ja" => "ja-JP",
+        "ko" => "ko-KR",
+        "lv" => "lv-LV",
+        "nl" => "nl-NL",
+        "pl" => "pl-PL",
+        "pt_br" => "pt-BR",
+        "pt" => "pt-PT",
+        "ru" => "ru-RU",
+        "sk" => "sk-SK",
+        "sv" => "sv-SE",
+        "tr" => "tr-TR",
+        "uk" => "uk-UA",
+        "vi" => "vi-VN",
+        "zh_cn" => "zh-CN"];
+
     /**
      * Get plugin key.
      *
      * @return string plugin key from the plugin configuration.
+     * @throws \dml_exception
      */
     public static function get_appkey() {
         $key = get_config('onlyofficeeditor', 'appkey');
@@ -84,6 +116,9 @@ class util {
         }
         if (!empty($data->print)) {
             $permissions['print'] = 1;
+        }
+        if (!empty($data->protect)) {
+            $permissions['protect'] = 1;
         }
         $data->permissions = serialize($permissions);
     }
@@ -155,6 +190,217 @@ class util {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Create new empty file for ONLYOFFICE activity.
+     *
+     * @param string $fileformat new file format.
+     * @param object $user user.
+     * @param int $contextid context id.
+     * @param string $dirroot moodle dir root.
+     * @param int $fileid new file id.
+     * @param string $name name of the new file.
+     * @throws \file_exception
+     * @throws \stored_file_creation_exception
+     */
+    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $dirroot, $fileid, $name) {
+        switch ($fileformat) {
+            case 'Document': {
+                $fileformat = 'docx';
+                break;
+            }
+            case 'Spreadsheet': {
+                $fileformat = 'xlsx';
+                break;
+            }
+            case 'Presentation': {
+                $fileformat = 'pptx';
+                break;
+            }
+            case 'Form template': {
+                $fileformat = 'docxf';
+                break;
+            }
+        }
+        $pathlocale = self::PATH_LOCALE[$user->lang];
+        if ($pathlocale === null) {
+            $pathlocale = "en-US";
+        }
+
+        $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;
+
+        $fileinfo = array(
+            'author' => fullname($user),
+            'contextid' => $contextid,
+            'component' => 'mod_onlyofficeeditor',
+            'filearea' => 'content',
+            'userid' => $user->id,
+            'itemid' => $fileid,
+            'filepath' => '/',
+            'filename' => $name . '.' . $fileformat);
+
+        $fs = get_file_storage();
+        $file = $fs->create_file_from_pathname($fileinfo, $pathname);
+    }
+
+    /**
+     * Generate new module for converted file;
+     * @param object $moduleinfo Onlyoffice module info.
+     * @param object $course Course.
+     * @param object $cm Course module.
+     * @param null|int $section Section.
+     * @return object|\stdClass
+     * @throws \moodle_exception
+     */
+    public static function generate_new_module_info($moduleinfo, $course, $cm, $section) {
+        $newmoduleinfo = $moduleinfo;
+        $newtime = time();
+        $permissions = unserialize($moduleinfo->permissions);
+
+        $newmoduleinfo->download = $permissions['download'];
+        $newmoduleinfo->print = $permissions['print'];
+        $newmoduleinfo->instance = 0;
+        $newmoduleinfo->coursemodule = 0;
+        $newmoduleinfo->section = $section;
+        $newmoduleinfo->course = $course->id;
+        $newmoduleinfo->add = 'onlyofficeeditor';
+        $newmoduleinfo->cmidnumber = '';
+        $newmoduleinfo->completionunlocked = 1;
+        $newmoduleinfo->completion = $cm->completion;
+        $newmoduleinfo->completionexpected = $cm->completionexpected;
+        $newmoduleinfo->showdescription = $cm->showdescription;
+        $newmoduleinfo->visible = $cm->visible;
+        $newmoduleinfo->visibleoncoursepage = $cm->visibleoncoursepage;
+        $newmoduleinfo->tags = [];
+        $newmoduleinfo->update = 0;
+        $newmoduleinfo->return = 0;
+        $newmoduleinfo->sr = 0;
+        $newmoduleinfo->competencies = [];
+        $newmoduleinfo->competency_rule = 0;
+        $newmoduleinfo->timecreated = $newtime;
+        $newmoduleinfo->timemodified = $newtime;
+        $newmoduleinfo->documentkey = null;
+        $newmoduleinfo->availabilityconditionsjson = '{"op":"&","c":[],"showc":[]}';
+
+        $newmoduleinfo = add_moduleinfo($newmoduleinfo, $course);
+        return $newmoduleinfo;
+    }
+
+    /**
+     * Create new activity module on save as... action from editor.
+     * @param string $url Url of document.
+     * @param string $title Title of document.
+     * @param \context_module $context Context.
+     * @param int $cmid Course module id.
+     * @param int $courseid Course id.
+     * @param int $section Section.
+     * @throws \Exception
+     */
+    public static function save_as_document($url, $title, $context, $cmid, $courseid, $section) {
+        global $DB;
+        $fs = get_file_storage();
+        $permission = has_capability('mod/onlyofficeeditor:addinstance', $context);
+
+        $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
+        $file = null;
+        if (count($files) >= 1) {
+            $file = reset($files);
+        }
+        if (!$permission || $file === null) {
+            throw new \Exception();
+        }
+
+        try {
+            $cm = get_fast_modinfo($courseid)->get_cm($cmid)->get_course_module_record();
+            $moduleinfo = (object)$DB->get_record('onlyofficeeditor', array('id' => $cm->instance));
+            $course = get_course($courseid);
+            $modulename = (object) array('modulename' => 'onlyofficeeditor');
+            list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $section);
+
+            $moduleinfo->module = $module->id;
+            $moduleinfo->modulename = $modulename->modulename;
+            $moduleinfo = self::generate_new_module_info($moduleinfo, $course, $cm, $section);
+
+            $fileinfo = array(
+                'author' => $file->get_author(),
+                'contextid' => \context_module::instance($moduleinfo->coursemodule)->id,
+                'component' => 'mod_onlyofficeeditor',
+                'filearea' => 'content',
+                'userid' => $file->get_userid(),
+                'itemid' => 0,
+                'filepath' => '/',
+                'filename' => $title
+            );
+
+            $fs->create_file_from_url($fileinfo, $url);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex);
+        }
+    }
+
+    /**
+     * Returns all users who can be mentioned in the comments.
+     *
+     * @param \context $context Module context.
+     * @return array Users array for mentioning.
+     * @throws \coding_exception
+     */
+    public static function get_users_to_mention_in_comments($context) {
+        global $USER;
+        $users = get_users_by_capability($context, 'mod/onlyofficeeditor:view');
+        $userstomention = array();
+        foreach ($users as $user) {
+            if ($user->id !== $USER->id) {
+                array_push($userstomention, array(
+                    'email' => $user->email,
+                    'name' => $user->firstname . ' ' . $user->lastname
+                ));
+            }
+        }
+        return $userstomention;
+    }
+
+    /**
+     * Send notification to users about mentioning in the comment.
+     *
+     * @param string $actionlink Link to the comment.
+     * @param string $comment Comment text.
+     * @param array $emails Emails of mentioned users.
+     * @param \context $context Module context.
+     * @return array Array of mentioned users.
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function mention_user_in_comment($actionlink, $comment, $emails, $context) {
+        global $DB, $USER;
+        $mentionedusers = array();
+
+        $messagedata = new \stdClass();
+        $messagedata->notifier = $USER->firstname . ' ' . $USER->lastname;
+        $messagedata->course = $context->get_course_context()->get_context_name(false);
+
+        foreach ($emails as $email) {
+            $user = $DB->get_record('user', array('email' => $email));
+            $permission = has_capability('mod/onlyofficeeditor:editdocument', $context, $user) ? 'Full Access' : 'Read only';
+            $mentioneduser = ['permissions' => $permission, 'user' => $user->firstname . ' ' . $user->lastname];
+            $mentionedusers[] =& $mentioneduser;
+
+            $message = new \core\message\message();
+            $message->component = 'mod_onlyofficeeditor';
+            $message->name = 'mentionnotifier';
+            $message->userfrom = \core_user::get_noreply_user();
+            $message->userto = $user;
+            $message->subject = get_string('mentionnotifier:notification', 'onlyofficeeditor', $messagedata);
+            $message->fullmessageformat = FORMAT_HTML;
+            $message->fullmessagehtml = '<p>' . $comment . '</p>';
+            $message->notification = 1;
+            $message->contexturl = $actionlink;
+            $message->contexturlname = get_string('mentioncontexturlname', 'onlyofficeeditor');
+
+            $messageid = message_send($message);
+        }
+        return $mentionedusers;
     }
 
 }
