@@ -38,7 +38,8 @@ define(['jquery'], function($) {
         require(['core/str'], function(str) {
             var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyofficeeditor');
             var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyofficeeditor');
-            var navButton = $('nav .nav-link.btn')[0];
+            var navLeftButton = $('.drawertoggle')[1];
+            var navRightButton = $('.drawertoggle')[2];
             var editorContainer = $('.onlyofficeeditor-container')[0];
 
             $.when(enterFullScreenText).done(function(localized) {
@@ -54,16 +55,21 @@ define(['jquery'], function($) {
                 enterButton.onclick = function() {
                     $('header').hide();
                     $('footer').hide();
-                    if (navButton.getAttribute('aria-expanded') === 'true') {
-                        $('nav .nav-link.btn')[0].click();
+                    if (navLeftButton && navLeftButton.getAttribute('data-aria-hidden-tab-index') === null) {
+                        $(navLeftButton).click();
                     }
-                    editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
-                        'padding: 0 16px 0 16px; z-index: 100;';
-                    editorContainer.children[0].style.height = '93.5vh';
+                    if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
+                        $(navRightButton).click();
+                    }
+                    if ($('.editmode-switch-form').length > 0 && $('.editmode-switch-form')[0][0].checked) {
+                        $(editorContainer).addClass('onlyofficeeditor-rightindent');
+                    }
+                    $(editorContainer).addClass('onlyofficeeditor-fullscreen');
+                    editorContainer.children[0].style.height = '93vh';
                     $('#onlyofficeeditor-enter-fs-button').hide();
                     $('#onlyofficeeditor-exit-fs-button').show();
                 };
-                $("#region-main-settings-menu .menubar")[0].prepend(enterButton);
+                editorContainer.before(enterButton);
             });
             $.when(exitFullScreenText).done(function(localized) {
                 exitFullScreenText = localized;
@@ -76,14 +82,15 @@ define(['jquery'], function($) {
                 exitButton.id = 'onlyofficeeditor-exit-fs-button';
 
                 exitButton.onclick = function() {
-                    editorContainer.style.cssText = '';
+                    $(editorContainer).removeClass('onlyofficeeditor-fullscreen');
+                    $(editorContainer).removeClass('onlyofficeeditor-rightindent');
                     editorContainer.children[0].style.height = '95vh';
                     $('header').show();
                     $('footer').show();
                     $('#onlyofficeeditor-enter-fs-button').show();
                     $('#onlyofficeeditor-exit-fs-button').hide();
                 };
-                $('.usernav .nav-item')[0].prepend(exitButton);
+                $('#usernavigation')[0].prepend(exitButton);
                 $('#onlyofficeeditor-exit-fs-button').hide();
             });
         });
