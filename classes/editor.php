@@ -175,7 +175,7 @@ class editor {
 
         // Add token.
         if (!empty($this->modconfig->documentserversecret)) {
-            $token = JWT::encode($config, $this->modconfig->documentserversecret);
+            $token = JWT::encode($config, $this->modconfig->documentserversecret, 'HS256');
             $config['token'] = $token;
         }
         return $config;
