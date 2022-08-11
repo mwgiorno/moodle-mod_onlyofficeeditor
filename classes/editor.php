@@ -137,7 +137,7 @@ class editor {
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['actionLink'] = null;
         $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
-        $editorconfig['lang'] = $USER->lang;
+        $editorconfig['lang'] = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
 
         // User.
         $user = [];
