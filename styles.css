@@ -3,6 +3,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+#page-content h2,
 #page-content .onlyofficeeditor .activityinstance > a {
     display: inline-block;
 }
@@ -93,4 +94,6 @@
     padding: 5px;
     margin-top: -5px;
     margin-right: 10px;
+    display: block;
+    float: right;
 }

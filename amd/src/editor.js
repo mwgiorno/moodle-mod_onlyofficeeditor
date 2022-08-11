@@ -63,7 +63,7 @@ define(['jquery'], function($) {
                     $('#onlyofficeeditor-enter-fs-button').hide();
                     $('#onlyofficeeditor-exit-fs-button').show();
                 };
-                $("#region-main-settings-menu .menubar")[0].prepend(enterButton);
+                editorContainer.before(enterButton);
             });
             $.when(exitFullScreenText).done(function(localized) {
                 exitFullScreenText = localized;
