@@ -121,7 +121,7 @@ class editor {
         // Document.
         $document = [];
         $filename = $file->get_filename();
-        $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content' . $file->get_filepath() . $filename;
+        $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content' . $file->get_filepath() . urlencode($filename);
         $contenthash = $crypt->get_hash(['userid' => $USER->id, 'contenthash' => $file->get_contenthash()]);
         $documenturl = $CFG->wwwroot . '/pluginfile.php' . $path . '?doc=' . $contenthash;
 
