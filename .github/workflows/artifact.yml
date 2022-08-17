@@ -1,0 +1,32 @@
+name: Artifact
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
+    branches: [main, master]
+
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get Info
+        run: |
+          echo "::set-output name=version::$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md)"
+        id: info
+      - name: Build Artifact
+        run: |
+          cd ${{ github.workspace }}
+          git submodule update --init --recursive
+          mkdir -p ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          rsync -av --exclude='deploy' ./ ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          cd ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          rm -rf ./.github/
+          rm -rf ./.git/
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          path: deploy
