@@ -47,6 +47,8 @@ function onlyofficeeditor_supports($feature) {
             return true;
         case FEATURE_BACKUP_MOODLE2:
             return true;
+        case FEATURE_MOD_PURPOSE:
+            return MOD_PURPOSE_CONTENT;
         default:
             return null;
     }
@@ -186,7 +188,6 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
     $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', 'content', 0, 'sortorder DESC, id ASC', false, 0, 0, 1);
     if (count($files) >= 1) {
         $file = reset($files);
-        $info->icon = file_file_icon($file, 24);
         $onlyoffice->file = $file->get_filename();
     }
 
@@ -203,7 +204,6 @@ function onlyofficeeditor_cm_info_view(cm_info $cm) {
     global $OUTPUT;
     $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
         array('class' => 'onlyofficeactivityicon'));
-    $cm->set_after_link(' ' . html_writer::tag('span', $icon));
 }
 
 /**

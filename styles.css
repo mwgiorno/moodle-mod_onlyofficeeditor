@@ -13,6 +13,19 @@
     max-height: 60rem;
 }
 
+.onlyofficeeditor-container.onlyofficeeditor-fullscreen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 0 0 50px;
+    z-index: 100;
+}
+
+.onlyofficeeditor-container.onlyofficeeditor-rightindent {
+    margin-right: 43px;
+}
+
 #onlyofficeeditor-editor.error {
     color: red;
 }
@@ -88,12 +101,14 @@
     border: 1px solid rgb(15, 111, 197);
     background: white;
     color: rgb(15, 111, 197);
+    float: right;
 }
 
 #onlyofficeeditor-enter-fs-button {
     padding: 5px;
-    margin-top: -5px;
     margin-right: 10px;
-    display: block;
-    float: right;
+}
+
+#onlyofficeeditor-exit-fs-button {
+    margin: 12px;
 }

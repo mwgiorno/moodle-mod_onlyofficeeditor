@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.0
+## Changed
+- redesign to moodle 4.*
+
 ## 2.2.0
 ## Added
 - add protect option for editor
