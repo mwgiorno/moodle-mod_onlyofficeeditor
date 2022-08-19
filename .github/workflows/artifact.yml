@@ -20,13 +20,16 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          rsync -av --exclude='deploy' ./ ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          cd ./deploy/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mkdir -p ./deploy/moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          rsync -av --exclude='deploy' ./ ./deploy/moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          cd ./deploy/moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
           rm -rf ./.github/
           rm -rf ./.git/
+          rm -rf .gitmodules
+          cd ./newdocs
+          rm -rf .git
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          name: moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
           path: deploy
