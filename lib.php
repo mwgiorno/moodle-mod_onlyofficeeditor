@@ -374,6 +374,16 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
         return false;
     }
 
+    $modconfig = get_config('onlyofficeeditor');
+    if (!empty($modconfig->documentserversecret)) {
+        $token = substr(getallheaders()['Authorization'], strlen('Bearer '));
+        try {
+            $decodedHeader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+        } catch (\UnexpectedValueException $e) {
+            return false;
+        }
+    }
+
     $fs = get_file_storage();
 
     $files = $fs->get_area_files($context->id, 'mod_onlyofficeeditor', $filearea, false, 'sortorder DESC, id ASC', false, 0, 0, 1);
