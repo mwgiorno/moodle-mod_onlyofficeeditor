@@ -67,6 +67,35 @@ if ($data === null) {
     die(json_encode($response));
 }
 
+$modconfig = get_config('onlyofficeeditor');
+if (!empty($modconfig->documentserversecret)) {
+    if (!empty($data['token'])) {
+        try {
+            $payload = \Firebase\JWT\JWT::decode($data['token'], $modconfig->documentserversecret, array('HS256'));
+        } catch (\UnexpectedValueException $e) {
+            $response['status'] = 'error';
+            $response['error'] = '403 Access denied';
+            die(json_encode($response));
+        }
+    } else {
+        $token = substr(getallheaders()['Authorization'], strlen('Bearer '));
+        try {
+            $decodedHeader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+
+            $payload = $decodedHeader->payload;
+        } catch (\UnexpectedValueException $e) {
+            $response['status'] = 'error';
+            $response['error'] = '403 Access denied';
+            die(json_encode($response));
+        }
+    }
+
+    $data['users'] = isset($payload->users) ? $payload->users : null;
+    $data['url'] = isset($payload->url) ? $payload->url : null;
+    $data['status'] = $payload->status;
+    $data['key'] = $payload->key;
+}
+
 if (isset($data['status'])) {
     $status = (int) $data['status'];
     switch ($status) {
