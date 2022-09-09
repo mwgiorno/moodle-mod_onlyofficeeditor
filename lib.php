@@ -378,7 +378,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     if (!empty($modconfig->documentserversecret)) {
         $token = substr(getallheaders()['Authorization'], strlen('Bearer '));
         try {
-            $decodedHeader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+            $decodedheader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
         } catch (\UnexpectedValueException $e) {
             return false;
         }

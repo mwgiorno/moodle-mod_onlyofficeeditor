@@ -80,9 +80,9 @@ if (!empty($modconfig->documentserversecret)) {
     } else {
         $token = substr(getallheaders()['Authorization'], strlen('Bearer '));
         try {
-            $decodedHeader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+            $decodedheader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
 
-            $payload = $decodedHeader->payload;
+            $payload = $decodedheader->payload;
         } catch (\UnexpectedValueException $e) {
             $response['status'] = 'error';
             $response['error'] = '403 Access denied';
