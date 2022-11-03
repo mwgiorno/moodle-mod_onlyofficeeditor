@@ -41,7 +41,9 @@ Once the plugin is installed, the plugin settings page will be opened. Alternati
 
 Enter the name of the server with ONLYOFFICE Document Server installed in the **Document Editing Service address** field.
 
-Enter the **Document Server Secret** to enable JWT protection of your documents from unauthorized access (further information can be found [here](https://api.onlyoffice.com/editors/signature/)).
+Starting from version 7.2, JWT is enabled by default and the secret key is generated automatically to restrict the access to ONLYOFFICE Docs and for security reasons and data integrity. 
+Specify your own **Document Server Secret** on the Moodle **Settings** page. 
+In the ONLYOFFICE Docs [config file](https://api.onlyoffice.com/editors/signature/), specify the same secret key and enable the validation.
 
 ## Using Moodle ONLYOFFICE Integration plugin
 
