@@ -49,6 +49,7 @@ $string['documentserverurl'] = 'Adresse du service d\'édition de documents';
 $string['documentserverurl_desc'] = 'L\'adresse du service d\'édition de documents spécifie l\'adresse du serveur sur lequel sont installés les services de documents. Veuillez remplacer \'https://documentserver.url\' ci-dessus par l\'adresse correcte du serveur.';
 $string['documentserversecret'] = 'Secret de Document Server';
 $string['documentserversecret_desc'] = 'Le secret est utilisé pour générer le jeton (une signature cryptée) dans le navigateur pour l\'ouverture de l\'éditeur de documents et l\'appel des méthodes et des demandes au service de commande de documents et au service de conversion de documents. Le jeton empêche la substitution de paramètres importants dans les requêtes du Document Server de ONLYOFFICE.';
+$string['jwtheader'] = 'En-tête d\'autorisation';
 
 $string['selectfile'] = 'Sélectionnez un fichier existant ou créez-en un nouveau en cliquant sur l\'une des icônes';
 $string['documentpermissions'] = 'Autorisations du document';
