@@ -29,11 +29,14 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
+    $defaultjwtheader = 'Authorization';
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
         get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
         $defaulthost));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
+    $settings->add(new admin_setting_configtext('onlyofficeeditor/jwtheader',
+        get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
         get_string('forcesave', 'onlyofficeeditor'), '', 0));
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',

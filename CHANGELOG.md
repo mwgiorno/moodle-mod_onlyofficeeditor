@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- the ability to change the JWT header
+
 ## 2.2.0
 ## Added
 - add protect option for editor
