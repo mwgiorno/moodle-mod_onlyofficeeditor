@@ -1,5 +1,8 @@
 # Change Log
 
+## Added
+- the ability to change the JWT header
+
 ## 3.0.0
 ## Changed
 - redesign to moodle 4.*

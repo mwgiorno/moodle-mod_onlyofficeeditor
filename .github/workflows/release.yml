@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Get Info
         run: |
-          echo "::set-output name=version::$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md)"
+          echo "version=$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1)" >> $GITHUB_OUTPUT
         id: info
       - name: Generate Changelog
         run: |
@@ -21,30 +21,20 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          rsync -av --exclude='moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          cd ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mkdir -p ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          rsync -av --exclude='moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          cd ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
           rm -rf ./.github/
           rm -rf ./.git/
+          rm -rf .gitmodules
+          cd ./newdocs
+          rm -rf .git
       - name: Zip Artifact
-        run: zip -r moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}/
+        run: zip -r moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}.zip moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}/
       - name: Create Release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         id: create_release
         with:
-          draft: false
-          prerelease: false
-          release_name: v${{ steps.info.outputs.version }}
-          tag_name: v${{ steps.info.outputs.version }}
-          body_path: ./RELEASE.md
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-      - name: Upload Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip
-          asset_name: moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}.zip
-          asset_content_type: application/zip
+          artifacts: "moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}.zip"
+          bodyFile: RELEASE.md
+          tag: v${{ steps.info.outputs.version }}

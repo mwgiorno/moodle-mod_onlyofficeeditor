@@ -25,7 +25,7 @@
  * Moodle is performing actions across all modules.
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -372,6 +372,17 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     list($hash, $error) = $crypt->read_hash($doc);
     if ($error || ($hash == null)) {
         return false;
+    }
+
+    $modconfig = get_config('onlyofficeeditor');
+    if (!empty($modconfig->documentserversecret)) {
+        $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
+        $token = substr(getallheaders()[$jwtheader], strlen('Bearer '));
+        try {
+            $decodedheader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+        } catch (\UnexpectedValueException $e) {
+            return false;
+        }
     }
 
     $fs = get_file_storage();
