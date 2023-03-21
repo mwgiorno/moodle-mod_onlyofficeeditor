@@ -138,7 +138,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
      */
     public function validation($data, $files) {
-        global $USER, $CFG;
+        global $USER;
 
         $errors = parent::validation($data, $files);
 
@@ -147,7 +147,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
             $fileformat = $data['onlyofficetemplateformat'];
             if ($fileformat != null && $fileformat != 'Upload file') {
-                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot,
+                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id,
                     $data['file'], $data['name']);
             } else {
                 $errors['file'] = get_string('required');

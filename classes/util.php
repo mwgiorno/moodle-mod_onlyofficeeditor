@@ -198,13 +198,12 @@ class util {
      * @param string $fileformat new file format.
      * @param object $user user.
      * @param int $contextid context id.
-     * @param string $dirroot moodle dir root.
      * @param int $fileid new file id.
      * @param string $name name of the new file.
      * @throws \file_exception
      * @throws \stored_file_creation_exception
      */
-    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $dirroot, $fileid, $name) {
+    public static function create_from_onlyoffice_template($fileformat, $user, $contextid, $fileid, $name) {
         switch ($fileformat) {
             case 'Document': {
                 $fileformat = 'docx';
@@ -223,12 +222,8 @@ class util {
                 break;
             }
         }
-        $pathlocale = self::PATH_LOCALE[$user->lang];
-        if ($pathlocale === null) {
-            $pathlocale = "en-US";
-        }
 
-        $pathname = $dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $fileformat;
+        $pathname = self::get_template_path($fileformat, $user);
 
         $fileinfo = array(
             'author' => fullname($user),
@@ -242,6 +237,29 @@ class util {
 
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname($fileinfo, $pathname);
+    }
+
+    /**
+     * Generate new module for converted file;
+     *
+     * @param string $ext Template extension.
+     * @param object $user user
+     * @return string
+     */
+    public static function get_template_path($ext, $user = null) {
+        global $USER;
+        global $CFG;
+
+        if ($user === null) {
+            $user = $USER;
+        }
+
+        $pathlocale = self::PATH_LOCALE[$user->lang];
+        if ($pathlocale === null) {
+            $pathlocale = "en-US";
+        }
+
+        return $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $ext;
     }
 
     /**
