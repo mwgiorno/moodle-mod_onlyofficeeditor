@@ -379,7 +379,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
         $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
         $token = substr(getallheaders()[$jwtheader], strlen('Bearer '));
         try {
-            $decodedheader = \Firebase\JWT\JWT::decode($token, $modconfig->documentserversecret, array('HS256'));
+            $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
         } catch (\UnexpectedValueException $e) {
             return false;
         }
