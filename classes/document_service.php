@@ -65,11 +65,11 @@ class document_service {
             $params = [
                 'payload' => $conversionbody
             ];
-            $token = \Firebase\JWT\JWT::encode($params, $modconfig->documentserversecret);
+            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
             $curl->setHeader([$jwtheader . ': Bearer ' . $token]);
 
-            $token = \Firebase\JWT\JWT::encode($conversionbody, $modconfig->documentserversecret);
+            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($conversionbody, $modconfig->documentserversecret);
             $conversionbody['token'] = $token;
         }
 

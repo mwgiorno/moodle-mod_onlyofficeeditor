@@ -29,7 +29,7 @@ namespace mod_onlyofficeeditor;
 
 use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\document;
-use Firebase\JWT\JWT;
+use mod_onlyofficeeditor\jwt_wrapper;
 
 /**
  * Editor config class.
@@ -176,7 +176,7 @@ class editor {
 
         // Add token.
         if (!empty($this->modconfig->documentserversecret)) {
-            $token = JWT::encode($config, $this->modconfig->documentserversecret);
+            $token = jwt_wrapper::encode($config, $this->modconfig->documentserversecret);
             $config['token'] = $token;
         }
         return $config;
