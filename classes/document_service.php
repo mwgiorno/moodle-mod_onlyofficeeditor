@@ -74,7 +74,7 @@ class document_service {
         }
 
         $conversionbody = json_encode($conversionbody);
-        $conversionurl = $modconfig->documentserverurl . '/ConvertService.ashx';
+        $conversionurl = rtrim($modconfig->documentserverurl, "/") . '/ConvertService.ashx';
 
         $response = $curl->post($conversionurl, $conversionbody);
 
