@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = 'Abrir pantalla completa';
@@ -49,6 +49,7 @@ $string['documentserverurl'] = 'Dirección del Servicio de Edición de Documento
 $string['documentserverurl_desc'] = 'La Dirección del Servicio de Edición de Documentos especifica la dirección del servidor con los servicios de documentos instalados. Por favor, reemplace \'https://documentserver.url\' arriba con la dirección correcta del servidor';
 $string['documentserversecret'] = 'Secreto del Servidor de Documentos';
 $string['documentserversecret_desc'] = 'El secreto se utiliza para generar el token (una firma cifrada) en el navegador para que el editor de documentos abra y llame a los métodos y las solicitudes al servicio de comando de documentos y al servicio de conversión de documentos. El token bloquea la sustitución de parámetros importantes en las solicitudes del Servidor de Documentos de ONLYOFFICE.';
+$string['jwtheader'] = 'Encabezado de autenticación';
 
 $string['selectfile'] = 'Seleccione un archivo existente o cree uno nuevo haciendo clic en uno de los iconos';
 $string['documentpermissions'] = 'Permisos para los documentos';

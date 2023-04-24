@@ -25,9 +25,9 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          rsync -av --exclude='moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          cd ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mkdir -p ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          rsync -av --exclude='moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
+          cd ./moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
           rm -rf ./.github/
           rm -rf ./.git/
       - name: Checkout Moodle

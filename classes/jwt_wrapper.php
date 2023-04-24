@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Contains class mod_onlyofficeeditor\output\summary.
+ * Jwt wrapper.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
@@ -23,35 +23,34 @@
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-namespace mod_onlyofficeeditor\output;
 
-use renderable;
-use templatable;
-use renderer_base;
-use stdClass;
+namespace mod_onlyofficeeditor;
 
 /**
- * @todo Custom module instance display, similar to https://api.onlyoffice.com/editors/alfresco
- */
-
-/**
- * Class containing data form instance display.
+ * Jwt wrapper class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
  * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
- * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class summary implements renderable, templatable {
+class jwt_wrapper {
+
     /**
-     * export data for mustache template
-     * @param renderer_base $output
-     * @return stdClass
+     * Encrypting payload.
+     * @param array $payload payload to crypt.
+     * @param string $secret secret key.
      */
-    public function export_for_template(renderer_base $output) {
-        $data = new stdClass();
-        // Do some stuff.
-        return $data;
+    public static function encode($payload, $secret) {
+        return \Firebase\JWT\JWT::encode($payload, $secret, 'HS256');
+    }
+
+    /**
+     * Decrypting payload.
+     * @param array $token jwt string.
+     * @param string $secret secret key.
+     */
+    public static function decode($token, $secret) {
+        return \Firebase\JWT\JWT::decode($token, new \Firebase\JWT\Key($secret, 'HS256'));
     }
 }

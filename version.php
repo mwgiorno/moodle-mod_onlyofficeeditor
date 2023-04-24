@@ -18,7 +18,7 @@
  * Defines the version and other meta-info about the plugin
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,8 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_onlyofficeeditor';
-$plugin->version = 2022081100;
-$plugin->release = 'v3.0.0';
+$plugin->version = 2023042401;
+$plugin->release = 'v4.1.0';
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = array();

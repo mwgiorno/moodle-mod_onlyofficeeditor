@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = '全画面表示で開く';
@@ -49,6 +49,7 @@ $string['documentserverurl'] = '文書編集サービスのアドレス';
 $string['documentserverurl_desc'] = '文書編集サービスアドレスは、文書サービスがインストールされているサーバーのアドレ スを指定します。上の \'https://documentserver.url\' を正しいサーバーアドレスに置き換えてください。';
 $string['documentserversecret'] = 'ドキュメントサーバーのシクレット';
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
+$string['jwtheader'] = '認証ヘッダー';
 
 $string['selectfile'] = 'アイコンをクリックして、既存のファイルを選択するか、新規ファイルを作成します。';
 $string['documentpermissions'] = 'ドキュメントの権限';

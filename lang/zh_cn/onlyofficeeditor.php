@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = '打开全屏';
@@ -49,6 +49,7 @@ $string['documentserverurl'] = '文档编辑的服务地址';
 $string['documentserverurl_desc'] = '文档编辑服务地址指定了带有文档服务的服务器地址。请用正确的服务器地址替换上面的 \'https://documentserver.url\'';
 $string['documentserversecret'] = '文件服务器秘密';
 $string['documentserversecret_desc'] = '该秘密在浏览器中生成令牌（加密签名），用于文档编辑器的打开和调用对文档命令服务和文档转换服务的方法和请求。该令牌可以防止ONLYOFFICE文档服务器请求中的重要参数替换。';
+$string['jwtheader'] = '授权标头';
 
 $string['selectfile'] = '选择现有文件或通过点击其中一个图标创建新文件';
 $string['documentpermissions'] = '文件权限';

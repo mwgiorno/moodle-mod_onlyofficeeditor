@@ -21,7 +21,7 @@
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,7 +38,7 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -138,7 +138,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
      */
     public function validation($data, $files) {
-        global $USER, $CFG;
+        global $USER;
 
         $errors = parent::validation($data, $files);
 
@@ -147,7 +147,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
         if (!$files = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['file'], 'sortorder, id', false)) {
             $fileformat = $data['onlyofficetemplateformat'];
             if ($fileformat != null && $fileformat != 'Upload file') {
-                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id, $CFG->dirroot,
+                util::create_from_onlyoffice_template($fileformat, $USER, $this->context->id,
                     $data['file'], $data['name']);
             } else {
                 $errors['file'] = get_string('required');

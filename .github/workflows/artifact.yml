@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, reopened]
-    branches: [main, master]
+    branches: [master]
 
 jobs:
   artifact:
@@ -49,5 +49,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          name: moodle-mod_onlyofficeeditor-v${{ steps.info.outputs.version }}
           path: deploy

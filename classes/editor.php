@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,14 +29,14 @@ namespace mod_onlyofficeeditor;
 
 use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\document;
-use Firebase\JWT\JWT;
+use mod_onlyofficeeditor\jwt_wrapper;
 
 /**
  * Editor config class.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -176,7 +176,7 @@ class editor {
 
         // Add token.
         if (!empty($this->modconfig->documentserversecret)) {
-            $token = JWT::encode($config, $this->modconfig->documentserversecret, 'HS256');
+            $token = jwt_wrapper::encode($config, $this->modconfig->documentserversecret);
             $config['token'] = $token;
         }
         return $config;

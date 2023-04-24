@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = 'Открыть в полноэкранном режиме';
@@ -49,6 +49,7 @@ $string['documentserverurl'] = 'Адрес службы редактирован
 $string['documentserverurl_desc'] = 'Адрес службы редактирования документов определяет адрес сервера с установленными сервисами документов. Пожалуйста, измените \'https://documentserver.url\' выше на верный адрес сервера';
 $string['documentserversecret'] = 'Секретный ключ Сервера документов';
 $string['documentserversecret_desc'] = 'Секретный ключ используется для генерирования токена (шифрованной подписи) в браузере, чтобы открыть редактор документов и вызвать методы и запросы к сервису управления документами и сервису преобразования документов. Токен предотвращает замену важных параметров в запросах от Сервера документов ONLYOFFICE.';
+$string['jwtheader'] = 'Заголовок авторизации';
 
 $string['selectfile'] = 'Выберите существующий файл или создайте новый нажатием на одну из иконок';
 $string['documentpermissions'] = 'Разрешения на действия с документом';

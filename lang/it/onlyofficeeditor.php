@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = 'Apri la modalità schermo intero';
@@ -49,6 +49,7 @@ $string['documentserverurl'] = 'Indirizzo del servizio di modifica documenti';
 $string['documentserverurl_desc'] = 'Indirizzo del servizio di modifica documenti specifica l\'indirizzo del server con i servizi documenti installati. Sostituisci \'https://documentserver.url\' sopra con l\'indirizzo corretto del server';
 $string['documentserversecret'] = 'Chiave di Document Server';
 $string['documentserversecret_desc'] = 'Chiave segreta viene utilizzata per generare il token (una firma crittografata) nel browser per aprire l\'editor di documenti e chiamare i metodi e le richieste al servizio di comando documenti e al servizio di conversione documenti. Il token impedisce la sostituzione di parametri importanti nelle richieste di ONLYOFFICE Document Server.';
+$string['jwtheader'] = 'Intestazione di autorizzazione';
 
 $string['selectfile'] = 'Seleziona il file esistente o creane uno nuovo cliccando una delle icone';
 $string['documentpermissions'] = 'Autorizzazioni per documenti';

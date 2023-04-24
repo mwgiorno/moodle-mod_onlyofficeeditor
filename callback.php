@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2022 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -65,6 +65,36 @@ $data = json_decode($request, true);
 
 if ($data === null) {
     die(json_encode($response));
+}
+
+$modconfig = get_config('onlyofficeeditor');
+if (!empty($modconfig->documentserversecret)) {
+    if (!empty($data['token'])) {
+        try {
+            $payload = \mod_onlyofficeeditor\jwt_wrapper::decode($data['token'], $modconfig->documentserversecret);
+        } catch (\UnexpectedValueException $e) {
+            $response['status'] = 'error';
+            $response['error'] = '403 Access denied';
+            die(json_encode($response));
+        }
+    } else {
+        $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
+        $token = substr(getallheaders()[$jwtheader], strlen('Bearer '));
+        try {
+            $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
+
+            $payload = $decodedheader->payload;
+        } catch (\UnexpectedValueException $e) {
+            $response['status'] = 'error';
+            $response['error'] = '403 Access denied';
+            die(json_encode($response));
+        }
+    }
+
+    $data['users'] = isset($payload->users) ? $payload->users : null;
+    $data['url'] = isset($payload->url) ? $payload->url : null;
+    $data['status'] = $payload->status;
+    $data['key'] = $payload->key;
 }
 
 if (isset($data['status'])) {

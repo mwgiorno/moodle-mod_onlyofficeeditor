@@ -2,13 +2,13 @@ name: Moodle Plugin CI
 
 on: 
   push:
-    branches: [master,develop]
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -37,7 +37,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: plugin
 
