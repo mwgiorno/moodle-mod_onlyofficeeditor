@@ -37,11 +37,11 @@ if (!util::desktop_detect()) {
 $domain = "'" . $CFG->wwwroot . "'";
 $displayname = "'" . \fullname($USER) . "'";
 $provider = "'Moodle'";
-$redirectUrl = "'" . $CFG->wwwroot . "'";
+$redirecturl = "'" . $CFG->wwwroot . "'";
 
 $js = <<< JAVASCRIPT
     if (!window['AscDesktopEditor']) {
-        location.href = $redirectUrl;
+        location.href = $redirecturl;
     }
 
     var data = {
@@ -52,7 +52,7 @@ $js = <<< JAVASCRIPT
 
     window.AscDesktopEditor.execCommand('portal:login', JSON.stringify(data));
 
-    location.href = $redirectUrl;
+    location.href = $redirecturl;
 JAVASCRIPT;
 
 echo html_writer::script($js);

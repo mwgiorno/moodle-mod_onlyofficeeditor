@@ -426,14 +426,14 @@ class util {
 
     /**
      * Detect desktop user agent.
-     * 
+     *
      * @return bool - user agent.
      */
     public static function desktop_detect() {
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
 
-        if (preg_match('/' . self::DESKTOP_USER_AGENT . '/', $userAgent)) {
-          return true;
+        if (preg_match('/' . self::DESKTOP_USER_AGENT . '/', $useragent)) {
+            return true;
         }
 
         return false;
