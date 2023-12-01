@@ -1,5 +1,9 @@
 # Change Log
 
+##
+## Added
+- desktop mode
+
 ## 4.0.0
 ## Added
 - support Moodle AssignSubmission ONLYOFFICE Integration plugin
