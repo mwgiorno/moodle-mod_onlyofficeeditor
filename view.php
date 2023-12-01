@@ -61,9 +61,11 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($cm->name);
 echo html_writer::start_div('', array('class' => 'onlyofficeeditor-container')); // Start onlyofficeeditor-container.
 $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
+$connectioninfo = \mod_onlyofficeeditor\util::get_connection_info($documentserverurl);
+$httpcode = $connectioninfo['http_code'] ?? null;
 if (!isset($documentserverurl) ||
         empty($documentserverurl) ||
-        \mod_onlyofficeeditor\util::get_connection_info($documentserverurl)['http_code'] != 200) {
+        $httpcode != 200) {
     echo $OUTPUT->notification(get_string('docserverunreachable', 'onlyofficeeditor'), 'error');
 } else {
     echo html_writer::div('', '', array('id' => 'onlyofficeeditor-editor'));

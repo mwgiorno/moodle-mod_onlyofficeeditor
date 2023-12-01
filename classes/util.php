@@ -89,6 +89,9 @@ class util {
         "vi" => "vi-VN",
         "zh_cn" => "zh-CN"];
 
+    /** Desktop user agent string */
+    const DESKTOP_USER_AGENT = 'AscDesktopEditor';
+
     /**
      * Get plugin key.
      *
@@ -421,4 +424,18 @@ class util {
         return $mentionedusers;
     }
 
+    /**
+     * Detect desktop user agent.
+     *
+     * @return bool - user agent.
+     */
+    public static function desktop_detect() {
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (preg_match('/' . self::DESKTOP_USER_AGENT . '/', $useragent)) {
+            return true;
+        }
+
+        return false;
+    }
 }

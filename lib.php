@@ -398,3 +398,14 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     }
     return false;
 }
+
+/* Event handlers */
+
+/**
+ * Login handler
+ */
+function onlyofficeeditor_login_handler() {
+    if (util::desktop_detect()) {
+        redirect($CFG->wwwroot . "/mod/onlyofficeeditor/desktop.php");
+    }
+}
