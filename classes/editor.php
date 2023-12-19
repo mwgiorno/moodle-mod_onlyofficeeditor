@@ -159,6 +159,7 @@ class editor {
         $customization['toolbarNoTabs'] = $this->modconfig->editor_view_toolbar == 1;
         $customization['commentAuthorOnly'] = true;
         $customization['plugins'] = $this->modconfig->editor_security_plugin == 1;
+        $customization['macros'] = $this->modconfig->editor_security_macros == 1;
         $editorconfig['customization'] = $customization;
 
         // Device type.
