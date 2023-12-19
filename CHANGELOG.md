@@ -3,6 +3,7 @@
 ##
 ## Added
 - desktop mode
+- disable plugins setting
 
 ## 4.0.0
 ## Added
