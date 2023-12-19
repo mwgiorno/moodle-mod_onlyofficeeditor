@@ -80,6 +80,7 @@ $string['editor_view_feedback'] = 'Feedback-& Support-Taste anzeigen';
 $string['editor_view_toolbar'] = 'Monochromen Kopfbereich der Symbolleiste anzeigen';
 $string['editor_security'] = 'Sicherheit';
 $string['editor_security_plugin'] = 'Arbeit mit Plugins aktivieren';
+$string['editor_security_macros'] = 'Makros im Dokument ausführen';
 
 $string['oldversion'] = ' Für Online-Arbeit mit Formularen ist Version 7.0 von ONLYOFFICE Docs erforderlich';
 $string['saveaserror'] = 'Ein Fehler ist aufgetreten.';

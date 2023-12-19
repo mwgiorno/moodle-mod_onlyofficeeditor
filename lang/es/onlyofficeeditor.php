@@ -80,6 +80,7 @@ $string['editor_view_feedback'] = 'Mostrar el botón de Feedback y Soporte';
 $string['editor_view_toolbar'] = 'Mostrar el encabezado monocromático de la barra de herramientas';
 $string['editor_security'] = 'Seguridad';
 $string['editor_security_plugin'] = 'Habilitar plugins';
+$string['editor_security_macros'] = 'Ejecutar macros de documentos';
 
 $string['oldversion'] = 'Por favor, actualice ONLYOFFICE Docs a la versión 7.0 para poder trabajar con formularios rellenables en línea';
 $string['saveaserror'] = 'Se ha producido un error.';

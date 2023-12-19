@@ -80,6 +80,7 @@ $string['editor_view_feedback'] = 'Visualizza il pulsante del menu Feedback e Su
 $string['editor_view_toolbar'] = 'Visualizza intestazione della barra degli strumenti monocromatica';
 $string['editor_security'] = 'Sicurezza';
 $string['editor_security_plugin'] = 'Abilitare plugin';
+$string['editor_security_macros'] = 'Esegui le macro del documento';
 
 $string['oldversion'] = 'Si prega di aggiornare ONLYOFFICE Docs alla versione 7.0 per lavorare su moduli compilabili online';
 $string['saveaserror'] = 'Qualcosa è andato storto.';
