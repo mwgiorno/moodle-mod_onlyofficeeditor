@@ -78,6 +78,8 @@ $string['editor_view_help'] = 'Visualizza il pulsante del menu Guida';
 $string['editor_view_header'] = 'Visualizza l\'intestazione più compatta';
 $string['editor_view_feedback'] = 'Visualizza il pulsante del menu Feedback e Supporto';
 $string['editor_view_toolbar'] = 'Visualizza intestazione della barra degli strumenti monocromatica';
+$string['editor_security'] = 'Sicurezza';
+$string['editor_security_plugin'] = 'Abilitare plugin';
 
 $string['oldversion'] = 'Si prega di aggiornare ONLYOFFICE Docs alla versione 7.0 per lavorare su moduli compilabili online';
 $string['saveaserror'] = 'Qualcosa è andato storto.';

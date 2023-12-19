@@ -78,6 +78,8 @@ $string['editor_view_help'] = 'Отображать кнопку справки'
 $string['editor_view_header'] = 'Отображать заголовок компактным';
 $string['editor_view_feedback'] = 'Отображать кнопку Обратной связи и поддержки';
 $string['editor_view_toolbar'] = 'Отображать монохромный заголовок панели инструментов';
+$string['editor_security'] = 'Безопасность';
+$string['editor_security_plugin'] = 'Включить работу с плагинами';
 
 $string['oldversion'] = 'Обновите сервер ONLYOFFICE Docs до версии 7.0 для работы с формами онлайн';
 $string['saveaserror'] = 'Что-то пошло не так.';

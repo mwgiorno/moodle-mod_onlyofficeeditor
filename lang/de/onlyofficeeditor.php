@@ -78,6 +78,8 @@ $string['editor_view_help'] = 'Hilfetaste anzeigen';
 $string['editor_view_header'] = 'Kompakte Kopfzeile anzeigen';
 $string['editor_view_feedback'] = 'Feedback-& Support-Taste anzeigen';
 $string['editor_view_toolbar'] = 'Monochromen Kopfbereich der Symbolleiste anzeigen';
+$string['editor_security'] = 'Sicherheit';
+$string['editor_security_plugin'] = 'Arbeit mit Plugins aktivieren';
 
 $string['oldversion'] = ' Für Online-Arbeit mit Formularen ist Version 7.0 von ONLYOFFICE Docs erforderlich';
 $string['saveaserror'] = 'Ein Fehler ist aufgetreten.';

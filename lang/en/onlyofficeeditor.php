@@ -79,6 +79,8 @@ $string['editor_view_help'] = 'Display Help menu button';
 $string['editor_view_header'] = 'Display the header more compact';
 $string['editor_view_feedback'] = 'Display Feedback & Support menu button';
 $string['editor_view_toolbar'] = 'Display monochrome toolbar header';
+$string['editor_security'] = 'Security';
+$string['editor_security_plugin'] = 'Enable plugins';
 
 $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
 $string['saveaserror'] = 'Something went wrong.';
