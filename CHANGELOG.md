@@ -3,6 +3,8 @@
 ##
 ## Added
 - desktop mode
+- disable plugins setting
+- macro launch setting
 
 ## 4.0.0
 ## Added

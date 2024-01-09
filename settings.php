@@ -51,5 +51,10 @@ if ($ADMIN->fulltree) {
         get_string('editor_view_feedback', 'onlyofficeeditor'), '', 1));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_toolbar',
         get_string('editor_view_toolbar', 'onlyofficeeditor'), '', 0));
-
+    $settings->add(new admin_setting_heading('onlyofficeeditor/editor_security',
+        get_string('editor_security', 'onlyofficeeditor'), ''));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_plugin',
+        get_string('editor_security_plugin', 'onlyofficeeditor'), '', 1));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_security_macros',
+        get_string('editor_security_macros', 'onlyofficeeditor'), '', 1));
 }
