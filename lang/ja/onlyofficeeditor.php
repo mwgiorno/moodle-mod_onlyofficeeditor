@@ -78,6 +78,9 @@ $string['editor_view_help'] = '「ヘルプメニュー」ボタンを表示す�
 $string['editor_view_header'] = 'ヘッダーをよりコンパクトに表示する';
 $string['editor_view_feedback'] = 'フィードバックと「サポートメニュー」ボタンを表示する';
 $string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示する';
+$string['editor_security'] = 'セキュリティ';
+$string['editor_security_plugin'] = 'プラグインを有効にする';
+$string['editor_security_macros'] = 'ドキュメントマクロを実行する';
 
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['saveaserror'] = 'エラーが発生しました';
