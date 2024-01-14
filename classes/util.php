@@ -84,6 +84,7 @@ class util {
         "ru" => "ru-RU",
         "sk" => "sk-SK",
         "sv" => "sv-SE",
+        "si" => "si-LK",
         "tr" => "tr-TR",
         "uk" => "uk-UA",
         "vi" => "vi-VN",
