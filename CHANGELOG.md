@@ -5,6 +5,7 @@
 - desktop mode
 - disable plugins setting
 - macro launch setting
+- si-LK empty file template
 
 ## 4.1.0
 ## Added

@@ -28,9 +28,13 @@
  */
 function xmldb_onlyofficeeditor_uninstall() {
     $coretypes = core_filetypes::get_types();
-    if ($coretypes["docxf"] !== null && $coretypes["oform"] !== null) {
+
+    if (array_key_exists("docxf", $coretypes)) {
         core_filetypes::delete_type("docxf");
+    }
+    if (array_key_exists("oform", $coretypes)) {
         core_filetypes::delete_type("oform");
     }
+
     return true;
 }
