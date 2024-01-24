@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 4.3.0
 ## Added
 - desktop mode
 - disable plugins setting
