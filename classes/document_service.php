@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use curl;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class document_service {
@@ -88,5 +88,57 @@ class document_service {
         }
 
         return '';
+    }
+
+    /**
+     * Command request.
+     * @param string $method command method.
+     * @return array command result
+     */
+    public static function command($method) {
+        $modconfig = get_config('onlyofficeeditor');
+
+        $curl = new curl();
+        $curl->setHeader(['Content-type: application/json']);
+        $curl->setHeader(['Accept: application/json']);
+
+        $commandbody = [
+            'c' => $method
+        ];
+
+        if (!empty($modconfig->documentserversecret)) {
+            $params = [
+                'payload' => $commandbody
+            ];
+            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
+            $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
+            $curl->setHeader([$jwtheader . ': Bearer ' . $token]);
+
+            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($conversionbody, $modconfig->documentserversecret);
+            $commandbody['token'] = $token;
+        }
+
+        $commandbody = json_encode($commandbody);
+        $commandurl = rtrim($modconfig->documentserverurl, "/") . '/coauthoring/CommandService.ashx';
+
+        $response = $curl->post($commandurl, $commandbody);
+
+        $commandjson = json_decode($response);
+
+        return $commandjson;
+    }
+
+    /**
+     * Get document server version
+     * @return string document server version
+     */
+    public static function get_version() {
+        $result = self::command('version');
+
+        if (isset($result->error) && $result->error > 0) {
+            return '';
+        }
+
+        return $result->version;
     }
 }

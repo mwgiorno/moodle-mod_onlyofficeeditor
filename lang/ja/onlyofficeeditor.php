@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = '全画面表示で開く';

@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ require_once("$CFG->dirroot/course/modlib.php");
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright   based on work by 2018 Olumuyiwa <muyi.taiwo@logicexpertise.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -63,32 +63,12 @@ class util {
 
     /** Path locales to create file from ONLYOFFICE template. */
     const PATH_LOCALE = [
-        "az" => "az-Latn-AZ",
-        "bg" => "bg-BG",
-        "cs" => "cs-CZ",
-        "de" => "de-DE",
-        "el" => "el-GR",
+        "en_us" => "en",
         "en" => "en-GB",
-        "en_us" => "en-US",
-        "es" => "es-ES",
-        "fr" => "fr-FR",
-        "gl" => "gl-ES",
-        "it" => "it-IT",
-        "ja" => "ja-JP",
-        "ko" => "ko-KR",
-        "lv" => "lv-LV",
-        "nl" => "nl-NL",
-        "pl" => "pl-PL",
         "pt_br" => "pt-BR",
-        "pt" => "pt-PT",
-        "ru" => "ru-RU",
-        "sk" => "sk-SK",
-        "sv" => "sv-SE",
-        "si" => "si-LK",
-        "tr" => "tr-TR",
-        "uk" => "uk-UA",
-        "vi" => "vi-VN",
-        "zh_cn" => "zh-CN"];
+        "sr_lt" => "sr",
+        "zh_cn" => "zh"
+    ];
 
     /** Desktop user agent string */
     const DESKTOP_USER_AGENT = 'AscDesktopEditor';
@@ -258,12 +238,18 @@ class util {
             $user = $USER;
         }
 
-        $pathlocale = self::PATH_LOCALE[$user->lang];
-        if ($pathlocale === null) {
-            $pathlocale = "en-US";
+        $langcode = $user->lang;
+
+        $pathlocale = self::PATH_LOCALE[$langcode];
+        if (isset($pathlocale)) {
+            $langcode = $pathlocale;
         }
 
-        return $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $pathlocale . '/new.' . $ext;
+        if (!file_exists($CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $langcode . '/new.' . $ext)) {
+            $langcode = "en";
+        }
+
+        return $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $langcode . '/new.' . $ext;
     }
 
     /**

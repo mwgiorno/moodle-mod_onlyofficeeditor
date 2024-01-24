@@ -5,7 +5,8 @@
 - desktop mode
 - disable plugins setting
 - macro launch setting
-- si-LK empty file template
+- si-LK, ar-SA and sr-Latn-RS empty file template
+- service for checking editor versions
 
 ## 4.1.0
 ## Added
