@@ -28,16 +28,18 @@ use mod_onlyofficeeditor\util;
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 
-global $CFG, $USER;
+global $CFG, $USER, $SESSION;
 
-if (!util::desktop_detect()) {
-    redirect($CFG->wwwroot);
-}
+$wantsurl = !empty($SESSION->wantsurl) ? $SESSION->wantsurl : $CFG->wwwroot;
 
 $domain = "'" . $CFG->wwwroot . "'";
 $displayname = "'" . \fullname($USER) . "'";
 $provider = "'Moodle'";
-$redirecturl = "'" . $CFG->wwwroot . "'";
+$redirecturl = "'" . $wantsurl . "'";
+
+if (!util::desktop_detect()) {
+    redirect($wantsurl);
+}
 
 $js = <<< JAVASCRIPT
     if (!window['AscDesktopEditor']) {
