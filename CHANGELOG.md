@@ -6,6 +6,7 @@
 - disable plugins setting
 - macro launch setting
 - si-LK, ar-SA and sr-Latn-RS empty file template
+- service for checking editor versions
 
 ## 4.0.0
 ## Added
