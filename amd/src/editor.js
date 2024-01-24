@@ -15,7 +15,7 @@
 
 /**
  * @module mod_onlyofficeeditor/editor
- * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2024 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
