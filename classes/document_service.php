@@ -114,7 +114,7 @@ class document_service {
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
             $curl->setHeader([$jwtheader . ': Bearer ' . $token]);
 
-            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($conversionbody, $modconfig->documentserversecret);
+            $token = \mod_onlyofficeeditor\jwt_wrapper::encode($commandbody, $modconfig->documentserversecret);
             $commandbody['token'] = $token;
         }
 
