@@ -91,7 +91,7 @@ class onlyoffice_file_utility {
      * @return string[] Editable extensions.
      */
     public static function get_editable_extensions() {
-        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform');
+        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform', '.pdf');
     }
 
 }

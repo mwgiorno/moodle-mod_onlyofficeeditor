@@ -82,7 +82,7 @@ class document {
 
         $permissions['edit'] = $canedit;
         $permissions['review'] = $canedit;
-        $permissions['fillForms'] = $canedit && $extension === '.oform';
+        $permissions['fillForms'] = $canedit && ($extension === '.oform' || $extension === '.pdf');
 
         return $permissions;
     }
