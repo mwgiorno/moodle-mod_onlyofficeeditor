@@ -1,6 +1,6 @@
 # Change Log
 
-## 4.3.0
+## 4.4.0
 ## Changed
 - fixed saveas dialog
 - support moodle v4.3
