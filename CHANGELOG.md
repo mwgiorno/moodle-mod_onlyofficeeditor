@@ -3,6 +3,7 @@
 ## 4.3.0
 ## Changed
 - fixed saveas dialog
+- support moodle v4.3
 
 ## Added
 - desktop mode
