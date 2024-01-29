@@ -18,7 +18,7 @@
  * Load document into ONLYOFFICE editor
  *
  * @package    mod_onlyofficeeditor
- * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2024 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -61,9 +61,11 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($cm->name);
 echo html_writer::start_div('', array('class' => 'onlyofficeeditor-container')); // Start onlyofficeeditor-container.
 $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
+$connectioninfo = \mod_onlyofficeeditor\util::get_connection_info($documentserverurl);
+$httpcode = $connectioninfo['http_code'] ?? null;
 if (!isset($documentserverurl) ||
         empty($documentserverurl) ||
-        \mod_onlyofficeeditor\util::get_connection_info($documentserverurl)['http_code'] != 200) {
+        $httpcode != 200) {
     echo $OUTPUT->notification(get_string('docserverunreachable', 'onlyofficeeditor'), 'error');
 } else {
     echo html_writer::div('', '', array('id' => 'onlyofficeeditor-editor'));

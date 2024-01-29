@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = 'Открыть в полноэкранном режиме';
@@ -78,6 +78,9 @@ $string['editor_view_help'] = 'Отображать кнопку справки'
 $string['editor_view_header'] = 'Отображать заголовок компактным';
 $string['editor_view_feedback'] = 'Отображать кнопку Обратной связи и поддержки';
 $string['editor_view_toolbar'] = 'Отображать монохромный заголовок панели инструментов';
+$string['editor_security'] = 'Безопасность';
+$string['editor_security_plugin'] = 'Включить работу с плагинами';
+$string['editor_security_macros'] = 'Запускать макросы документа';
 
 $string['oldversion'] = 'Обновите сервер ONLYOFFICE Docs до версии 7.0 для работы с формами онлайн';
 $string['saveaserror'] = 'Что-то пошло не так.';

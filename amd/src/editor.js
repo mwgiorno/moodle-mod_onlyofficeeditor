@@ -15,7 +15,7 @@
 
 /**
  * @module mod_onlyofficeeditor/editor
- * @copyright  2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright  2024 Ascensio System SIA <integration@onlyoffice.com>
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
@@ -116,24 +116,10 @@ define(['jquery'], function($) {
         return link;
     };
 
-    var saveAsModal = null;
-
     var displaySaveAsModal = function(saveAsData, cmid, courseid) {
-        require(['jquery', 'core/templates', 'core/modal_factory', 'mod_onlyofficeeditor/modal_saveas'],
-            function($, Templates, ModalFactory, ModalSaveas) {
-                var trigger = $('.onlyofficeeditor-container');
-                if (saveAsModal === null) {
-                    saveAsModal = ModalFactory.create({
-                        type: ModalSaveas.TYPE
-                    }, trigger);
-                }
-                saveAsModal.done((modal) => {
-                    modal.courseid = courseid;
-                    modal.CMID = cmid;
-                    modal.saveAsData = saveAsData;
-                    modal.renderSections(modal.getBody(), cmid, courseid);
-                    modal.show();
-                });
+        require(['mod_onlyofficeeditor/modal_saveas'],
+            function(ModalSaveas) {
+                ModalSaveas.build(cmid, courseid, saveAsData);
             });
     };
 

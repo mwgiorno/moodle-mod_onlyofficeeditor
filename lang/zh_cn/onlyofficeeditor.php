@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = '打开全屏';
@@ -78,6 +78,9 @@ $string['editor_view_help'] = '显示帮助菜单按钮';
 $string['editor_view_header'] = '更紧致地显示菜单栏';
 $string['editor_view_feedback'] = '显示反馈及支持菜单按钮';
 $string['editor_view_toolbar'] = '显示单色工具栏标题';
+$string['editor_security'] = '安全';
+$string['editor_security_plugin'] = '启用插件';
+$string['editor_security_macros'] = '运行文档宏';
 
 $string['oldversion'] = '请将ONLYOFFICE Docs更新到7.0版本，以便在线编辑可填写的表单。';
 $string['saveaserror'] = '出了问题。';

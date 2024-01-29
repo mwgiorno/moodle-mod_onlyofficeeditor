@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = 'Vollbildmodus aktivieren';
@@ -78,6 +78,9 @@ $string['editor_view_help'] = 'Hilfetaste anzeigen';
 $string['editor_view_header'] = 'Kompakte Kopfzeile anzeigen';
 $string['editor_view_feedback'] = 'Feedback-& Support-Taste anzeigen';
 $string['editor_view_toolbar'] = 'Monochromen Kopfbereich der Symbolleiste anzeigen';
+$string['editor_security'] = 'Sicherheit';
+$string['editor_security_plugin'] = 'Arbeit mit Plugins aktivieren';
+$string['editor_security_macros'] = 'Makros im Dokument ausführen';
 
 $string['oldversion'] = ' Für Online-Arbeit mit Formularen ist Version 7.0 von ONLYOFFICE Docs erforderlich';
 $string['saveaserror'] = 'Ein Fehler ist aufgetreten.';

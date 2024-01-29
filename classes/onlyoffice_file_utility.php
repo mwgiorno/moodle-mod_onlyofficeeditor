@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +30,7 @@ namespace mod_onlyofficeeditor;
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license        http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class onlyoffice_file_utility {
@@ -91,7 +91,7 @@ class onlyoffice_file_utility {
      * @return string[] Editable extensions.
      */
     public static function get_editable_extensions() {
-        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform');
+        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform', '.pdf');
     }
 
 }

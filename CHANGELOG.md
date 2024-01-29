@@ -1,5 +1,17 @@
 # Change Log
 
+## 4.4.0
+## Changed
+- fixed saveas dialog
+- support moodle v4.3
+
+## Added
+- desktop mode
+- disable plugins setting
+- macro launch setting
+- si-LK, ar-SA and sr-Latn-RS empty file template
+- service for checking editor versions
+
 ## 4.1.0
 ## Added
 - support Moodle AssignSubmission ONLYOFFICE Integration plugin

@@ -19,7 +19,7 @@
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
- * @copyright   2023 Ascensio System SIA <integration@onlyoffice.com>
+ * @copyright   2024 Ascensio System SIA <integration@onlyoffice.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['editorenterfullscreen'] = '全画面表示で開く';
@@ -78,6 +78,9 @@ $string['editor_view_help'] = '「ヘルプメニュー」ボタンを表示す�
 $string['editor_view_header'] = 'ヘッダーをよりコンパクトに表示する';
 $string['editor_view_feedback'] = 'フィードバックと「サポートメニュー」ボタンを表示する';
 $string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示する';
+$string['editor_security'] = 'セキュリティ';
+$string['editor_security_plugin'] = 'プラグインを有効にする';
+$string['editor_security_macros'] = 'ドキュメントマクロを実行する';
 
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['saveaserror'] = 'エラーが発生しました';

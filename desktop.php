@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Inherits backup settings.
+ * Desktop handler.
  *
  * @package     mod_onlyofficeeditor
  * @subpackage
@@ -23,8 +23,38 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+use mod_onlyofficeeditor\util;
 
-// This activity has not particular settings but the inherited from the generic
-// backup_activity_task so here there isn't any class definition, like the ones
-// existing in /backup/moodle2/backup_settingslib.php (activities section).
+require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
+require_once(dirname(__FILE__).'/lib.php');
+
+global $CFG, $USER, $SESSION;
+
+$wantsurl = !empty($SESSION->wantsurl) ? $SESSION->wantsurl : $CFG->wwwroot;
+
+$domain = "'" . $CFG->wwwroot . "'";
+$displayname = "'" . \fullname($USER) . "'";
+$provider = "'Moodle'";
+$redirecturl = "'" . $wantsurl . "'";
+
+if (!util::desktop_detect()) {
+    redirect($wantsurl);
+}
+
+$js = <<< JAVASCRIPT
+    if (!window['AscDesktopEditor']) {
+        location.href = $redirecturl;
+    }
+
+    var data = {
+        displayName: $displayname,
+        domain: $domain,
+        provider: $provider,
+    };
+
+    window.AscDesktopEditor.execCommand('portal:login', JSON.stringify(data));
+
+    location.href = $redirecturl;
+JAVASCRIPT;
+
+echo html_writer::script($js);

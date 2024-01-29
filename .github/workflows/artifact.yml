@@ -23,9 +23,9 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git submodule update --init --recursive
-          mkdir -p ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          rsync -av --exclude='moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}' ./ ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
-          cd ./moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          mkdir -p ./onlyofficeeditor
+          rsync -av --exclude='onlyofficeeditor' ./ ./onlyofficeeditor
+          cd ./onlyofficeeditor
           rm -rf ./.github/
           rm -rf ./.git/
       - name: Checkout Moodle
@@ -35,7 +35,7 @@ jobs:
           path: ./moodle
       - name: Copy Plugin
         run: |
-          cp -r moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
+          cp -r onlyofficeeditor ./moodle/mod/onlyofficeeditor
       - name: Build Plugin
         run: |
           cd ./moodle
@@ -44,6 +44,7 @@ jobs:
       - name: Build Artifact
         run: |
           cd ${{ github.workspace }}
+          mv ./moodle/mod/onlyofficeeditor ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }}
           mkdir -p ./deploy
           cp -r ./moodle/mod/moodle-mod_onlyofficeeditor-${{ steps.info.outputs.version }} ./deploy
       - name: Upload Artifact
