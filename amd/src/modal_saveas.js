@@ -65,7 +65,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                     var sections = response.sections;
 
                     var body = Templates.render('mod_onlyofficeeditor/modal_saveas_sections_list', {sections: sections});
-                    var footer = Templates.render('mod_onlyofficeeditor/modal_saveas');
+                    var footer = Templates.render('mod_onlyofficeeditor/modal_saveas_footer');
 
                     self.modal.setBody(body);
                     self.modal.setFooter(footer);
