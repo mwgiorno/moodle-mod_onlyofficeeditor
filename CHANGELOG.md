@@ -1,6 +1,9 @@
 # Change Log
 
 ## 4.3.0
+## Changed
+- fixed saveas dialog
+
 ## Added
 - desktop mode
 - disable plugins setting
