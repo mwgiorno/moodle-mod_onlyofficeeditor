@@ -93,7 +93,7 @@ class mod_onlyofficeeditor_mod_form extends moodleform_mod {
             $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('pptxformname', 'onlyofficeeditor'), 'Presentation', $attr);
             $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
-                get_string('docxfformname', 'onlyofficeeditor'), 'Form template', $attr);
+                get_string('docxfformname', 'onlyofficeeditor'), 'PDF form', $attr);
             $createbuttons[] =& $mform->createElement('radio', 'onlyofficetemplateformat', '',
                 get_string('uploadformname', 'onlyofficeeditor'), 'Upload file', $attr);
 

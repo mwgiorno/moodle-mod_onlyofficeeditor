@@ -50,7 +50,7 @@
     content: url([[pix:onlyofficeeditor|file_xlsx]]);
 }
 
-.onlyofficeeditor-create-button input[value^="Form template"] {
+.onlyofficeeditor-create-button input[value^="PDF form"] {
     content: url([[pix:onlyofficeeditor|file_docxf]]);
 }
 

@@ -201,7 +201,7 @@ class util {
                 $fileformat = 'pptx';
                 break;
             }
-            case 'Form template': {
+            case 'PDF form': {
                 $fileformat = 'docxf';
                 break;
             }
