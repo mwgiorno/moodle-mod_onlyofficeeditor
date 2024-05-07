@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     $defaulthost = 'https://documentserver.url';
-    $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx';
+    $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx?referer=moodle';
     $defaultjwtheader = 'Authorization';
     $bannerdata = [
         'title' => get_string('banner_title', 'onlyofficeeditor'),
