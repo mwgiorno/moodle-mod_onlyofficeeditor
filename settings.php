@@ -31,15 +31,15 @@ if ($ADMIN->fulltree) {
     $defaulthost = 'https://documentserver.url';
     $linktodocs = 'https://www.onlyoffice.com/docs-registration.aspx';
     $defaultjwtheader = 'Authorization';
-    $bannerData = [
-        'title'=> get_string('banner_title', 'onlyofficeeditor'),
-        'description'=> get_string('banner_description', 'onlyofficeeditor'),
-        'link'=> [
+    $bannerdata = [
+        'title' => get_string('banner_title', 'onlyofficeeditor'),
+        'description' => get_string('banner_description', 'onlyofficeeditor'),
+        'link' => [
             'title' => get_string('banner_link_title', 'onlyofficeeditor'),
             'href' => $linktodocs
         ]
     ];
-    $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerData);
+    $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
         get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
         $defaulthost));
@@ -49,7 +49,7 @@ if ($ADMIN->fulltree) {
         get_string('jwtheader', 'onlyofficeeditor'), '', $defaultjwtheader));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
         get_string('forcesave', 'onlyofficeeditor'), '', 0));
-    $settings->add(new admin_setting_heading('onlyofficeeditor/editor_banner', '', $banner));
+    $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
         get_string('editor_view', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
