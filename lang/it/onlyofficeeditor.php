@@ -50,6 +50,7 @@ $string['documentserverurl_desc'] = 'Indirizzo del servizio di modifica document
 $string['documentserversecret'] = 'Chiave di Document Server';
 $string['documentserversecret_desc'] = 'Chiave segreta viene utilizzata per generare il token (una firma crittografata) nel browser per aprire l\'editor di documenti e chiamare i metodi e le richieste al servizio di comando documenti e al servizio di conversione documenti. Il token impedisce la sostituzione di parametri importanti nelle richieste di ONLYOFFICE Document Server.';
 $string['jwtheader'] = 'Intestazione di autorizzazione';
+$string['disable_verify_ssl'] = 'Disattiva la verifica del certificato (non sicuro)';
 
 $string['selectfile'] = 'Seleziona il file esistente o creane uno nuovo cliccando una delle icone';
 $string['documentpermissions'] = 'Autorizzazioni per documenti';

@@ -50,6 +50,7 @@ $string['documentserverurl_desc'] = 'Die Adresse des Dienstes für die Dokumente
 $string['documentserversecret'] = 'Geheimschlüssel des Document Servers';
 $string['documentserversecret_desc'] = 'Der Geheimschlüssel wird verwendet, um das Token (eine verschlüsselte Signatur) im Browser für das Öffnen des Dokumenteditors und den Aufruf der Methoden und der Anfragen an den Dokumentbefehlsdienst und den Dokumentkonvertierungsdienst zu generieren. Das Token verhindert die Ersetzung wichtiger Parameter in ONLYOFFICE Document Server-Anfragen.';
 $string['jwtheader'] = 'Authorization-Header';
+$string['disable_verify_ssl'] = 'Zertifikatsüberprüfung deaktivieren (unsicher)';
 
 $string['selectfile'] = 'Wählen Sie eine vorhandene Datei aus oder erstellen Sie eine neue, indem Sie auf eines der Symbole klicken';
 $string['documentpermissions'] = 'Zugriffsrechte auf Dokumente';

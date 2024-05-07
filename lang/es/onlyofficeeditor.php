@@ -50,6 +50,7 @@ $string['documentserverurl_desc'] = 'La Dirección del Servicio de Edición de D
 $string['documentserversecret'] = 'Secreto del Servidor de Documentos';
 $string['documentserversecret_desc'] = 'El secreto se utiliza para generar el token (una firma cifrada) en el navegador para que el editor de documentos abra y llame a los métodos y las solicitudes al servicio de comando de documentos y al servicio de conversión de documentos. El token bloquea la sustitución de parámetros importantes en las solicitudes del Servidor de Documentos de ONLYOFFICE.';
 $string['jwtheader'] = 'Encabezado de autenticación';
+$string['disable_verify_ssl'] = 'Desactivar la verificación de certificados (inseguro)';
 
 $string['selectfile'] = 'Seleccione un archivo existente o cree uno nuevo haciendo clic en uno de los iconos';
 $string['documentpermissions'] = 'Permisos para los documentos';

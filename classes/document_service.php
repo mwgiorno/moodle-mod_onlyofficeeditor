@@ -76,6 +76,8 @@ class document_service {
         $conversionbody = json_encode($conversionbody);
         $conversionurl = rtrim($modconfig->documentserverurl, "/") . '/ConvertService.ashx';
 
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
         $response = $curl->post($conversionurl, $conversionbody);
 
         $conversionjson = json_decode($response);
@@ -121,6 +123,8 @@ class document_service {
         $commandbody = json_encode($commandbody);
         $commandurl = rtrim($modconfig->documentserverurl, "/") . '/coauthoring/CommandService.ashx';
 
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
         $response = $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);

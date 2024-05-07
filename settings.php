@@ -33,6 +33,8 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
         get_string('documentserverurl', 'onlyofficeeditor'), get_string('documentserverurl_desc', 'onlyofficeeditor'),
         $defaulthost));
+    $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/disable_verify_ssl',
+        get_string('disable_verify_ssl', 'onlyofficeeditor'), '', 0));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserversecret',
         get_string('documentserversecret', 'onlyofficeeditor'), get_string('documentserversecret_desc', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configtext('onlyofficeeditor/jwtheader',
