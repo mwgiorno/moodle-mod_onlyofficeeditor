@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示�
 $string['editor_security'] = 'セキュリティ';
 $string['editor_security_plugin'] = 'プラグインを有効にする';
 $string['editor_security_macros'] = 'ドキュメントマクロを実行する';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'ダウンロードやインストールをすることなく、クラウド上で簡単にエディタを起動することができます';
+$string['banner_link_title'] = '今すぐ使ってみる';
 
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['saveaserror'] = 'エラーが発生しました';

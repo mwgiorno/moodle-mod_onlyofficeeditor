@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = 'Afficher un en-tête monochrome de la barre d\
 $string['editor_security'] = 'Sécurité';
 $string['editor_security_plugin'] = 'Activer les plugins';
 $string['editor_security_macros'] = 'Exécuter des macros de documents';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'Lancez facilement les éditeurs dans le cloud sans téléchargement ni installation';
+$string['banner_link_title'] = 'Obtenir maintenant';
 
 $string['oldversion'] = 'Veuillez mettre à jour ONLYOFFICE Docs vers la version 7.0 pour travailler sur les formulaires à remplir en ligne.';
 $string['saveaserror'] = 'Un problème est survenu.';

@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = 'Visualizza intestazione della barra degli stru
 $string['editor_security'] = 'Sicurezza';
 $string['editor_security_plugin'] = 'Abilitare plugin';
 $string['editor_security_macros'] = 'Esegui le macro del documento';
+$string['banner_title'] = 'ONLYOFFICE Docs nel Cloud';
+$string['banner_description'] = 'Avvia facilmente gli editor nel cloud senza scaricarli e installarli';
+$string['banner_link_title'] = 'Ottieni ora';
 
 $string['oldversion'] = 'Si prega di aggiornare ONLYOFFICE Docs alla versione 7.0 per lavorare su moduli compilabili online';
 $string['saveaserror'] = 'Qualcosa è andato storto.';

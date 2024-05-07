@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = 'Monochromen Kopfbereich der Symbolleiste anzei
 $string['editor_security'] = 'Sicherheit';
 $string['editor_security_plugin'] = 'Arbeit mit Plugins aktivieren';
 $string['editor_security_macros'] = 'Makros im Dokument ausführen';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'Öffnen Sie die Editoren in der Cloud einfach ohne Herunterladen und Installation';
+$string['banner_link_title'] = 'Jetzt erhalten';
 
 $string['oldversion'] = ' Für Online-Arbeit mit Formularen ist Version 7.0 von ONLYOFFICE Docs erforderlich';
 $string['saveaserror'] = 'Ein Fehler ist aufgetreten.';
