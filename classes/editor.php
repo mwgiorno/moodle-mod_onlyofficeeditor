@@ -152,7 +152,7 @@ class editor {
         $customization['goback']['text'] = get_string('returntodocument', 'onlyofficeeditor');
         $customization['goback']['url'] = $CFG->wwwroot . '/course/view.php?id=' . $this->courseid;
         $customization['forcesave'] = $this->modconfig->forcesave == 1;
-        $customization['chat'] = $this->modconfig->editor_view_chat == 1;
+        $customization['chat'] = $this->modconfig->editor_view_chat == 1 && !is_guest($this->context);
         $customization['help'] = $this->modconfig->editor_view_help == 1;
         $customization['compactHeader'] = $this->modconfig->editor_view_header == 1;
         $customization['feedback'] = $this->modconfig->editor_view_feedback == 1;

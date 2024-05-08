@@ -79,6 +79,7 @@ class document {
         $permissions['print'] = empty($permissions['print']) ? $canmanage : true;
         $permissions['download'] = empty($permissions['download']) ? $canmanage : true;
         $permissions['protect'] = $canmanage || empty($permissions['protect']);
+        $permissions['chat'] = get_config('onlyofficeeditor')->editor_view_chat == 1 && !is_guest($context);
 
         $permissions['edit'] = $canedit;
         $permissions['review'] = $canedit;
