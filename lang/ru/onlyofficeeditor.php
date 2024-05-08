@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = 'Отображать монохромный з
 $string['editor_security'] = 'Безопасность';
 $string['editor_security_plugin'] = 'Включить работу с плагинами';
 $string['editor_security_macros'] = 'Запускать макросы документа';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'Легко запускайте редакторы в облаке без скачивания и установки';
+$string['banner_link_title'] = 'Получить сейчас';
 
 $string['oldversion'] = 'Обновите сервер ONLYOFFICE Docs до версии 7.0 для работы с формами онлайн';
 $string['saveaserror'] = 'Что-то пошло не так.';

@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = '显示单色工具栏标题';
 $string['editor_security'] = '安全';
 $string['editor_security_plugin'] = '启用插件';
 $string['editor_security_macros'] = '运行文档宏';
+$string['banner_title'] = 'ONLYOFFICE 文档云';
+$string['banner_description'] = '无需下载和安装即可轻松启动云端编辑器';
+$string['banner_link_title'] = '立即获取';
 
 $string['oldversion'] = '请将ONLYOFFICE Docs更新到7.0版本，以便在线编辑可填写的表单。';
 $string['saveaserror'] = '出了问题。';

@@ -82,6 +82,9 @@ $string['editor_view_toolbar'] = 'Display monochrome toolbar header';
 $string['editor_security'] = 'Security';
 $string['editor_security_plugin'] = 'Enable plugins';
 $string['editor_security_macros'] = 'Run document macros';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'Easily launch the editors in the cloud without downloading and installation';
+$string['banner_link_title'] = 'Get Now';
 
 $string['oldversion'] = 'Please update ONLYOFFICE Docs to version 7.0 to work on fillable forms online.';
 $string['saveaserror'] = 'Something went wrong.';

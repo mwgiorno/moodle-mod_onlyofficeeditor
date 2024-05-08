@@ -81,6 +81,9 @@ $string['editor_view_toolbar'] = 'Mostrar el encabezado monocromático de la bar
 $string['editor_security'] = 'Seguridad';
 $string['editor_security_plugin'] = 'Habilitar plugins';
 $string['editor_security_macros'] = 'Ejecutar macros de documentos';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'Inicie fácilmente los editores en la nube sin tener que descargarlos ni instalarlos';
+$string['banner_link_title'] = 'Obtener ahora';
 
 $string['oldversion'] = 'Por favor, actualice ONLYOFFICE Docs a la versión 7.0 para poder trabajar con formularios rellenables en línea';
 $string['saveaserror'] = 'Se ha producido un error.';
