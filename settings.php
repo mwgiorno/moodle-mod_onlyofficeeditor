@@ -50,6 +50,10 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/forcesave',
         get_string('forcesave', 'onlyofficeeditor'), '', 0));
     $settings->add(new admin_setting_heading('onlyofficeeditor/banner', '', $banner));
+    $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverinternal',
+        get_string('documentserverinternal', 'onlyofficeeditor'), '', ''));
+    $settings->add(new admin_setting_configtext('onlyofficeeditor/storageurl',
+        get_string('storageurl', 'onlyofficeeditor'), '', ''));
     $settings->add(new admin_setting_heading('onlyofficeeditor/editor_view',
         get_string('editor_view', 'onlyofficeeditor'), ''));
     $settings->add(new admin_setting_configcheckbox('onlyofficeeditor/editor_view_chat',
