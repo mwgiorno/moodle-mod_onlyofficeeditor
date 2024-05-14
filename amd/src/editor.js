@@ -54,7 +54,7 @@ define(['jquery'], function($) {
                 enterButton.onclick = function() {
                     $('header').hide();
                     $('footer').hide();
-                    if (navButton.getAttribute('aria-expanded') === 'true') {
+                    if (navButton && navButton.getAttribute('aria-expanded') === 'true') {
                         $('nav .nav-link.btn')[0].click();
                     }
                     editorContainer.style.cssText = 'position: absolute; left: 0; right: 0; top: 0; ' +
