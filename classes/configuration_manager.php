@@ -68,8 +68,7 @@ class configuration_manager {
      *
      * @return string
      */
-    public static function replace_document_server_url_to_internal($url)
-    {
+    public static function replace_document_server_url_to_internal($url) {
         $documentserverurl = self::get_document_server_internal_url();
         if (!empty($documentserverurl)) {
             $from = get_config("onlyofficeeditor", "documentserverurl");
