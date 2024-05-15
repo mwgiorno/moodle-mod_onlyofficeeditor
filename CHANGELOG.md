@@ -1,5 +1,15 @@
 # Change Log
 
+##
+## Added
+- link to docs cloud
+- certificate verification setting
+
+## Changed
+- fix exit full screan
+- disable scrolling page to editor
+- disable chat in editor for guest
+
 ## 4.2.0
 ## Added
 - desktop mode
