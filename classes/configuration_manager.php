@@ -60,4 +60,25 @@ class configuration_manager {
         }
         return $url;
     }
+
+    /**
+     * Replace domain in document server url with internal address from configuration
+     *
+     * @param string $url - document server url
+     *
+     * @return string
+     */
+    public static function replace_document_server_url_to_internal($url)
+    {
+        $documentserverurl = self::get_document_server_internal_url();
+        if (!empty($documentserverurl)) {
+            $from = get_config("onlyofficeeditor", "documentserverurl");
+
+            if ($from !== $documentserverurl) {
+                $url = str_replace($from, $documentserverurl, $url);
+            }
+        }
+
+        return $url;
+    }
 }
