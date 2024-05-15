@@ -5,6 +5,7 @@
 - link to docs cloud
 - certificate verification setting
 - advanced server settings for specifying internal addresses
+- check the url address of the save as document and replace it with internal docs address
 
 ## Changed
 - fix exit full screan
