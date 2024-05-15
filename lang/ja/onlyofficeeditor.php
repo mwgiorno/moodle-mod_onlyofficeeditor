@@ -50,6 +50,9 @@ $string['documentserverurl_desc'] = '文書編集サービスアドレスは、�
 $string['documentserversecret'] = 'ドキュメントサーバーのシクレット';
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
 $string['jwtheader'] = '認証ヘッダー';
+$string['disable_verify_ssl'] = '証明書の検証を無効にする（安全ではありません)';
+$string['documentserverinternal'] = 'サーバーから内部リクエストに利用されるONLYOFFICE Docs アドレス';
+$string['storageurl'] = 'ONLYOFFICE Docsから内部リクエストに利用されるサーバーアドレス';
 
 $string['selectfile'] = 'アイコンをクリックして、既存のファイルを選択するか、新規ファイルを作成します。';
 $string['documentpermissions'] = 'ドキュメントの権限';
@@ -81,6 +84,9 @@ $string['editor_view_toolbar'] = '白黒のツールバーヘッダーを表示�
 $string['editor_security'] = 'セキュリティ';
 $string['editor_security_plugin'] = 'プラグインを有効にする';
 $string['editor_security_macros'] = 'ドキュメントマクロを実行する';
+$string['banner_title'] = 'ONLYOFFICE Docs Cloud';
+$string['banner_description'] = 'ダウンロードやインストールをすることなく、クラウド上で簡単にエディタを起動することができます';
+$string['banner_link_title'] = '今すぐ使ってみる';
 
 $string['oldversion'] = 'オンラインで記入式フォームを作成するには、ONLYOFFICE Docs 7.0版まで更新してください';
 $string['saveaserror'] = 'エラーが発生しました';

@@ -160,7 +160,9 @@ class util {
                 'userid' => $file->get_userid(),
                 'timecreated' => $file->get_timecreated());
             try {
-                $newfile = $fs->create_file_from_url($fr, $downloadurl);
+                $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+                $options['skipcertverify'] = $disableverifyssl == 1;
+                $newfile = $fs->create_file_from_url($fr, $downloadurl, $options);
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
@@ -356,7 +358,9 @@ class util {
                 'filename' => $title
             );
 
-            $fs->create_file_from_url($fileinfo, $url);
+            $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+            $options['skipcertverify'] = $disableverifyssl == 1;
+            $fs->create_file_from_url($fileinfo, $url, $options);
         } catch (\Exception $ex) {
             throw new \Exception($ex);
         }
