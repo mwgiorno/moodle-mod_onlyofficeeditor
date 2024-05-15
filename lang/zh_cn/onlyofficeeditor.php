@@ -50,6 +50,7 @@ $string['documentserverurl_desc'] = '文档编辑服务地址指定了带有文�
 $string['documentserversecret'] = '文件服务器秘密';
 $string['documentserversecret_desc'] = '该秘密在浏览器中生成令牌（加密签名），用于文档编辑器的打开和调用对文档命令服务和文档转换服务的方法和请求。该令牌可以防止ONLYOFFICE文档服务器请求中的重要参数替换。';
 $string['jwtheader'] = '授权标头';
+$string['disable_verify_ssl'] = '关闭证书校验(不安全)';
 $string['documentserverinternal'] = '服务器内部请求 ONLYOFFICE Docs 的地址';
 $string['storageurl'] = 'ONLYOFFICE Docs 内部请求服务器的地址';
 

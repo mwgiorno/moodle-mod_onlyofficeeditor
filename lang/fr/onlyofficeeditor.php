@@ -50,6 +50,7 @@ $string['documentserverurl_desc'] = 'L\'adresse du service d\'édition de docume
 $string['documentserversecret'] = 'Secret de Document Server';
 $string['documentserversecret_desc'] = 'Le secret est utilisé pour générer le jeton (une signature cryptée) dans le navigateur pour l\'ouverture de l\'éditeur de documents et l\'appel des méthodes et des demandes au service de commande de documents et au service de conversion de documents. Le jeton empêche la substitution de paramètres importants dans les requêtes du Document Server de ONLYOFFICE.';
 $string['jwtheader'] = 'En-tête d\'autorisation';
+$string['disable_verify_ssl'] = 'Désactiver la vérification du certificat (non sur)';
 $string['documentserverinternal'] = 'Adresse du ONLYOFFICE Docs pour les demandes internes du serveur';
 $string['storageurl'] = 'Adresse du serveur pour les demandes internes du ONLYOFFICE Docs';
 
