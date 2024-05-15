@@ -323,6 +323,8 @@ class util {
             throw new \Exception('The domain in the file url does not match the domain of the Document server');
         }
 
+        $url = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($url);
+
         global $DB;
         $fs = get_file_storage();
         $permission = has_capability('mod/onlyofficeeditor:addinstance', $context);
