@@ -26,6 +26,7 @@
 namespace mod_onlyofficeeditor;
 
 use curl;
+use mod_onlyofficeeditor\configuration_manager;
 
 /**
  * Document class.
@@ -74,7 +75,8 @@ class document_service {
         }
 
         $conversionbody = json_encode($conversionbody);
-        $conversionurl = rtrim($modconfig->documentserverurl, "/") . '/ConvertService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $conversionurl = rtrim($documentserverurl, "/") . '/ConvertService.ashx';
 
         $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
         $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
@@ -121,7 +123,8 @@ class document_service {
         }
 
         $commandbody = json_encode($commandbody);
-        $commandurl = rtrim($modconfig->documentserverurl, "/") . '/coauthoring/CommandService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $commandurl = rtrim($documentserverurl, "/") . '/coauthoring/CommandService.ashx';
 
         $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
         $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);

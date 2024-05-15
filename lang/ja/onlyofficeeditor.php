@@ -51,6 +51,8 @@ $string['documentserversecret'] = 'ドキュメントサーバーのシクレッ
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
 $string['jwtheader'] = '認証ヘッダー';
 $string['disable_verify_ssl'] = '証明書の検証を無効にする（安全ではありません)';
+$string['documentserverinternal'] = 'サーバーから内部リクエストに利用されるONLYOFFICE Docs アドレス';
+$string['storageurl'] = 'ONLYOFFICE Docsから内部リクエストに利用されるサーバーアドレス';
 
 $string['selectfile'] = 'アイコンをクリックして、既存のファイルを選択するか、新規ファイルを作成します。';
 $string['documentpermissions'] = 'ドキュメントの権限';

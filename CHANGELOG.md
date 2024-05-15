@@ -4,6 +4,7 @@
 ## Added
 - link to docs cloud
 - certificate verification setting
+- advanced server settings for specifying internal addresses
 
 ## Changed
 - fix exit full screan

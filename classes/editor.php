@@ -30,6 +30,7 @@ namespace mod_onlyofficeeditor;
 use mod_onlyofficeeditor\onlyoffice_file_utility;
 use mod_onlyofficeeditor\document;
 use mod_onlyofficeeditor\jwt_wrapper;
+use mod_onlyofficeeditor\configuration_manager;
 
 /**
  * Editor config class.
@@ -117,6 +118,7 @@ class editor {
         // Top level config object.
         $config = [];
         $crypt = new \mod_onlyofficeeditor\hasher();
+        $storageurl = configuration_manager::get_storage_url();
 
         // Document.
         $document = [];
@@ -124,7 +126,7 @@ class editor {
         $path = '/' . $this->context->id . '/mod_onlyofficeeditor/content/'
                     . urlencode(substr($file->get_filepath(), 1) . $filename);
         $contenthash = $crypt->get_hash(['userid' => $USER->id, 'contenthash' => $file->get_contenthash()]);
-        $documenturl = $CFG->wwwroot . '/pluginfile.php' . $path . '?doc=' . $contenthash;
+        $documenturl = $storageurl . '/pluginfile.php' . $path . '?doc=' . $contenthash;
 
         $document['url'] = $documenturl;
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
@@ -137,7 +139,7 @@ class editor {
         $editorconfig = [];
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['actionLink'] = null;
-        $editorconfig['callbackUrl'] = $CFG->wwwroot . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
+        $editorconfig['callbackUrl'] = $storageurl . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
         $editorconfig['lang'] = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
 
         // User.
