@@ -147,7 +147,7 @@ class util {
      * @throws \Exception
      */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
-        $downloadurl = $data['url'];
+        $downloadurl = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($data['url']);
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
             $fr = array(
