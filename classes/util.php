@@ -147,7 +147,7 @@ class util {
      * @throws \Exception
      */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
-        $downloadurl = $data['url'];
+        $downloadurl = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($data['url']);
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
             $fr = array(
@@ -322,6 +322,8 @@ class util {
         if (parse_url($url, PHP_URL_HOST) !== parse_url($documentserverurl, PHP_URL_HOST)) {
             throw new \Exception('The domain in the file url does not match the domain of the Document server');
         }
+
+        $url = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($url);
 
         global $DB;
         $fs = get_file_storage();
