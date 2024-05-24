@@ -44,9 +44,10 @@ class document_service {
      * @param string $from original file format.
      * @param string $to format to which to convert.
      * @param string $key document key.
+     * @param array $pdf pdf conversion param
      * @return string source url for converted document
      */
-    public static function get_conversion_url($documenturi, $from, $to, $key) {
+    public static function get_conversion_url($documenturi, $from, $to, $key, $pdf = []) {
         $modconfig = get_config('onlyofficeeditor');
 
         $curl = new curl();
@@ -61,6 +62,10 @@ class document_service {
             "title" => $key . '.' . $from,
             "key" => $key
         ];
+
+        if ($pdf) {
+            $conversionbody['pdf']['form'] = $pdf['form'];
+        }
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
