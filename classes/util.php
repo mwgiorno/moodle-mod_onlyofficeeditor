@@ -147,7 +147,7 @@ class util {
      * @throws \Exception
      */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
-        $downloadurl = $data['url'];
+        $downloadurl = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($data['url']);
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
             $fr = array(
@@ -160,7 +160,9 @@ class util {
                 'userid' => $file->get_userid(),
                 'timecreated' => $file->get_timecreated());
             try {
-                $newfile = $fs->create_file_from_url($fr, $downloadurl);
+                $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+                $options['skipcertverify'] = $disableverifyssl == 1;
+                $newfile = $fs->create_file_from_url($fr, $downloadurl, $options);
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
@@ -201,7 +203,7 @@ class util {
                 $fileformat = 'pptx';
                 break;
             }
-            case 'Form template': {
+            case 'PDF form': {
                 $fileformat = 'docxf';
                 break;
             }
@@ -306,6 +308,23 @@ class util {
      * @throws \Exception
      */
     public static function save_as_document($url, $title, $context, $cmid, $courseid, $section) {
+        $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
+        $connectioninfo = self::get_connection_info($documentserverurl);
+        $httpcode = $connectioninfo['http_code'] ?? null;
+        if (
+            !isset($documentserverurl) ||
+            empty($documentserverurl) ||
+            $httpcode != 200
+        ) {
+            throw new \Exception(get_string('docserverunreachable', 'onlyofficeeditor'));
+        }
+
+        if (parse_url($url, PHP_URL_HOST) !== parse_url($documentserverurl, PHP_URL_HOST)) {
+            throw new \Exception('The domain in the file url does not match the domain of the Document server');
+        }
+
+        $url = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($url);
+
         global $DB;
         $fs = get_file_storage();
         $permission = has_capability('mod/onlyofficeeditor:addinstance', $context);
@@ -341,7 +360,9 @@ class util {
                 'filename' => $title
             );
 
-            $fs->create_file_from_url($fileinfo, $url);
+            $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+            $options['skipcertverify'] = $disableverifyssl == 1;
+            $fs->create_file_from_url($fileinfo, $url, $options);
         } catch (\Exception $ex) {
             throw new \Exception($ex);
         }

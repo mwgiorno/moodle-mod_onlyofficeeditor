@@ -13,7 +13,6 @@ Supported formats:
 
 * For viewing and editing: DOCX, XLSX, PPTX, TXT, CSV.
 * For viewing only: PDF.
-* For converting to Office Open XML formats: ODT, ODS, ODP, DOC, XLS, PPT, PPS, EPUB, RTF, HTML, HTM.
 
 ## Installing ONLYOFFICE Docs
 
