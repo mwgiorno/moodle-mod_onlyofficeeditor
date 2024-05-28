@@ -1,5 +1,17 @@
 # Change Log
 
+##
+## Added
+- link to docs cloud
+- certificate verification setting
+- advanced server settings for specifying internal addresses
+- check the url address of the save as document
+
+## Changed
+- fix exit full screan
+- disable scrolling page to editor
+- disable chat in editor for guest
+
 ## 4.4.0
 ## Changed
 - fixed saveas dialog
