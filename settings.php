@@ -36,8 +36,8 @@ if ($ADMIN->fulltree) {
         'description' => get_string('banner_description', 'onlyofficeeditor'),
         'link' => [
             'title' => get_string('banner_link_title', 'onlyofficeeditor'),
-            'href' => $linktodocs
-        ]
+            'href' => $linktodocs,
+        ],
     ];
     $banner = $OUTPUT->render_from_template('mod_onlyofficeeditor/banner', $bannerdata);
     $settings->add(new admin_setting_configtext('onlyofficeeditor/documentserverurl',
