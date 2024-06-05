@@ -63,10 +63,10 @@ function onlyofficeeditor_supports($feature) {
  * of the new instance.
  *
  * @param stdClass $data Submitted data from the form in mod_form.php
- * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
+ * @param mod_onlyofficeeditor_mod_form|null $mform The form instance itself (if needed)
  * @return int The id of the newly inserted ONLYOFFICE record
  */
-function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
+function onlyofficeeditor_add_instance(stdClass $data, ?mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $cmid = $data->coursemodule;
@@ -109,10 +109,10 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
  * will update an existing instance with new data.
  *
  * @param stdClass $data An object from the form in mod_form.php
- * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
+ * @param mod_onlyofficeeditor_mod_form|null $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function onlyofficeeditor_update_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
+function onlyofficeeditor_update_instance(stdClass $data, ?mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $data->timemodified = time();
