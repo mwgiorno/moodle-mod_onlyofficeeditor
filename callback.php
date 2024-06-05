@@ -26,7 +26,9 @@
 /**
  * @todo Log disconnection (editor close) for respective user. note, editor open (connection) is logged in view.php
  */
+// phpcs:ignore moodle.Files.RequireLogin.Missing
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+// phpcs:enable
 
 defined('AJAX_SCRIPT') || define('AJAX_SCRIPT', true);
 

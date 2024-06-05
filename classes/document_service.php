@@ -60,7 +60,7 @@ class document_service {
             "outputtype" => $to,
             "filetype" => $from,
             "title" => $key . '.' . $from,
-            "key" => $key
+            "key" => $key,
         ];
 
         if ($pdf) {
@@ -69,7 +69,7 @@ class document_service {
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $conversionbody
+                'payload' => $conversionbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
@@ -112,12 +112,12 @@ class document_service {
         $curl->setHeader(['Accept: application/json']);
 
         $commandbody = [
-            'c' => $method
+            'c' => $method,
         ];
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $commandbody
+                'payload' => $commandbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';

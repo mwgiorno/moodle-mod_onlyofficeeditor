@@ -24,10 +24,10 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-$observers = array(
-    array(
+$observers = [
+    [
         'eventname' => '\core\event\user_loggedin',
         'callback'  => 'onlyofficeeditor_login_handler',
-        'includefile' => '/mod/onlyofficeeditor/lib.php'
-    )
-);
+        'includefile' => '/mod/onlyofficeeditor/lib.php',
+    ],
+];

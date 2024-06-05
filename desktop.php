@@ -25,8 +25,10 @@
 
 use mod_onlyofficeeditor\util;
 
+// phpcs:ignore moodle.Files.RequireLogin.Missing
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
+// phpcs:enable
 
 global $CFG, $USER, $SESSION;
 
