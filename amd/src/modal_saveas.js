@@ -101,6 +101,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                 }).fail(() => {
                     displayNotification('saveaserror', 'error');
                 });
+                return;
             });
         };
 
