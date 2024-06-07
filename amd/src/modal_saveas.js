@@ -41,7 +41,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
 
         SaveAsDialog.modal = null;
 
-        SaveAsDialog.build = async (cmid, courseid, saveAsData) => {
+        SaveAsDialog.build = async(cmid, courseid, saveAsData) => {
             var self = this;
 
             var stringkeys = [
