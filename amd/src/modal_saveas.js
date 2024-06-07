@@ -41,7 +41,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
 
         SaveAsDialog.modal = null;
 
-        SaveAsDialog.build = async (cmid, courseid, saveAsData) => {
+        SaveAsDialog.build = async(cmid, courseid, saveAsData) => {
             var self = this;
 
             var stringkeys = [
@@ -50,7 +50,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                     component: 'mod_onlyofficeeditor'
                 }
             ];
-
+            // eslint-disable-next-line promise/catch-or-return
             Str.get_strings(stringkeys).then(async([title]) => {
                 this.modal = await Modal.create({
                     title: title,
@@ -101,6 +101,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                 }).fail(() => {
                     displayNotification('saveaserror', 'error');
                 });
+                return;
             });
         };
 
