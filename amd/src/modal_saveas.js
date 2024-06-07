@@ -50,7 +50,7 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                     component: 'mod_onlyofficeeditor'
                 }
             ];
-
+            // eslint-disable-next-line promise/catch-or-return
             Str.get_strings(stringkeys).then(async([title]) => {
                 this.modal = await Modal.create({
                     title: title,
