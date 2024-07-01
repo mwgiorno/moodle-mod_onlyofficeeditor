@@ -54,7 +54,7 @@ class onlyoffice_file_utility {
             '.dot', '.dotx', '.dotm',
             '.odt', '.fodt', '.ott', '.rtf', '.txt',
             '.html', '.htm', '.mht', '.xml',
-            '.pdf', '.djvu', '.fb2', '.epub', '.xps', '.oxps', '.oform', '.docxf');
+            '.fb2', '.epub');
     }
 
     /**
@@ -66,6 +66,14 @@ class onlyoffice_file_utility {
             '.ppt', '.pptx', '.pptm',
             '.pot', '.potx', '.potm',
             '.odp', '.fodp', '.otp');
+    }
+
+    /**
+     * Get accepted presentation extensions.
+     * @return string[] Accepted extensions of presentation files.
+     */
+    public static function get_accepted_pdf_formats() {
+        return ('.djvu', '.pdf', '.oform', '.docxf', '.xps', '.oxps');
     }
 
     /**
@@ -82,6 +90,9 @@ class onlyoffice_file_utility {
         }
         if (in_array($ext, self::get_accepted_presentation_formats())) {
             return 'slide';
+        }
+        if (in_array($ext, self::get_accepted_pdf_formats())) {
+            return 'pdf';
         }
         return 'word';
     }
