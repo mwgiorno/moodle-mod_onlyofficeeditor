@@ -148,7 +148,11 @@ define(['jquery'], function($) {
                 var config = data.config;
 
                 var favicon = config.documentType;
-                if (config.fileType === 'docxf' || config.fileType === 'oform') {
+                if (
+                    config.fileType === 'docxf'
+                    || config.fileType === 'oform'
+                    || config.fileType === 'pdf'
+                ) {
                     favicon = config.fileType;
                 }
                 document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyofficeeditor/pix/'
