@@ -209,7 +209,7 @@ class util {
                 break;
             }
             case 'PDF form': {
-                $fileformat = 'docxf';
+                $fileformat = 'pdf';
                 break;
             }
         }
