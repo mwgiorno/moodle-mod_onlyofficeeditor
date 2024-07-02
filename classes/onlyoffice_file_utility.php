@@ -73,7 +73,7 @@ class onlyoffice_file_utility {
      * @return string[] Accepted extensions of presentation files.
      */
     public static function get_accepted_pdf_formats() {
-        return array('.djvu', '.pdf', '.oform', '.docxf', '.xps', '.oxps');
+        return ['.djvu', '.pdf', '.oform', '.docxf', '.xps', '.oxps'];
     }
 
     /**
