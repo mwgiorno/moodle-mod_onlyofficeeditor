@@ -63,6 +63,7 @@ $string['onlyofficeeditor:editdocument'] = 'Редактирование эле�
 $string['onlyofficeeditor:view'] = 'Просмотр элемента Документ ONLYOFFICE';
 $string['onlyofficename'] = 'Наименование элемента';
 $string['onmentionerror'] = 'Ошибка при упоминании.';
+$string['pdfformname'] = 'PDF форма';
 $string['pluginadministration'] = 'Управление элементом Документ ONLYOFFICE';
 $string['pluginname'] = 'Документ ONLYOFFICE';
 $string['pptxformname'] = 'Презентация';

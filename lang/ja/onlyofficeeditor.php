@@ -63,6 +63,7 @@ $string['onlyofficeeditor:editdocument'] = 'ONLYOFFICEドキュメントの活�
 $string['onlyofficeeditor:view'] = 'ONLYOFFICEドキュメントの活動を表示する';
 $string['onlyofficename'] = '活動名';
 $string['onmentionerror'] = ' メンションのエラー';
+$string['pdfformname'] = 'PDFフォーム';
 $string['pluginadministration'] = 'ONLYOFFICE ドキュメント活動管理';
 $string['pluginname'] = 'ONLYOFFICEの文書';
 $string['pptxformname'] = 'プレゼンテーション';

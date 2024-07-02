@@ -63,6 +63,7 @@ $string['onlyofficeeditor:editdocument'] = 'Modifier l\'activité du document ON
 $string['onlyofficeeditor:view'] = 'Afficher l\'activité du document ONLYOFFICE';
 $string['onlyofficename'] = 'Nom de l\'activité';
 $string['onmentionerror'] = 'Erreur de mention.';
+$string['pdfformname'] = 'Formulaire PDF';
 $string['pluginadministration'] = 'Administration de l\'activité documentaire ONLYOFFICE';
 $string['pluginname'] = 'Document ONLYOFFICE';
 $string['pptxformname'] = 'Presentation';
