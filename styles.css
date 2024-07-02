@@ -64,7 +64,7 @@
 }
 
 .onlyofficeeditor-create-button input[value^="PDF form"] {
-    content: url([[pix:onlyofficeeditor|file_docxf]]);
+    content: url([[pix:onlyofficeeditor|file_pdf]]);
 }
 
 .onlyofficeeditor-create-button input[value^="Upload file"] {

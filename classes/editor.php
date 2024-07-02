@@ -140,7 +140,12 @@ class editor {
         $pathnamehash = $crypt->get_hash(['userid' => $USER->id, 'pathnamehash' => $file->get_pathnamehash(), 'cm' => $this->cm]);
         $editorconfig['actionLink'] = null;
         $editorconfig['callbackUrl'] = $storageurl . '/mod/onlyofficeeditor/callback.php?doc=' . $pathnamehash;
-        $editorconfig['lang'] = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
+        if (property_exists($USER, 'lang')) {
+            $lang = stristr($USER->lang, '_', true) !== false ? stristr($USER->lang, '_', true) : $USER->lang;
+        } else {
+            $lang = $CFG->lang;
+        }
+        $editorconfig['lang'] = $lang;
 
         // User.
         $user = [];

@@ -29,17 +29,6 @@
  * @see upgrade_plugins_modules()
  */
 function xmldb_onlyofficeeditor_install() {
-    $coretypes = core_filetypes::get_types();
-
-    if (!array_key_exists("docxf", $coretypes)) {
-        core_filetypes::add_type("docxf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.docxf",
-            "document", [], '', 'ONLYOFFICE docxf');
-    }
-    if (!array_key_exists("oform", $coretypes)) {
-        core_filetypes::add_type("oform", "application/vnd.openxmlformats-officedocument.wordprocessingml.document.oform",
-            "document", [], '', 'ONLYOFFICE oform');
-    }
-
     return true;
 }
 
