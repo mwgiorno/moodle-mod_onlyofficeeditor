@@ -33,7 +33,6 @@ $string['documentserversecret'] = 'ドキュメントサーバーのシクレッ
 $string['documentserversecret_desc'] = 'このシクレットは、ドキュメントエディタを開いてメソッドを呼び出したり、ドキュメントコマンドサービスやドキュメント変換サービスへのリクエストのために、ブラウザでトークン（暗号化された署名）を生成するために使われます。トークンはONLYOFFICE Document Serverリクエストの重要なパラメータを置換することを防止します。';
 $string['documentserverurl'] = '文書編集サービスのアドレス';
 $string['documentserverurl_desc'] = '文書編集サービスアドレスは、文書サービスがインストールされているサーバーのアドレ スを指定します。上の \'https://documentserver.url\' を正しいサーバーアドレスに置き換えてください。';
-$string['docxfformname'] = '';
 $string['docxformname'] = 'ドキュメント';
 $string['download'] = 'ドキュメントをダウンロードできます';
 $string['download_help'] = 'このオプションがオフの場合、ONLYOFFICEエディタアプリで文書をダウンロードすることはできません。ご注意：<strong>course:manageactivities</strong> 権を持つユーザーは、常にアプリからドキュメントをダウンロードすることができます。';

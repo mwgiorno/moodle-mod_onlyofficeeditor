@@ -33,7 +33,6 @@ $string['documentserversecret'] = 'Chiave di Document Server';
 $string['documentserversecret_desc'] = 'Chiave segreta viene utilizzata per generare il token (una firma crittografata) nel browser per aprire l\'editor di documenti e chiamare i metodi e le richieste al servizio di comando documenti e al servizio di conversione documenti. Il token impedisce la sostituzione di parametri importanti nelle richieste di ONLYOFFICE Document Server.';
 $string['documentserverurl'] = 'Indirizzo del servizio di modifica documenti';
 $string['documentserverurl_desc'] = 'Indirizzo del servizio di modifica documenti specifica l\'indirizzo del server con i servizi documenti installati. Sostituisci \'https://documentserver.url\' sopra con l\'indirizzo corretto del server';
-$string['docxfformname'] = '';
 $string['docxformname'] = 'Documento';
 $string['download'] = 'E possibile scaricare documento';
 $string['download_help'] = 'Se è disabilitata gli documenti non saranno scaricabili tramite l\'editor ONLYOFFICE. Nota: gli utenti con la funzionalità <strong>course:manageactivities</strong> possono sempre scaricare i documenti tramite l\'applicazione.';
