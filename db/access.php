@@ -42,7 +42,8 @@ $capabilities = array(
             'student' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
+            'manager' => CAP_ALLOW,
+            'guest' => CAP_ALLOW,
         )
     ),
     'mod/onlyofficeeditor:editdocument' => array(
