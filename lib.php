@@ -394,7 +394,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
                 || has_any_capability([
                     'moodle/course:manageactivities',
                     'mod/onlyofficeeditor:editdocument',
-                    'mod/onlyofficeeditor:view'
+                    'mod/onlyofficeeditor:view',
                 ], $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
