@@ -1,6 +1,4 @@
 # Change Log
-## Changed
-- replace docxf with pdf as a form template
 
 ## 4.5.0
 ## Added
@@ -10,6 +8,7 @@
 - check the url address of the save as document
 
 ## Changed
+- replace docxf with pdf as a form template
 - fix exit full screan
 - disable scrolling page to editor
 - disable chat in editor for guest
