@@ -391,7 +391,7 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     if (count($files) >= 1) {
         $file = reset($files);
         if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
-                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument'],
+                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument', 'mod/onlyofficeeditor:view'],
                     $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
