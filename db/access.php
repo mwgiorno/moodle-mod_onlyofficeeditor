@@ -43,7 +43,6 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
-            'guest' => CAP_ALLOW,
         ],
     ],
     'mod/onlyofficeeditor:editdocument' => [
@@ -54,6 +53,7 @@ $capabilities = [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW,
+            'guest' => CAP_PROHIBIT,
         ],
     ],
 ];
