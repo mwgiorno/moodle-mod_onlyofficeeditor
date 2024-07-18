@@ -24,13 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$messageproviders = array(
+$messageproviders = [
     // Notify user if he was mentioned in document.
-    'mentionnotifier' => array(
+    'mentionnotifier' => [
         'capability' => 'mod/onlyofficeeditor:view',
-        'defaults' => array(
+        'defaults' => [
             'airnotifier' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
-            'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF
-        ),
-    )
-);
+            'popup' => MESSAGE_PERMITTED + MESSAGE_DEFAULT_LOGGEDIN + MESSAGE_DEFAULT_LOGGEDOFF,
+        ],
+    ],
+];

@@ -63,10 +63,10 @@ function onlyofficeeditor_supports($feature) {
  * of the new instance.
  *
  * @param stdClass $data Submitted data from the form in mod_form.php
- * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
+ * @param mod_onlyofficeeditor_mod_form|null $mform The form instance itself (if needed)
  * @return int The id of the newly inserted ONLYOFFICE record
  */
-function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
+function onlyofficeeditor_add_instance(stdClass $data, ?mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $cmid = $data->coursemodule;
@@ -81,7 +81,7 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
         $records = $DB->get_records('files', [
             'itemid' => $data->file,
             'component' => 'mod_onlyofficeeditor',
-            'filearea' => 'content'
+            'filearea' => 'content',
         ]);
         foreach ($records as $record) {
             $record->contextid = context_module::instance($cmid)->id;
@@ -93,7 +93,7 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
     $data->id = $DB->insert_record('onlyofficeeditor', $data);
 
     // We need to use context now, so we need to make sure all needed info is already in db.
-    $DB->set_field('course_modules', 'instance', $data->id, array('id' => $cmid));
+    $DB->set_field('course_modules', 'instance', $data->id, ['id' => $cmid]);
 
     $completiontimeexpected = !empty($data->completionexpected) ? $data->completionexpected : null;
     \core_completion\api::update_completion_date_event($cmid, 'onlyofficeeditor', $data->id, $completiontimeexpected);
@@ -109,10 +109,10 @@ function onlyofficeeditor_add_instance(stdClass $data, mod_onlyofficeeditor_mod_
  * will update an existing instance with new data.
  *
  * @param stdClass $data An object from the form in mod_form.php
- * @param mod_onlyofficeeditor_mod_form $mform The form instance itself (if needed)
+ * @param mod_onlyofficeeditor_mod_form|null $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function onlyofficeeditor_update_instance(stdClass $data, mod_onlyofficeeditor_mod_form $mform = null) {
+function onlyofficeeditor_update_instance(stdClass $data, ?mod_onlyofficeeditor_mod_form $mform = null) {
     global $CFG, $DB;
 
     $data->timemodified = time();
@@ -142,14 +142,14 @@ function onlyofficeeditor_update_instance(stdClass $data, mod_onlyofficeeditor_m
 function onlyofficeeditor_delete_instance($id) {
     global $DB;
 
-    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', array('id' => $id))) {
+    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', ['id' => $id])) {
         return false;
     }
 
     $cm = get_coursemodule_from_instance('onlyofficeeditor', $id);
     \core_completion\api::update_completion_date_event($cm->id, 'onlyofficeeditor', $id, null);
 
-    $DB->delete_records('onlyofficeeditor', array('id' => $onlyoffice->id));
+    $DB->delete_records('onlyofficeeditor', ['id' => $onlyoffice->id]);
 
     return true;
 }
@@ -171,7 +171,7 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
 
     $context = \context_module::instance($coursemodule->id);
 
-    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', array('id' => $coursemodule->instance),
+    if (!$onlyoffice = $DB->get_record('onlyofficeeditor', ['id' => $coursemodule->instance],
         'id, name, display, displayoptions, intro, introformat')) {
         return null;
     }
@@ -202,8 +202,8 @@ function onlyofficeeditor_get_coursemodule_info($coursemodule) {
  */
 function onlyofficeeditor_cm_info_view(cm_info $cm) {
     global $OUTPUT;
-    $icon = $OUTPUT->pix_icon('icon', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
-        array('class' => 'onlyofficeactivityicon'));
+    $icon = $OUTPUT->pix_icon('monologo', get_string('onlyofficeactivityicon', 'onlyofficeeditor'), 'onlyofficeeditor',
+        ['class' => 'onlyofficeactivityicon']);
 }
 
 /**
@@ -310,7 +310,7 @@ function onlyofficeeditor_print_recent_mod_activity($activity, $courseid, $detai
  * @return array
  */
 function onlyofficeeditor_get_extra_capabilities() {
-    return array();
+    return [];
 }
 
 /* File API */
@@ -327,7 +327,7 @@ function onlyofficeeditor_get_extra_capabilities() {
  * @return array of [(string)filearea] => (string)description
  */
 function onlyofficeeditor_get_file_areas($course, $cm, $context) {
-    return array();
+    return [];
 }
 
 /**
@@ -364,7 +364,7 @@ function onlyofficeeditor_get_file_info($browser, $areas, $course, $cm, $context
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = array()) {
+function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = []) {
 
     $doc = required_param('doc', PARAM_RAW);
 
@@ -391,8 +391,11 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
     if (count($files) >= 1) {
         $file = reset($files);
         if ($hash->contenthash == $file->get_contenthash() && (is_enrolled($context, $hash->userid, '', true)
-                || has_any_capability(['moodle/course:manageactivities', 'mod/onlyofficeeditor:editdocument'],
-                    $context, $hash->userid))) {
+                || has_any_capability([
+                    'moodle/course:manageactivities',
+                    'mod/onlyofficeeditor:editdocument',
+                    'mod/onlyofficeeditor:view',
+                ], $context, $hash->userid))) {
             send_stored_file($file, null, 0, true);
         }
     }

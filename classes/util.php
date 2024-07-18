@@ -67,7 +67,7 @@ class util {
         "en" => "en-GB",
         "pt_br" => "pt-BR",
         "sr_lt" => "sr",
-        "zh_cn" => "zh"
+        "zh_cn" => "zh",
     ];
 
     /** Desktop user agent string */
@@ -131,6 +131,11 @@ class util {
      */
     public static function get_connection_info($url) {
         $ch = new \curl();
+
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl') == 0;
+        $ch->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl]);
+        $ch->setopt(['CURLOPT_SSL_VERIFYHOST' => $disableverifyssl]);
+
         $ch->get($url);
         $info = $ch->get_info();
         return $info;
@@ -147,10 +152,10 @@ class util {
      * @throws \Exception
      */
     public static function save_document_to_moodle($data, $hash, $isforcesave) {
-        $downloadurl = $data['url'];
+        $downloadurl = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($data['url']);
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
-            $fr = array(
+            $fr = [
                 'contextid' => $file->get_contextid(),
                 'component' => $file->get_component(),
                 'filearea' => 'draft',
@@ -158,9 +163,11 @@ class util {
                 'filename' => $file->get_filename() . '_temp',
                 'filepath' => '/',
                 'userid' => $file->get_userid(),
-                'timecreated' => $file->get_timecreated());
+                'timecreated' => $file->get_timecreated()];
             try {
-                $newfile = $fs->create_file_from_url($fr, $downloadurl);
+                $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+                $options['skipcertverify'] = $disableverifyssl == 1;
+                $newfile = $fs->create_file_from_url($fr, $downloadurl, $options);
                 $file->replace_file_with($newfile);
                 $file->set_timemodified(time());
                 $newfile->delete();
@@ -201,15 +208,15 @@ class util {
                 $fileformat = 'pptx';
                 break;
             }
-            case 'Form template': {
-                $fileformat = 'docxf';
+            case 'PDF form': {
+                $fileformat = 'pdf';
                 break;
             }
         }
 
         $pathname = self::get_template_path($fileformat, $user);
 
-        $fileinfo = array(
+        $fileinfo = [
             'author' => fullname($user),
             'contextid' => $contextid,
             'component' => 'mod_onlyofficeeditor',
@@ -217,7 +224,7 @@ class util {
             'userid' => $user->id,
             'itemid' => $fileid,
             'filepath' => '/',
-            'filename' => $name . '.' . $fileformat);
+            'filename' => $name . '.' . $fileformat];
 
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname($fileinfo, $pathname);
@@ -306,6 +313,23 @@ class util {
      * @throws \Exception
      */
     public static function save_as_document($url, $title, $context, $cmid, $courseid, $section) {
+        $documentserverurl = get_config('onlyofficeeditor', 'documentserverurl');
+        $connectioninfo = self::get_connection_info($documentserverurl);
+        $httpcode = $connectioninfo['http_code'] ?? null;
+        if (
+            !isset($documentserverurl) ||
+            empty($documentserverurl) ||
+            $httpcode != 200
+        ) {
+            throw new \Exception(get_string('docserverunreachable', 'onlyofficeeditor'));
+        }
+
+        if (parse_url($url, PHP_URL_HOST) !== parse_url($documentserverurl, PHP_URL_HOST)) {
+            throw new \Exception('The domain in the file url does not match the domain of the Document server');
+        }
+
+        $url = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($url);
+
         global $DB;
         $fs = get_file_storage();
         $permission = has_capability('mod/onlyofficeeditor:addinstance', $context);
@@ -321,16 +345,16 @@ class util {
 
         try {
             $cm = get_fast_modinfo($courseid)->get_cm($cmid)->get_course_module_record();
-            $moduleinfo = (object)$DB->get_record('onlyofficeeditor', array('id' => $cm->instance));
+            $moduleinfo = (object)$DB->get_record('onlyofficeeditor', ['id' => $cm->instance]);
             $course = get_course($courseid);
-            $modulename = (object) array('modulename' => 'onlyofficeeditor');
+            $modulename = (object) ['modulename' => 'onlyofficeeditor'];
             list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $section);
 
             $moduleinfo->module = $module->id;
             $moduleinfo->modulename = $modulename->modulename;
             $moduleinfo = self::generate_new_module_info($moduleinfo, $course, $cm, $section);
 
-            $fileinfo = array(
+            $fileinfo = [
                 'author' => $file->get_author(),
                 'contextid' => \context_module::instance($moduleinfo->coursemodule)->id,
                 'component' => 'mod_onlyofficeeditor',
@@ -338,10 +362,12 @@ class util {
                 'userid' => $file->get_userid(),
                 'itemid' => 0,
                 'filepath' => '/',
-                'filename' => $title
-            );
+                'filename' => $title,
+            ];
 
-            $fs->create_file_from_url($fileinfo, $url);
+            $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+            $options['skipcertverify'] = $disableverifyssl == 1;
+            $fs->create_file_from_url($fileinfo, $url, $options);
         } catch (\Exception $ex) {
             throw new \Exception($ex);
         }
@@ -357,13 +383,13 @@ class util {
     public static function get_users_to_mention_in_comments($context) {
         global $USER;
         $users = get_users_by_capability($context, 'mod/onlyofficeeditor:view');
-        $userstomention = array();
+        $userstomention = [];
         foreach ($users as $user) {
             if ($user->id !== $USER->id) {
-                array_push($userstomention, array(
+                array_push($userstomention, [
                     'email' => $user->email,
-                    'name' => $user->firstname . ' ' . $user->lastname
-                ));
+                    'name' => $user->firstname . ' ' . $user->lastname,
+                ]);
             }
         }
         return $userstomention;
@@ -382,14 +408,14 @@ class util {
      */
     public static function mention_user_in_comment($actionlink, $comment, $emails, $context) {
         global $DB, $USER;
-        $mentionedusers = array();
+        $mentionedusers = [];
 
         $messagedata = new \stdClass();
         $messagedata->notifier = $USER->firstname . ' ' . $USER->lastname;
         $messagedata->course = $context->get_course_context()->get_context_name(false);
 
         foreach ($emails as $email) {
-            $user = $DB->get_record('user', array('email' => $email));
+            $user = $DB->get_record('user', ['email' => $email]);
             $permission = has_capability('mod/onlyofficeeditor:editdocument', $context, $user) ? 'Full Access' : 'Read only';
             $mentioneduser = ['permissions' => $permission, 'user' => $user->firstname . ' ' . $user->lastname];
             $mentionedusers[] =& $mentioneduser;

@@ -26,6 +26,7 @@
 namespace mod_onlyofficeeditor;
 
 use curl;
+use mod_onlyofficeeditor\configuration_manager;
 
 /**
  * Document class.
@@ -43,9 +44,10 @@ class document_service {
      * @param string $from original file format.
      * @param string $to format to which to convert.
      * @param string $key document key.
+     * @param array $pdf pdf conversion param
      * @return string source url for converted document
      */
-    public static function get_conversion_url($documenturi, $from, $to, $key) {
+    public static function get_conversion_url($documenturi, $from, $to, $key, $pdf = []) {
         $modconfig = get_config('onlyofficeeditor');
 
         $curl = new curl();
@@ -58,12 +60,16 @@ class document_service {
             "outputtype" => $to,
             "filetype" => $from,
             "title" => $key . '.' . $from,
-            "key" => $key
+            "key" => $key,
         ];
+
+        if ($pdf) {
+            $conversionbody['pdf']['form'] = $pdf['form'];
+        }
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $conversionbody
+                'payload' => $conversionbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
@@ -74,8 +80,11 @@ class document_service {
         }
 
         $conversionbody = json_encode($conversionbody);
-        $conversionurl = rtrim($modconfig->documentserverurl, "/") . '/ConvertService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $conversionurl = rtrim($documentserverurl, "/") . '/ConvertService.ashx';
 
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
         $response = $curl->post($conversionurl, $conversionbody);
 
         $conversionjson = json_decode($response);
@@ -103,12 +112,12 @@ class document_service {
         $curl->setHeader(['Accept: application/json']);
 
         $commandbody = [
-            'c' => $method
+            'c' => $method,
         ];
 
         if (!empty($modconfig->documentserversecret)) {
             $params = [
-                'payload' => $commandbody
+                'payload' => $commandbody,
             ];
             $token = \mod_onlyofficeeditor\jwt_wrapper::encode($params, $modconfig->documentserversecret);
             $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
@@ -119,8 +128,11 @@ class document_service {
         }
 
         $commandbody = json_encode($commandbody);
-        $commandurl = rtrim($modconfig->documentserverurl, "/") . '/coauthoring/CommandService.ashx';
+        $documentserverurl = configuration_manager::get_document_server_internal_url();
+        $commandurl = rtrim($documentserverurl, "/") . '/coauthoring/CommandService.ashx';
 
+        $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
+        $curl->setopt(['CURLOPT_SSL_VERIFYPEER' => $disableverifyssl == 0]);
         $response = $curl->post($commandurl, $commandbody);
 
         $commandjson = json_decode($response);

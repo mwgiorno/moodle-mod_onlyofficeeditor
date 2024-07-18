@@ -140,12 +140,8 @@ define(['jquery'], function($) {
                 var docEditor = null;
                 var config = data.config;
 
-                var favicon = config.documentType;
-                if (config.fileType === 'docxf' || config.fileType === 'oform') {
-                    favicon = config.fileType;
-                }
                 document.head.innerHTML += '<link type="image/x-icon" rel="icon" href="/mod/onlyofficeeditor/pix/'
-                    + favicon + '.ico" />';
+                    + config.documentType + '.ico" />';
 
                 var canAddInstance = data.addinstance;
 
@@ -226,9 +222,9 @@ define(['jquery'], function($) {
                     config.events.onRequestSendNotify = onRequestSendNotify;
                 }
 
-                if ((config.document.fileType === "docxf" || config.document.fileType === "oform")
+                if ((config.document.fileType === "pdf")
                     // eslint-disable-next-line no-undef
-                    && DocsAPI.DocEditor.version().split(".")[0] < 7) {
+                    && DocsAPI.DocEditor.version().split(".")[0] < 8) {
                     displayNotification('oldversion', 'error');
                 } else {
                     // eslint-disable-next-line no-undef

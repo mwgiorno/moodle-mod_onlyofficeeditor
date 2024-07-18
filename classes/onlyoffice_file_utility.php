@@ -40,9 +40,9 @@ class onlyoffice_file_utility {
      * @return string[] Accepted extensions of spreadsheet files
      */
     public static function get_accepted_spreadsheet_formats() {
-        return array('.xls', '.xlsx', '.xlsm',
+        return ['.xls', '.xlsx', '.xlsm',
             '.xlt', '.xltx', '.xltm',
-            '.ods', '.fods', '.ots', '.csv');
+            '.ods', '.fods', '.ots', '.csv'];
     }
 
     /**
@@ -50,11 +50,11 @@ class onlyoffice_file_utility {
      * @return string[] Accepted extensions of document files.
      */
     public static function get_accepted_document_formats() {
-        return array('.doc', '.docx', '.docm',
+        return ['.doc', '.docx', '.docm',
             '.dot', '.dotx', '.dotm',
             '.odt', '.fodt', '.ott', '.rtf', '.txt',
             '.html', '.htm', '.mht', '.xml',
-            '.pdf', '.djvu', '.fb2', '.epub', '.xps', '.oxps', '.oform', '.docxf');
+            '.fb2', '.epub'];
     }
 
     /**
@@ -62,10 +62,18 @@ class onlyoffice_file_utility {
      * @return string[] Accepted extensions of presentation files.
      */
     public static function get_accepted_presentation_formats() {
-        return array('.pps', '.ppsx', '.ppsm',
+        return ['.pps', '.ppsx', '.ppsm',
             '.ppt', '.pptx', '.pptm',
             '.pot', '.potx', '.potm',
-            '.odp', '.fodp', '.otp');
+            '.odp', '.fodp', '.otp'];
+    }
+
+    /**
+     * Get accepted presentation extensions.
+     * @return string[] Accepted extensions of presentation files.
+     */
+    public static function get_accepted_pdf_formats() {
+        return ['.djvu', '.pdf', '.oform', '.docxf', '.xps', '.oxps'];
     }
 
     /**
@@ -83,6 +91,9 @@ class onlyoffice_file_utility {
         if (in_array($ext, self::get_accepted_presentation_formats())) {
             return 'slide';
         }
+        if (in_array($ext, self::get_accepted_pdf_formats())) {
+            return 'pdf';
+        }
         return 'word';
     }
 
@@ -91,7 +102,7 @@ class onlyoffice_file_utility {
      * @return string[] Editable extensions.
      */
     public static function get_editable_extensions() {
-        return array('.docx', '.xlsx', '.pptx', '.docxf', '.oform', '.pdf');
+        return ['.docx', '.xlsx', '.pptx', '.docxf', '.oform', '.pdf'];
     }
 
 }
