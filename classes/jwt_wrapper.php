@@ -42,7 +42,7 @@ class jwt_wrapper {
      * @param string $secret secret key.
      */
     public static function encode($payload, $secret) {
-        return \Firebase\JWT\JWT::encode($payload, $secret);
+        return \Firebase\JWT\JWT::encode($payload, $secret, 'HS256');
     }
 
     /**
@@ -51,6 +51,6 @@ class jwt_wrapper {
      * @param string $secret secret key.
      */
     public static function decode($token, $secret) {
-        return \Firebase\JWT\JWT::decode($token, $secret, ['HS256']);
+        return \Firebase\JWT\JWT::decode($token, new \Firebase\JWT\Key($secret, 'HS256'));
     }
 }

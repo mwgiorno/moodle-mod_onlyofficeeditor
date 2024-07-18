@@ -67,7 +67,7 @@ class util {
         "en" => "en-GB",
         "pt_br" => "pt-BR",
         "sr_lt" => "sr",
-        "zh_cn" => "zh"
+        "zh_cn" => "zh",
     ];
 
     /** Desktop user agent string */
@@ -155,7 +155,7 @@ class util {
         $downloadurl = \mod_onlyofficeeditor\configuration_manager::replace_document_server_url_to_internal($data['url']);
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($hash->pathnamehash)) {
-            $fr = array(
+            $fr = [
                 'contextid' => $file->get_contextid(),
                 'component' => $file->get_component(),
                 'filearea' => 'draft',
@@ -163,7 +163,7 @@ class util {
                 'filename' => $file->get_filename() . '_temp',
                 'filepath' => '/',
                 'userid' => $file->get_userid(),
-                'timecreated' => $file->get_timecreated());
+                'timecreated' => $file->get_timecreated()];
             try {
                 $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
                 $options['skipcertverify'] = $disableverifyssl == 1;
@@ -216,7 +216,7 @@ class util {
 
         $pathname = self::get_template_path($fileformat, $user);
 
-        $fileinfo = array(
+        $fileinfo = [
             'author' => fullname($user),
             'contextid' => $contextid,
             'component' => 'mod_onlyofficeeditor',
@@ -224,7 +224,7 @@ class util {
             'userid' => $user->id,
             'itemid' => $fileid,
             'filepath' => '/',
-            'filename' => $name . '.' . $fileformat);
+            'filename' => $name . '.' . $fileformat];
 
         $fs = get_file_storage();
         $file = $fs->create_file_from_pathname($fileinfo, $pathname);
@@ -345,16 +345,16 @@ class util {
 
         try {
             $cm = get_fast_modinfo($courseid)->get_cm($cmid)->get_course_module_record();
-            $moduleinfo = (object)$DB->get_record('onlyofficeeditor', array('id' => $cm->instance));
+            $moduleinfo = (object)$DB->get_record('onlyofficeeditor', ['id' => $cm->instance]);
             $course = get_course($courseid);
-            $modulename = (object) array('modulename' => 'onlyofficeeditor');
+            $modulename = (object) ['modulename' => 'onlyofficeeditor'];
             list($module, $cntxt, $cw) = can_add_moduleinfo($course, $modulename->modulename, $section);
 
             $moduleinfo->module = $module->id;
             $moduleinfo->modulename = $modulename->modulename;
             $moduleinfo = self::generate_new_module_info($moduleinfo, $course, $cm, $section);
 
-            $fileinfo = array(
+            $fileinfo = [
                 'author' => $file->get_author(),
                 'contextid' => \context_module::instance($moduleinfo->coursemodule)->id,
                 'component' => 'mod_onlyofficeeditor',
@@ -362,8 +362,8 @@ class util {
                 'userid' => $file->get_userid(),
                 'itemid' => 0,
                 'filepath' => '/',
-                'filename' => $title
-            );
+                'filename' => $title,
+            ];
 
             $disableverifyssl = get_config('onlyofficeeditor', 'disable_verify_ssl');
             $options['skipcertverify'] = $disableverifyssl == 1;
@@ -383,13 +383,13 @@ class util {
     public static function get_users_to_mention_in_comments($context) {
         global $USER;
         $users = get_users_by_capability($context, 'mod/onlyofficeeditor:view');
-        $userstomention = array();
+        $userstomention = [];
         foreach ($users as $user) {
             if ($user->id !== $USER->id) {
-                array_push($userstomention, array(
+                array_push($userstomention, [
                     'email' => $user->email,
-                    'name' => $user->firstname . ' ' . $user->lastname
-                ));
+                    'name' => $user->firstname . ' ' . $user->lastname,
+                ]);
             }
         }
         return $userstomention;
@@ -408,14 +408,14 @@ class util {
      */
     public static function mention_user_in_comment($actionlink, $comment, $emails, $context) {
         global $DB, $USER;
-        $mentionedusers = array();
+        $mentionedusers = [];
 
         $messagedata = new \stdClass();
         $messagedata->notifier = $USER->firstname . ' ' . $USER->lastname;
         $messagedata->course = $context->get_course_context()->get_context_name(false);
 
         foreach ($emails as $email) {
-            $user = $DB->get_record('user', array('email' => $email));
+            $user = $DB->get_record('user', ['email' => $email]);
             $permission = has_capability('mod/onlyofficeeditor:editdocument', $context, $user) ? 'Full Access' : 'Read only';
             $mentioneduser = ['permissions' => $permission, 'user' => $user->firstname . ' ' . $user->lastname];
             $mentionedusers[] =& $mentioneduser;

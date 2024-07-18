@@ -1,6 +1,6 @@
 # Change Log
 
-## 4.5.0
+## 5.0.0
 ## Added
 - link to docs cloud
 - certificate verification setting
@@ -13,7 +13,7 @@
 - disable scrolling page to editor
 - disable chat in editor for guest
 
-## 4.2.0
+## 4.3.0
 ## Added
 - desktop mode
 - disable plugins setting
@@ -21,10 +21,14 @@
 - si-LK, ar-SA and sr-Latn-RS empty file template
 - service for checking editor versions
 
-## 4.0.0
+## 4.1.0
 ## Added
 - support Moodle AssignSubmission ONLYOFFICE Integration plugin
 - the ability to change the JWT header
+
+## 3.0.0
+## Changed
+- redesign to moodle 4.*
 
 ## 2.2.0
 ## Added
