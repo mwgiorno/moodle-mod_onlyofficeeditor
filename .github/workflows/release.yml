@@ -30,6 +30,7 @@ jobs:
           cd ./onlyofficeeditor
           rm -rf ./.github/
           rm -rf ./.git/
+          rm -f ./.gitmodules
       - name: Checkout Moodle
         uses: actions/checkout@v3
         with:
