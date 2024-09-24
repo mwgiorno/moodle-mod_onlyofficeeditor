@@ -47,7 +47,7 @@ class jwt_wrapper {
 
     /**
      * Decrypting payload.
-     * @param array $token jwt string.
+     * @param string $token jwt string.
      * @param string $secret secret key.
      */
     public static function decode($token, $secret) {
