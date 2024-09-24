@@ -81,7 +81,8 @@ if (!empty($modconfig->documentserversecret)) {
         }
     } else {
         $jwtheader = !empty($modconfig->jwtheader) ? $modconfig->jwtheader : 'Authorization';
-        $token = substr(getallheaders()[$jwtheader], strlen('Bearer '));
+        $headers = array_change_key_case(getallheaders(), CASE_LOWER);
+        $token = substr($headers[strtolower($jwtheader)], strlen('Bearer '));
         try {
             $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
 
