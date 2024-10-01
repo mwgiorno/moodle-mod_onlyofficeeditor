@@ -365,6 +365,7 @@ function onlyofficeeditor_get_file_info($browser, $areas, $course, $cm, $context
  * @param array $options additional options affecting the file serving
  */
 function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options = []) {
+    global $CFG;
 
     $doc = required_param('doc', PARAM_RAW);
 
@@ -381,7 +382,12 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
         $token = substr($headers[strtolower($jwtheader)], strlen('Bearer '));
         try {
             $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
-        } catch (\UnexpectedValueException $e) {
+        } catch (\Exception $e) {
+            file_put_contents(
+                $CFG->dataroot . "/logs.txt",
+                var_export($headers, true),
+                FILE_APPEND | LOCK_EX
+            );
             return false;
         }
     }
