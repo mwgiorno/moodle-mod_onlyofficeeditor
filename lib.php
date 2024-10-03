@@ -30,6 +30,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use mod_onlyofficeeditor\logger;
 use mod_onlyofficeeditor\util;
 
 /**
@@ -383,11 +384,13 @@ function onlyofficeeditor_pluginfile($course, $cm, $context, $filearea, array $a
         try {
             $decodedheader = \mod_onlyofficeeditor\jwt_wrapper::decode($token, $modconfig->documentserversecret);
         } catch (\Exception $e) {
-            file_put_contents(
-                $CFG->dataroot . "/logs.txt",
-                var_export($headers, true),
-                FILE_APPEND | LOCK_EX
-            );
+            $logger = new logger();
+            $logger->add($jwtheader, 'JWT header');
+            $logger->add(var_export($headers, true), 'Headers');
+            $logger->add($token, 'Token');
+            $logger->add($modconfig->documentserversecret, 'Secret');
+            $logger->add($e->getTraceAsString(), 'Stack Trace');
+            $logger->dump();
             return false;
         }
     }
