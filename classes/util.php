@@ -253,7 +253,7 @@ class util {
         }
 
         if (!file_exists($CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $langcode . '/new.' . $ext)) {
-            $langcode = "en";
+            $langcode = "default";
         }
 
         return $CFG->dirroot . '/mod/onlyofficeeditor/newdocs/' . $langcode . '/new.' . $ext;
