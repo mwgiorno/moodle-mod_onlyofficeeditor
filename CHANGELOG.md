@@ -1,9 +1,11 @@
 # Change Log
-## Changed
-- remove trailing slashes from setting urls after update
 
 ## Added
 - fi, he, no, sl language templates
+
+## Changed
+- fix JWT header issue
+- remove trailing slashes from setting urls after update
 
 ## 5.0.0
 ## Added
