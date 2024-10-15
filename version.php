@@ -29,5 +29,7 @@ $plugin->component = 'mod_onlyofficeeditor';
 $plugin->version = 2024061101;
 $plugin->release = 'v5.0.0';
 $plugin->requires = 2022041900;
+$plugin->supported = [400, 402];
+$plugin->incompatible = 403;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [];
