@@ -25,6 +25,7 @@
  */
 
 namespace mod_onlyofficeeditor;
+use context_user;
 
 defined('MOODLE_INTERNAL') || die();
 require_once("$CFG->dirroot/course/modlib.php");
@@ -113,11 +114,25 @@ class util {
      * @param \stdClass $data form data for new onlyoffice module.
      */
     public static function save_file($data) {
+        global $USER;
+
         $cmid = $data->coursemodule;
         $draftitemid = $data->file;
 
         $context = \context_module::instance($cmid);
         if ($draftitemid) {
+            $usercontext = context_user::instance($USER->id);
+            $fs = get_file_storage();
+            $draftfiles = $fs->get_area_files($usercontext->id, 'user', 'draft', $draftitemid, 'id');
+
+            foreach ($draftfiles as $file) {
+                if (!$file->is_directory()) {
+                    $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
+                    $newfilename = $data->name . ".$extension";
+                    $file->rename($file->get_filepath(), $newfilename);
+                }
+            }
+
             $options = ['subdirs' => false];
             file_save_draft_area_files($draftitemid, $context->id, 'mod_onlyofficeeditor', 'content', 0, $options);
         }
