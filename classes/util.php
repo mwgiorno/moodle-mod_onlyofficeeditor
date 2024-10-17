@@ -129,7 +129,9 @@ class util {
                 if (!$file->is_directory()) {
                     $extension = pathinfo($file->get_filename(), PATHINFO_EXTENSION);
                     $newfilename = $data->name . ".$extension";
-                    $file->rename($file->get_filepath(), $newfilename);
+                    if ($newfilename !== $file->get_filename()) {
+                        $file->rename($file->get_filepath(), $newfilename);
+                    }
                 }
             }
 
