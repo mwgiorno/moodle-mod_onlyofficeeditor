@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 6.0.1
 ## Added
 - fi, he, no, sl language templates
 
