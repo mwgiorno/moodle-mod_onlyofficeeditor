@@ -1,5 +1,6 @@
 # Change Log
 
+##
 ## Added
 - fi, he, no, sl language templates
 

@@ -6,13 +6,12 @@ This plugin enables users to edit office documents from [Moodle](https://moodle.
 
 The app allows to:
 
-* Edit text documents, spreadsheets, and presentations.
+* Edit text documents, spreadsheets, presentations, and PDF forms.
 * Co-edit documents in real-time: use two co-editing modes (Fast and Strict), the Track Changes mode, comments, and the built-in chat.
 
 Supported formats:
 
-* For viewing and editing: DOCX, XLSX, PPTX, TXT, CSV.
-* For viewing only: PDF.
+* For viewing and editing: DOCX, XLSX, PPTX, PDF, TXT, CSV.
 
 ## Installing ONLYOFFICE Docs
 
