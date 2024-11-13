@@ -1,5 +1,13 @@
 # Change Log
 
+## 6.0.1
+## Added
+- fi, he, no, sl language templates
+
+## Changed
+- fix JWT header issue
+- remove trailing slashes from setting urls after update
+
 ## 6.0.0
 ## Added
 - link to docs cloud
