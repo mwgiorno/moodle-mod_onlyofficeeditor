@@ -89,8 +89,6 @@ class onlyoffice_file_utility {
             self::get_accepted_pdf_formats(),
         ));
 
-        $formats = array_map(fn($format) => ltrim($format, '.'), $formats);
-
         return $formats;
     }
 
