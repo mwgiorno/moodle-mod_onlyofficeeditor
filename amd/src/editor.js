@@ -19,19 +19,25 @@
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
-define(['jquery', 'mod_onlyofficeeditor/fullscreen'], function($, Fullscreen) {
-    var displayNotification = function(error, type) {
-        require(['core/notification'], function(notification) {
-            require(['core/str'], function(str) {
-                var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
-                $.when(errorIsAvailable).done(function(localizedStr) {
-                    notification.addNotification({
-                        message: localizedStr,
-                        type: type
-                    });
-                });
+define([
+    'jquery',
+    'core/notification',
+    'core/str',
+    'core/toast',
+    'mod_onlyofficeeditor/fullscreen'
+], function($, Notification, Str, Toast, Fullscreen) {
+    var displayNotification = function(key, type) {
+        Str.get_string(key, 'onlyofficeeditor').then(function(localizedStr) {
+            Notification.addNotification({
+                message: localizedStr,
+                type: type
             });
-        });
+            return;
+        }).catch(Notification.exception);
+    };
+
+    var displayToast = function(key, type) {
+        Toast.add(Str.getString(key, 'onlyofficeeditor'), {type: type});
     };
 
     $.urlParam = function(name) {
@@ -115,7 +121,7 @@ define(['jquery', 'mod_onlyofficeeditor/fullscreen'], function($, Fullscreen) {
                         dataType: 'json',
                         data: mentionData
                     }).fail(() => {
-                        displayNotification('onmentionerror', 'error');
+                        displayToast('onmentionerror', 'danger');
                     });
                 };
 

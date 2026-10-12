@@ -20,24 +20,14 @@
  * @copyright  2026 Ascensio System SIA <integration@onlyoffice.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
-define(['jquery', 'core/modal', 'core/templates', 'core/str'],
-    function($, Modal, Templates, Str) {
-
-        var displayNotification = function(error, type) {
-            require(['core/notification'], function(notification) {
-                require(['core/str'], function(str) {
-                    var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
-                    $.when(errorIsAvailable).done(function(localizedStr) {
-                        notification.addNotification({
-                            message: localizedStr,
-                            type: type
-                        });
-                    });
-                });
-            });
-        };
+define(['jquery', 'core/modal', 'core/templates', 'core/str', 'core/toast'],
+    function($, Modal, Templates, Str, Toast) {
 
         const SaveAsDialog = Object;
+
+        var showMessage = function(key, type) {
+            Toast.add(Str.getString(key, 'onlyofficeeditor'), {type: type});
+        };
 
         SaveAsDialog.modal = null;
 
@@ -90,16 +80,17 @@ define(['jquery', 'core/modal', 'core/templates', 'core/str'],
                             dataType: 'json',
                             data: saveAsData,
                         }).done(() => {
-                            displayNotification('saveassuccess', 'success');
+                            showMessage('saveassuccess', 'success');
                         }).fail(() => {
-                            displayNotification('saveaserror', 'error');
+                            showMessage('saveaserror', 'danger');
                         }).always(() => {
                             self.modal.hide();
                         });
                     });
 
                 }).fail(() => {
-                    displayNotification('saveaserror', 'error');
+                    self.modal.hide();
+                    showMessage('saveaserror', 'danger');
                 });
                 return;
             });
