@@ -29,7 +29,7 @@ moodle-plugin-ci phpmd                      # advisory only, does not fail CI
 
 `phpcs`/`phpdoc` are zero-warning gates, so every new class/function needs the full Moodle docblock (`@package`, `@copyright`, `@license`, `@param`, `@return`) and the GPL file header. Deviations must be annotated inline with `phpcs:ignore` + `phpcs:enable`, as [callback.php](callback.php) and [desktop.php](desktop.php) do for the missing `require_login`.
 
-**AMD JavaScript.** Sources are in [amd/src/](amd/src/); the minified `amd/build/*.min.js` and `.map` files are committed and must be regenerated with Moodle's `grunt` (run from the Moodle root, not from this directory) whenever a source file changes. Modules are AMD (`define([...], function(){})`), not ES modules.
+**AMD JavaScript.** Sources are in [amd/src/](amd/src/); the minified `amd/build/*.min.js` and `.map` files are committed and must be regenerated with Moodle's `grunt` (run from the Moodle root, not from this directory) whenever a source file changes. Legacy modules are AMD (`define([...], function(){})`); write new modules as ES modules (`import`/`export`, transpiled to AMD by `grunt`, e.g. [amd/src/fullscreen.js](amd/src/fullscreen.js)) and migrate legacy ones to ES where practical.
 
 ## Architecture
 
@@ -141,7 +141,7 @@ Third-party attributions live in **[3rd-Party.license](3rd-Party.license)**, wit
 
 What is and isn't bundled matters here, because the declared list is short for a reason:
 
-- The plugin vendors **no PHP dependencies** — there is no `composer.json` and no `vendor/`. `Firebase\JWT` (used by [classes/jwt_wrapper.php](classes/jwt_wrapper.php)) and jQuery (the `define(['jquery'], …)` AMD dependency) both come from **Moodle core**, which is why neither is a bundled dependency of this plugin even though `3rd-Party.license` credits them. Don't add a composer dependency to pull in something core already ships.
+- The plugin vendors **no PHP dependencies** — there is no `composer.json` and no `vendor/`. `Firebase\JWT` (used by [classes/jwt_wrapper.php](classes/jwt_wrapper.php)) and jQuery (the `jquery` AMD dependency) both come from **Moodle core**, which is why neither is a bundled dependency of this plugin even though `3rd-Party.license` credits them. Don't add a composer dependency to pull in something core already ships.
 - `newdocs/` is a submodule under a **different licence** — Apache 2.0, not GPL — and it *is* redistributed, since [.github/workflows/artifact.yml](.github/workflows/artifact.yml) initialises submodules and packages the directory into the release zip. Its own `LICENSE` travels with it; leave it in place.
 
 Anything genuinely new and bundled needs three things together: the entry in both `3rd-Party.license` copies, its full licence text in `licenses/`, and a compatible licence — GPLv3 is the constraint. The CHANGELOG records past rounds of "approval blockers" and "market code prechecks", so treat this as a release gate rather than housekeeping.
