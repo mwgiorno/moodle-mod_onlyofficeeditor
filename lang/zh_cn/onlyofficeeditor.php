@@ -75,6 +75,7 @@ $string['onlyofficeeditor:editdocument'] = '编辑ONLYOFFICE文档活动';
 $string['onlyofficeeditor:view'] = '查看ONLYOFFICE文档活动';
 $string['onlyofficename'] = '活动名称';
 $string['onmentionerror'] = '提及错误';
+$string['onmentionsuccess'] = '通知发送成功';
 $string['pdfformname'] = 'PDF 表单';
 $string['pluginadministration'] = 'ONLYOFFICE文档活动管理';
 $string['pluginname'] = 'ONLYOFFICE 文档';

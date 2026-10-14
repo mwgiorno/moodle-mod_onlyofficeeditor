@@ -446,6 +446,7 @@ class util {
             $message->userfrom = \core_user::get_noreply_user();
             $message->userto = $user;
             $message->subject = get_string('mentionnotifier:notification', 'onlyofficeeditor', $messagedata);
+            $message->fullmessage = $comment;
             $message->fullmessageformat = FORMAT_HTML;
             $message->fullmessagehtml = '<p>' . $comment . '</p>';
             $message->notification = 1;

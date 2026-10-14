@@ -76,6 +76,7 @@ $string['onlyofficeeditor:editdocument'] = 'Edit ONLYOFFICE document activity';
 $string['onlyofficeeditor:view'] = 'View ONLYOFFICE document activity';
 $string['onlyofficename'] = 'Activity Name';
 $string['onmentionerror'] = 'Error on mentioning.';
+$string['onmentionsuccess'] = 'Notification sent successfully';
 $string['pdfformname'] = 'PDF form';
 $string['pluginadministration'] = 'ONLYOFFICE document activity administration';
 $string['pluginname'] = 'ONLYOFFICE document';
