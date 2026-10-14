@@ -19,79 +19,25 @@
  * @copyright  based on work by 2018 Olumuyiwa Taiwo <muyi.taiwo@logicexpertise.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  **/
-define(['jquery'], function($) {
-    var displayNotification = function(error, type) {
-        require(['core/notification'], function(notification) {
-            require(['core/str'], function(str) {
-                var errorIsAvailable = str.get_string(error, 'onlyofficeeditor');
-                $.when(errorIsAvailable).done(function(localizedStr) {
-                    notification.addNotification({
-                        message: localizedStr,
-                        type: type
-                    });
-                });
+define([
+    'jquery',
+    'core/notification',
+    'core/str',
+    'core/toast',
+    'mod_onlyofficeeditor/fullscreen'
+], function($, Notification, Str, Toast, Fullscreen) {
+    var displayNotification = function(key, type) {
+        Str.get_string(key, 'onlyofficeeditor').then(function(localizedStr) {
+            Notification.addNotification({
+                message: localizedStr,
+                type: type
             });
-        });
+            return;
+        }).catch(Notification.exception);
     };
 
-    var createFullScreenButtons = function() {
-        require(['core/str'], function(str) {
-            var enterFullScreenText = str.get_string('editorenterfullscreen', 'onlyofficeeditor');
-            var exitFullScreenText = str.get_string('editorexitfullscreen', 'onlyofficeeditor');
-            var navLeftButton = $('.drawertoggle')[1];
-            var navRightButton = $('.drawertoggle')[2];
-            var editorContainer = $('.onlyofficeeditor-container')[0];
-
-            $.when(enterFullScreenText).done(function(localized) {
-                enterFullScreenText = localized;
-                var enterButton = document.createElement('button');
-                var enterIcon = document.createElement('i');
-                enterIcon.className = 'icon fa fa-expand fa-fw';
-                enterButton.appendChild(enterIcon);
-                enterButton.className = 'onlyofficeeditor-editor-fs-button';
-                enterButton.id = 'onlyofficeeditor-enter-fs-button';
-                enterButton.innerHTML += enterFullScreenText;
-
-                enterButton.onclick = function() {
-                    var navbarEl = document.querySelector('#nav-bar') ||
-                        document.querySelector('.navbar');
-                    var navbarHeight = navbarEl ? navbarEl.offsetHeight : 0;
-                    editorContainer.style.setProperty('--oo-navbar-height', navbarHeight + 'px');
-                    document.body.style.overflow = 'hidden';
-                    if (navLeftButton && navLeftButton.getAttribute('data-aria-hidden-tab-index') === null) {
-                        $(navLeftButton).click();
-                    }
-                    if (navRightButton && navRightButton.getAttribute('data-aria-hidden-tab-index') === null) {
-                        $(navRightButton).click();
-                    }
-                    $(editorContainer).addClass('onlyofficeeditor-fullscreen');
-                    $('#onlyofficeeditor-enter-fs-button').hide();
-                    $('#onlyofficeeditor-exit-fs-button').show();
-                };
-                editorContainer.before(enterButton);
-            });
-            $.when(exitFullScreenText).done(function(localized) {
-                exitFullScreenText = localized;
-                var exitButton = document.createElement('button');
-                var exitIcon = document.createElement('i');
-                exitIcon.className = 'icon fa fa-compress fa-fw';
-                exitButton.appendChild(exitIcon);
-                exitButton.innerHTML += exitFullScreenText;
-                exitButton.className = 'onlyofficeeditor-editor-fs-button';
-                exitButton.id = 'onlyofficeeditor-exit-fs-button';
-
-                exitButton.onclick = function() {
-                    $(editorContainer).removeClass('onlyofficeeditor-fullscreen');
-                    editorContainer.style.removeProperty('--oo-navbar-height');
-                    editorContainer.children[0].style.height = '';
-                    document.body.style.overflow = '';
-                    $('#onlyofficeeditor-enter-fs-button').show();
-                    $('#onlyofficeeditor-exit-fs-button').hide();
-                };
-                $('#usernavigation')[0].prepend(exitButton);
-                $('#onlyofficeeditor-exit-fs-button').hide();
-            });
-        });
+    var displayToast = function(key, type) {
+        Toast.add(Str.getString(key, 'onlyofficeeditor'), {type: type});
     };
 
     $.urlParam = function(name) {
@@ -127,7 +73,6 @@ define(['jquery'], function($) {
                 displayNotification('docserverunreachable', 'error');
                 return;
             }
-            createFullScreenButtons();
             var ajaxUrl = M.cfg.wwwroot + '/mod/onlyofficeeditor/dsconfig.php';
             $.getJSON(ajaxUrl, {
                 courseid: courseid,
@@ -176,7 +121,7 @@ define(['jquery'], function($) {
                         dataType: 'json',
                         data: mentionData
                     }).fail(() => {
-                        displayNotification('onmentionerror', 'error');
+                        displayToast('onmentionerror', 'danger');
                     });
                 };
 
@@ -227,6 +172,7 @@ define(['jquery'], function($) {
                 } else {
                     // eslint-disable-next-line no-undef
                     docEditor = new DocsAPI.DocEditor("onlyofficeeditor-editor", config);
+                    Fullscreen.init(document.querySelector('.onlyofficeeditor-container'), config.documentType);
                 }
             });
         }
