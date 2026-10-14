@@ -47,7 +47,7 @@ jobs:
       - name: Build Plugin
         run: |
           cd ./moodle
-          npm install
+          npm ci
           grunt
       - name: Zip Artifact
         run: |
