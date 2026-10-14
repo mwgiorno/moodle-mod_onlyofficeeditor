@@ -75,6 +75,7 @@ $string['onlyofficeeditor:editdocument'] = 'Editar la actividad documental de ON
 $string['onlyofficeeditor:view'] = 'Ver la actividad documental de ONLYOFFICE';
 $string['onlyofficename'] = 'Nombre de la actividad';
 $string['onmentionerror'] = 'Error al mencionar.';
+$string['onmentionsuccess'] = 'Notificación enviada correctamente';
 $string['pdfformname'] = 'Formulario PDF';
 $string['pluginadministration'] = 'Administración de la actividad documental de ONLYOFFICE';
 $string['pluginname'] = 'Documento de ONLYOFFICE';

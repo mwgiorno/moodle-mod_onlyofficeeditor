@@ -120,6 +120,8 @@ define([
                         type: 'POST',
                         dataType: 'json',
                         data: mentionData
+                    }).done(() => {
+                        displayToast('onmentionsuccess', 'success');
                     }).fail(() => {
                         displayToast('onmentionerror', 'danger');
                     });
